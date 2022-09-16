@@ -404,6 +404,14 @@ def run_agent(parameters):
     logs[agent_name]['type'] = knowledge_type
     logs[agent_name]['cond'] = condition
 
+    pickle.dump(logs, open(f'logs/{agent_name}-res.pkl', "wb"))
+
+    global transaction_logs
+    tlogs = ['Agent,Concept,Problem,Knowledge,Type,Result,Action,When-Part,Where-Part,How-Part,Intermediate,Seen,AL Ans,Correct Ans,Time\n']
+    tlogs.extend(transaction_logs)
+    with open(f"logs/{agent_name}-transaction_logs.csv", 'w+') as f:
+        f.writelines(tlogs)
+
 
 def run_debug(agent, a, b, c):
     print(f'{a}, {b}, {c}')
@@ -499,8 +507,8 @@ def run_loop():
     num_set = 5
     for i in range(num_set):
         print("Running agent set: {}/{}".format(i+1, num_set))
-        run_agent([f'SPPP-F-{i+1}', alpha, tau, c, s, beta, b_practice, b_study, COND_SPPP, KTYPE_FACT, study_problems, post_problems])
-        run_agent([f'SPSP-F-{i+1}', alpha, tau, c, s, beta, b_practice, b_study, COND_SPSP, KTYPE_FACT, study_problems, post_problems])
+        # run_agent([f'SPPP-F-{i+1}', alpha, tau, c, s, beta, b_practice, b_study, COND_SPPP, KTYPE_FACT, study_problems, post_problems])
+        # run_agent([f'SPSP-F-{i+1}', alpha, tau, c, s, beta, b_practice, b_study, COND_SPSP, KTYPE_FACT, study_problems, post_problems])
         run_agent([f'SPPP-S-{i+1}', alpha, tau, c, s, beta, b_practice, b_study, COND_SPPP, KTYPE_SKILL, study_problems, post_problems])
         run_agent([f'SPSP-S-{i+1}', alpha, tau, c, s, beta, b_practice, b_study, COND_SPSP, KTYPE_SKILL, study_problems, post_problems])
 
@@ -539,13 +547,13 @@ def check_problems():
 
 
 if __name__ == "__main__":
-    tic = time.time()
-    # main()
-    run_loop()
-    toc = time.time()
-    print(f'[loop] Done in {tic-toc:.4f} seconds')
-
     # tic = time.time()
-    # run_pool()
+    # # main()
+    # run_loop()
     # toc = time.time()
     # print(f'[loop] Done in {tic-toc:.4f} seconds')
+
+    tic = time.time()
+    run_pool()
+    toc = time.time()
+    print(f'[loop] Done in {toc-tic:.4f} seconds')
