@@ -204,18 +204,19 @@ def run_problem(agent, p, ptype, ktype, ttype):
     solution = solutions[int(p['concept']) - 1]
     if DEBUG: print(name)
     if ktype == KTYPE_FACT:
-        _run_problem_fact(agent, state, answer, ptype, ttype, name)
+        _run_problem_fact(agent, state, answer, ptype, ttype, name, seen)
     elif ktype == KTYPE_SKILL:
         _run_problem_skill(agent, state, answer, ptype, ttype, name, seen, solution)
 
     print('-' * 20)
 
 
-def _run_problem_fact(agent, state, answer, ptype, ttype, name):
+def _run_problem_fact(agent, state, answer, ptype, ttype, name, seen):
     problem_info = {'problem_name': name}
     if ptype == PTYPE_DEMO:
         sai = generate_sai(answer)
         agent.train(state, sai=sai, reward=1, problem_info=problem_info)
+        when, where, exp = log_transaction(None, 'Train', when, where, exp, False, None, answer, seen)
         log(LOG_DEMO, agent.agent_name)
     elif ptype == PTYPE_PRACTICE:
         res, info = agent.request(state, problem_info=problem_info)
@@ -223,25 +224,29 @@ def _run_problem_fact(agent, state, answer, ptype, ttype, name):
         if len(res) == 0:
             # Can't answer
             log(LOG_HINT, agent.agent_name, KTYPE_FACT, ttype, info)
+            log_transaction(False, 'Request', info['when'], info['where'], 'HINT', False, None, answer, seen)
             if ttype == TT_STUDY:
                 sai = generate_sai(answer)
-                agent.train(state, sai=sai, reward=1, problem_info=problem_info)
+                when, where, exp = agent.train(state, sai=sai, reward=1, problem_info=problem_info)
+                log_transaction(None, 'Train', when, where, exp, False, None, answer, seen)
         else:
             val = res["inputs"]["value"]
             selection = res['selection']
-            correct = val == answer
+            correct = str(val) == str(answer)
+            log_transaction(correct, 'Request', info['when'], info['where'], info['skill'], False, val, answer, seen)
             if ttype == TT_STUDY:
                 rhs_id = res["rhs_id"]
                 sai = generate_sai(val)
                 rew = 1 if correct else -1
-                agent.train(state, sai=sai, reward=rew, rhs_id=rhs_id, problem_info=problem_info)
+                agent.train(state, sai=sai, reward=rew, rhs_id=rhs_id, problem_info=problem_info, ret_train_expl=True)
             if correct:
                 log(LOG_CORRECT, agent.agent_name, KTYPE_FACT, ttype, info, val, answer)
             else:
                 log(LOG_WRONG, agent.agent_name, KTYPE_FACT, ttype, info, val, answer)
                 if ttype == TT_STUDY:
                     sai = generate_sai(answer)
-                    agent.train(state, sai=sai, reward=1, problem_info=problem_info)
+                    when, where, exp = agent.train(state, sai=sai, reward=1, problem_info=problem_info, ret_train_expl=True)
+                    log_transaction(None, 'Train', when, where, exp, False, None, answer, seen)
 
 
 
@@ -521,7 +526,7 @@ def run_pool():
     beta, b_practice, b_study = 5, 1, 0.01
 
     study_problems, post_problems = read_problems()
-    num_set = 1
+    num_set = 4
     pool = multiprocessing.Pool()
     
     agents = []
