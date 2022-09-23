@@ -50,19 +50,25 @@ current_ktype = ""
 current_ttype = ""
 current_ptype = ""
 
-def log_result(log_type, agent_name, ktype, ttype, info):
+def log_result(log_type, agent_name, ktype, ttype, info, seen):
     global logs
     if agent_name not in logs:
         logs[agent_name] = {
             "study": { "correct": 0, "incorrect": 0, "hint": 0, "demo": 0 },
-            "post": { 
-                KTYPE_SKILL: { "correct": 0, "incorrect": 0 },
-                KTYPE_FACT: { "correct": 0, "incorrect": 0 }
+            "post": {
+                KTYPE_SKILL: {
+                    "seen": {"correct": 0, "incorrect": 0 },
+                    "unseen": {"correct": 0, "incorrect": 0 },
+                },
+                KTYPE_FACT: {
+                    "seen": {"correct": 0, "incorrect": 0 },
+                    "unseen": {"correct": 0, "incorrect": 0 },
+                }
             },
             "type": "", "post_t": 0, "pre_t": 0,
             "results": []
         }
-        
+
     # if (ttype == TT_POSTTEST) \
     #     and len(logs[agent_name]['results']) > 0 \
     #     and logs[agent_name]['results'][-1][0]['info']['problem_name'] == info['problem_name']:
@@ -80,27 +86,30 @@ def log_result(log_type, agent_name, ktype, ttype, info):
         "ltype": log_type
     }])
 
+    novelty = "seen" if seen else "unseen"
+
     if log_type == LOG_HINT:
         if ttype == TT_STUDY:
             logs[agent_name][TT_STUDY]['hint'] += 1
         elif ttype == TT_POSTTEST:
-            logs[agent_name][ttype][ktype]['incorrect'] += 1
+            logs[agent_name][ttype][ktype][novelty]['incorrect'] += 1
     elif log_type == LOG_WRONG:
         if ttype == TT_STUDY:
             logs[agent_name][TT_STUDY]['incorrect'] += 1
         elif ttype == TT_POSTTEST:
-            logs[agent_name][ttype][ktype]['incorrect'] += 1
+            logs[agent_name][ttype][ktype][novelty]['incorrect'] += 1
     elif log_type == LOG_CORRECT:
         if ttype == TT_STUDY:
             logs[agent_name][TT_STUDY]['correct'] += 1
         elif ttype == TT_POSTTEST:
-            logs[agent_name][ttype][ktype]['correct'] += 1
+            logs[agent_name][ttype][ktype][novelty]['correct'] += 1
     elif log_type == LOG_DEMO:
         logs[agent_name]["study"]['demo'] += 1
 
 
-def log(log_type, agent_name, ktype=None, ttype=TT_STUDY, info=None, al_answer="", correct_answer=""):
-    log_result(log_type, agent_name, ktype, ttype, info)
+
+def log(log_type, agent_name, ktype=None, ttype=TT_STUDY, info=None, al_answer="", correct_answer="", seen=False):
+    log_result(log_type, agent_name, ktype, ttype, info, seen)
 
     if not DEBUG: return
 
@@ -215,15 +224,15 @@ def _run_problem_fact(agent, state, answer, ptype, ttype, name, seen):
     problem_info = {'problem_name': name}
     if ptype == PTYPE_DEMO:
         sai = generate_sai(answer)
-        agent.train(state, sai=sai, reward=1, problem_info=problem_info)
-        when, where, exp = log_transaction(None, 'Train', when, where, exp, False, None, answer, seen)
-        log(LOG_DEMO, agent.agent_name)
+        when, where, exp = agent.train(state, sai=sai, reward=1, problem_info=problem_info)
+        log_transaction(None, 'Train', when, where, exp, False, None, answer, seen)
+        log(LOG_DEMO, agent.agent_name, correct_answer=answer, seen=seen)
     elif ptype == PTYPE_PRACTICE:
         res, info = agent.request(state, problem_info=problem_info)
         info['problem_name'] = name
         if len(res) == 0:
             # Can't answer
-            log(LOG_HINT, agent.agent_name, KTYPE_FACT, ttype, info)
+            log(LOG_HINT, agent.agent_name, KTYPE_FACT, ttype, info, seen=seen)
             log_transaction(False, 'Request', info['when'], info['where'], 'HINT', False, None, answer, seen)
             if ttype == TT_STUDY:
                 sai = generate_sai(answer)
@@ -240,9 +249,9 @@ def _run_problem_fact(agent, state, answer, ptype, ttype, name, seen):
                 rew = 1 if correct else -1
                 agent.train(state, sai=sai, reward=rew, rhs_id=rhs_id, problem_info=problem_info, ret_train_expl=True)
             if correct:
-                log(LOG_CORRECT, agent.agent_name, KTYPE_FACT, ttype, info, val, answer)
+                log(LOG_CORRECT, agent.agent_name, KTYPE_FACT, ttype, info, val, answer, seen=seen)
             else:
-                log(LOG_WRONG, agent.agent_name, KTYPE_FACT, ttype, info, val, answer)
+                log(LOG_WRONG, agent.agent_name, KTYPE_FACT, ttype, info, val, answer, seen=seen)
                 if ttype == TT_STUDY:
                     sai = generate_sai(answer)
                     when, where, exp = agent.train(state, sai=sai, reward=1, problem_info=problem_info, ret_train_expl=True)
@@ -253,7 +262,7 @@ def _run_problem_fact(agent, state, answer, ptype, ttype, name, seen):
 def _run_problem_skill(agent, state, answer, ptype, ttype, name, seen, solution):
     problem_info = {'problem_name': name}
     if ptype == PTYPE_DEMO:
-        log(LOG_DEMO, agent.agent_name)
+        log(LOG_DEMO, agent.agent_name, correct_answer=answer, seen=seen)
         sai = generate_sai(answer)
         print(solution)
         # agent.train(state, sai=sai, reward=1, problem_info=problem_info, solution=solution)
@@ -267,7 +276,7 @@ def _run_problem_skill(agent, state, answer, ptype, ttype, name, seen, solution)
         print(info)
         info['problem_name'] = name
         if len(res) == 0:
-            log(LOG_HINT, agent.agent_name, KTYPE_SKILL, ttype, info)
+            log(LOG_HINT, agent.agent_name, KTYPE_SKILL, ttype, info, correct_answer=answer, seen=seen)
             if ttype == TT_STUDY:
                 # TODO: Also need to provide step by step here?
                 sai = generate_sai(answer)
@@ -289,16 +298,16 @@ def _run_problem_skill(agent, state, answer, ptype, ttype, name, seen, solution)
                 agent.train(state, sai=sai, reward=rew, rhs_id=rhs_id, problem_info=problem_info, ret_train_expl=True)
 
             if correct:
-                log(LOG_CORRECT, agent.agent_name, KTYPE_SKILL, ttype, info, val, answer)
+                log(LOG_CORRECT, agent.agent_name, KTYPE_SKILL, ttype, info, val, answer, seen=seen)
             else:
-                log(LOG_WRONG, agent.agent_name, KTYPE_SKILL, ttype, info, val, answer)
+                log(LOG_WRONG, agent.agent_name, KTYPE_SKILL, ttype, info, val, answer, seen=seen)
                 if ttype == TT_STUDY:
                     sai = generate_sai(answer)
                     when, where, exp = agent.train(state, sai=sai, reward=1, problem_info=problem_info, ret_train_expl=True)
 
                     log_transaction(None, 'Train', when, where, exp, False, None, answer, seen)
         else:
-            log(LOG_WRONG, agent.agent_name, KTYPE_SKILL, ttype, info, val, answer)
+            log(LOG_WRONG, agent.agent_name, KTYPE_SKILL, ttype, info, val, answer, seen=seen)
             log_transaction(False, 'Request', info['when'], info['where'], info['skill'], None, val, answer, seen)
         return
 
@@ -366,6 +375,7 @@ def get_post_test_problems(study, post, ktype):
         study_problems = []
         if ktype == KTYPE_FACT:
             selected = choice(problems)
+            selected['seen'] = True
             for _ in range(5):
                 study_problems.append(selected)
         elif ktype == KTYPE_SKILL:

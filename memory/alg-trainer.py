@@ -537,7 +537,7 @@ def main():
     study_problems, post_problems = read_problems()
     # print(study_problems['1'])
     outname = f"res.pkl"
-    num_set = 5
+    num_set = 15
     for i in range(num_set):
         print("Running agent set: {}/{}".format(i+1, num_set))
         run_agent(f'SPPP-F-{i+1}', alpha, tau, c, s, beta, b_practice, b_study, COND_SPPP, KTYPE_FACT, study_problems, post_problems)
