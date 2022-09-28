@@ -393,6 +393,7 @@ def read_problems():
 
 
 STUDY_PROBLEM_NUM = 10
+CONCEPT_NUM = 4
 def get_post_test_problems(study, post, ktype):
     global seen_answers
     seen_answers = []
@@ -400,8 +401,9 @@ def get_post_test_problems(study, post, ktype):
     post_problems = []
     problems_by_concept = []
     for c, problems in study.items():
-        # if c != '5' and c != 5:
-        #     continue
+        if c in [1, '1']:
+        # if c in [1, 2, 4, 5, '1', '2', '4', '5']:
+            continue 
         seen = []
         study_problems = []
         if ktype == KTYPE_FACT:
@@ -442,22 +444,19 @@ def get_post_test_problems(study, post, ktype):
 
     return study_problems, post_problems
 
-
-def run_agent(agent_name, alpha, tau, c, s, beta, b_practice, b_study, condition, knowledge_type, study_problems, post_problems):
+def run_agent(parameters):
+    agent_name, alpha, tau, c, s, beta, b_practice, b_study, condition, knowledge_type, study_problems, post_problems = parameters
     print(f"RUNNING: {agent_name}")
     agent = create_agent(agent_name, alpha, tau, c, s, beta, b_practice, b_study)
     study, post = get_post_test_problems(study_problems, post_problems, knowledge_type)
 
-    # print(len([p for p in post if p.get('seen', False)]))
-    # return
-
     # run study
     for idx, p in enumerate(study):
-        # if idx != 4: continue
-        num = 2 if condition == COND_SPSP else 30
-        ptype = PTYPE_DEMO if int(idx / 5) % num == 0 else PTYPE_PRACTICE
+        if condition == COND_SPPP:
+            ptype = PTYPE_DEMO if idx < int(idx / CONCEPT_NUM) == 0 else PTYPE_PRACTICE
+        elif condition == COND_SPSP:
+            ptype = PTYPE_DEMO if int(idx / CONCEPT_NUM) % 2 == 0 else PTYPE_PRACTICE
         run_problem(agent, p, ptype, knowledge_type, TT_STUDY)
-        # return
 
     ft = 0.625
     st = 0.2
@@ -470,6 +469,14 @@ def run_agent(agent_name, alpha, tau, c, s, beta, b_practice, b_study, condition
 
     logs[agent_name]['type'] = knowledge_type
     logs[agent_name]['cond'] = condition
+
+    pickle.dump(logs, open(f'logs/{agent_name}-res.pkl', "wb"))
+
+    global transaction_logs
+    tlogs = ['Agent,Concept,Problem,Knowledge,Type,Result,Action,When-Part,Where-Part,How-Part,Intermediate,Seen,AL Ans,Correct Ans,Time\n']
+    tlogs.extend(transaction_logs)
+    with open(f"logs/{agent_name}-transaction_logs.csv", 'w+') as f:
+        f.writelines(tlogs)
 
 
 def run_debug(agent, a, b, c):
@@ -568,7 +575,7 @@ def run_pool():
     beta, b_practice, b_study = 5, 1, 0.01
 
     study_problems, post_problems = read_problems()
-    num_set = 15
+    num_set = 1
     pool = multiprocessing.Pool()
     
     agents = []
