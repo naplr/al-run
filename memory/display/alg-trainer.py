@@ -174,11 +174,13 @@ def create_agent(name, alpha, tau, c, s, beta, b_practice, b_study):
         agent = MemoryAgent(
             agent_name=name,
             # feature_set=["equals"],
-            function_set=["add", "subtract", "multiply", "divide", "pow", "inverse"],
-            feature_set=["is_number"],
+            # feature_set=["is_number"],
+            feature_set=[],
+            function_set=["add", "subtract", "multiply", "divide", "pow", "inverse", "ripfloatvalue"],
             when_learner="decisiontree",
             # when_learner="alwaystrue",
             where_learner="mostspecific",
+            planner="numba",
             search_depth=1,
             alpha=alpha,
             tau=tau,
@@ -204,7 +206,7 @@ def create_agent(name, alpha, tau, c, s, beta, b_practice, b_study):
 def run_problem(agent, p, ptype, ktype, ttype):
     global current_agent, current_concept, current_problem, current_ktype, current_ttype, current_ptype
 
-    state, answer, choices, steps, foa = get_state_and_answer(p)
+    state, answer, choices, steps = get_state_and_answer(p)
     name = f"{p['concept']}, args: {str(p['args'])}, ans: {p['ans']}, {ktype}, {ttype}"
     seen = p.get('seen', False)
 
@@ -221,7 +223,7 @@ def run_problem(agent, p, ptype, ktype, ttype):
     if ktype == KTYPE_FACT:
         _run_problem_fact(agent, concept, state, answer, ptype, ttype, name, seen)
     elif ktype == KTYPE_SKILL:
-        _run_problem_skill(agent, concept, state, answer, steps, ptype, ttype, name, seen, foa)
+        _run_problem_skill(agent, concept, state, answer, steps, ptype, ttype, name, seen)
 
     print('-' * 20)
 
@@ -265,22 +267,23 @@ def _run_problem_fact(agent, concept, state, answer, ptype, ttype, name, seen):
 
 
     # log_transaction(result, action, skill, isInt, al_answer="", correct_answer=""):
-def _run_problem_skill(agent, concept, state, answer, steps, ptype, ttype, name, seen, foa):
+def _run_problem_skill(agent, concept, state, answer, steps, ptype, ttype, name, seen):
     problem_info = {'problem_name': name}
     if ptype == PTYPE_DEMO:
         log(LOG_DEMO, agent.agent_name, correct_answer=answer)
         for idx, s in enumerate(steps):
-            s = int(s)
-            selection = f'step_{idx+1}_concept_{concept}'
-            sai = generate_sai(s, selection)
+            sel, val, foa = s
+            sai = generate_sai(val, sel)
+            is_answer = sel == 'answer'
+
             print(f'TRAIN INT: {s}, {selection}')
-            when, where, exp = agent.train(state, sai=sai, reward=1, problem_info=problem_info, ret_train_expl=True, foci_of_attention=foa[idx])
+
+            when, where, exp = agent.train(state, sai=sai, reward=1, problem_info=problem_info, ret_train_expl=True, foci_of_attention=foa)
             log_transaction(None, 'Train', when, where, exp, True, None, s, seen)
-            state[selection]['value'] = str(s)
-            state[selection]['contentEditable'] = False
-            state[selection]['is_empty'] = False
-        sai = generate_sai(answer)
-        when, where, exp = agent.train(state, sai=sai, reward=1, problem_info=problem_info, ret_train_expl=True, foci_of_attention=foa[-1])
+
+            state[sel]['value'] = str(val)
+            state[sel]['contentEditable'] = False
+
         log_transaction(None, 'Train', when, where, exp, False, None, answer, seen)
     elif ptype == PTYPE_PRACTICE:
         ss = {f"step_{idx+1}_concept_{concept}": f'{step}' for idx, step in enumerate(steps)}
