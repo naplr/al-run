@@ -100,17 +100,17 @@ def populate_1(args, state):
 
 
 def populate_2(args, state):
-    state['r1c1'] = '('
-    state['r1c2'] = args[0]
-    state['r1c3'] = ','
-    state['r1c4'] = args[1]
-    state['r1c5'] = ')'
-    state['r1c6'] = 'SUN'
-    state['r1c7'] = '('
-    state['r1c8'] = args[2]
-    state['r1c9'] = ','
-    state['r1c10'] = args[3]
-    state['r1c11'] = ')'
+    state['r1c1'] = get_state_field('r1c1', '(', False)
+    state['r1c2'] = get_state_field('r1c1',args[0], False)
+    state['r1c3'] = get_state_field('r1c1',',', False)
+    state['r1c4'] = get_state_field('r1c1',args[1], False)
+    state['r1c5'] = get_state_field('r1c1',')', False)
+    state['r1c6'] = get_state_field('r1c1','SUN', False)
+    state['r1c7'] = get_state_field('r1c1','(', False)
+    state['r1c8'] = get_state_field('r1c1',args[2], False)
+    state['r1c9'] = get_state_field('r1c1',',', False)
+    state['r1c10'] = get_state_field('r1c1',args[3], False)
+    state['r1c11'] = get_state_field('r1c1',')', False)
 
 
 populate_funcs = [populate_1, populate_2]
@@ -154,7 +154,7 @@ def get_foa(concept):
 
 def get_steps(p):
     args = p['args']
-    answer = p['answer']
+    answer = p['ans']
     if p['concept'] == '1':
         return [
             ('r2c1', args[0], ('r1c1')),
