@@ -1,0 +1,18 @@
+Agent,Concept,Problem,Knowledge,Type,Result,Action,When-Part,Where-Part,How-Part,Intermediate,Seen,AL Ans,Correct Ans,Time
+SPPP-F-1,2,[2][args:240-5-72-24],Fact,practice,INCORRECT,Request,...,[0&0],HINT,False,True,None,16,01:51:08
+SPPP-F-1,2,[2][args:240-5-72-24],Fact,practice,NA,Train,None,{('QMele-answer'&)},16:()->answer,False,True,None,16,01:51:08
+SPPP-F-1,2,[2][args:240-5-72-24],Fact,practice,CORRECT,Request,...,{('QMele-answer'&)},16:()->answer (v: 0.749),False,True,16,16,01:51:08
+SPPP-F-1,2,[2][args:240-5-72-24],Fact,practice,CORRECT,Request,...,{('QMele-answer'&)},16:()->answer (v: 0.997),False,True,16,16,01:51:08
+SPPP-F-1,2,[2][args:240-5-72-24],Fact,practice,CORRECT,Request,...,{('QMele-answer'&)},16:()->answer (v: 0.998),False,True,16,16,01:51:08
+SPPP-F-1,2,[2][args:240-5-72-24],Fact,practice,CORRECT,Request,...,{('QMele-answer'&)},16:()->answer (v: 0.998),False,True,16,16,01:51:08
+SPPP-F-1,2,[2][args:240-5-72-24],Fact,practice,CORRECT,Request,...,{('QMele-answer'&)},16:()->answer (v: 0.998),False,True,16,16,01:51:08
+SPPP-F-1,2,[2][args:240-5-72-24],Fact,practice,CORRECT,Request,...,{('QMele-answer'&)},16:()->answer (v: 0.998),False,True,16,16,01:51:08
+SPPP-F-1,2,[2][args:240-5-72-24],Fact,practice,CORRECT,Request,...,{('QMele-answer'&)},16:()->answer (v: 0.998),False,True,16,16,01:51:08
+SPPP-F-1,2,[2][args:240-5-72-24],Fact,practice,CORRECT,Request,...,{('QMele-answer'&)},16:()->answer (v: 0.997),False,True,16,16,01:51:08
+SPPP-F-1,2,[2][args:240-5-72-24],Fact,practice,CORRECT,Request,...,{('QMele-answer'&)},16:()->answer (v: 0.997),False,True,16,16,01:51:08
+SPPP-F-1,2,[2][args:110-5-121-11],Fact,posttest,INCORRECT,Request,...,{('QMele-answer'&)},16:()->answer (v: 0.980),False,False,16,2,01:51:08
+SPPP-F-1,2,[2][args:288-12-18-9],Fact,posttest,INCORRECT,Request,...,{('QMele-answer'&)},16:()->answer (v: 0.997),False,False,16,12,01:51:08
+SPPP-F-1,2,[2][args:240-5-72-24],Fact,posttest,CORRECT,Request,...,{('QMele-answer'&)},16:()->answer (v: 0.997),False,True,16,16,01:51:08
+SPPP-F-1,2,[2][args:240-5-72-24],Fact,posttest,CORRECT,Request,...,{('QMele-answer'&)},16:()->answer (v: 0.997),False,True,16,16,01:51:08
+SPPP-F-1,2,[2][args:45-3-120-24],Fact,posttest,INCORRECT,Request,...,{('QMele-answer'&)},16:()->answer (v: 0.997),False,False,16,3,01:51:08
+SPPP-F-1,2,[2][args:240-5-72-24],Fact,posttest,CORRECT,Request,...,{('QMele-answer'&)},16:()->answer (v: 0.997),False,True,16,16,01:51:08

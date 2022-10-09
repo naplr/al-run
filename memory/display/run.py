@@ -393,7 +393,7 @@ def read_problems():
 
 
 STUDY_PROBLEM_NUM = 10
-CONCEPT_NUM = 4
+CONCEPT_NUM = 1
 def get_post_test_problems(study, post, ktype):
     global seen_answers
     seen_answers = []
@@ -401,8 +401,9 @@ def get_post_test_problems(study, post, ktype):
     post_problems = []
     problems_by_concept = []
     for c, problems in study.items():
-        if c in [1, '1']:
+        # if c in [1, '1']:
         # if c in [1, 2, 4, 5, '1', '2', '4', '5']:
+        if c in [1, 3, 4, 5, '1', '3', '4', '5']:
             continue 
         seen = []
         study_problems = []
@@ -576,17 +577,19 @@ def run_pool():
 
     study_problems, post_problems = read_problems()
     num_set = 1
-    pool = multiprocessing.Pool()
+
+    run_agent([f'SPSP-S-1', alpha, tau, c, s, beta, b_practice, b_study, COND_SPSP, KTYPE_SKILL, study_problems, post_problems])
+    # pool = multiprocessing.Pool()
     
-    agents = []
-    for i in range(num_set):
-        agents.append([f'SPPP-F-{i+1}', alpha, tau, c, s, beta, b_practice, b_study, COND_SPPP, KTYPE_FACT, study_problems, post_problems])
-        agents.append([f'SPSP-F-{i+1}', alpha, tau, c, s, beta, b_practice, b_study, COND_SPSP, KTYPE_FACT, study_problems, post_problems])
-        agents.append([f'SPPP-S-{i+1}', alpha, tau, c, s, beta, b_practice, b_study, COND_SPPP, KTYPE_SKILL, study_problems, post_problems])
-        agents.append([f'SPSP-S-{i+1}', alpha, tau, c, s, beta, b_practice, b_study, COND_SPSP, KTYPE_SKILL, study_problems, post_problems])
+    # agents = []
+    # for i in range(num_set):
+    #     agents.append([f'SPPP-F-{i+1}', alpha, tau, c, s, beta, b_practice, b_study, COND_SPPP, KTYPE_FACT, study_problems, post_problems])
+    #     agents.append([f'SPSP-F-{i+1}', alpha, tau, c, s, beta, b_practice, b_study, COND_SPSP, KTYPE_FACT, study_problems, post_problems])
+    #     agents.append([f'SPPP-S-{i+1}', alpha, tau, c, s, beta, b_practice, b_study, COND_SPPP, KTYPE_SKILL, study_problems, post_problems])
+    #     agents.append([f'SPSP-S-{i+1}', alpha, tau, c, s, beta, b_practice, b_study, COND_SPSP, KTYPE_SKILL, study_problems, post_problems])
 
 
-    pool.map(run_agent, agents)
+    # pool.map(run_agent, agents)
     show_result()
 
 
