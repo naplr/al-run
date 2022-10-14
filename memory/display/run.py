@@ -174,12 +174,16 @@ def create_agent(name, alpha, tau, c, s, beta, b_practice, b_study):
         agent = MemoryAgent(
             agent_name=name,
             # feature_set=["equals"],
-            function_set=["add", "subtract", "multiply", "divide", "pow", "inverse"],
-            feature_set=["is_number"],
+            function_set=["add", "subtract", "multiply", "divide", "pow", "inverse", "ripfloatvalue"],
+            # function_set=["add", "subtract", "multiply", "divide", "pow", "inverse"],
+            # function_set=["concatenate2", "concatenate3", "solve", "ripfloatvalue"],
+            # function_set=["concatenate2", "solve", "ripfloatvalue"],
+            feature_set=[],
             when_learner="decisiontree",
             # when_learner="alwaystrue",
             where_learner="mostspecific",
-            search_depth=1,
+            planner="numba",
+            search_depth=2,
             alpha=alpha,
             tau=tau,
             c=c,
@@ -270,18 +274,17 @@ def _run_problem_skill(agent, concept, state, answer, steps, ptype, ttype, name,
     if ptype == PTYPE_DEMO:
         log(LOG_DEMO, agent.agent_name, correct_answer=answer)
         for idx, s in enumerate(steps):
-            s = int(s)
-            selection = f'step_{idx+1}_concept_{concept}'
-            sai = generate_sai(s, selection)
-            print(f'TRAIN INT: {s}, {selection}')
-            when, where, exp = agent.train(state, sai=sai, reward=1, problem_info=problem_info, ret_train_expl=True, foci_of_attention=None)
-            log_transaction(None, 'Train', when, where, exp, True, None, s, seen)
-            state[selection]['value'] = str(s)
+            selection, value, foas = s
+            sai = generate_sai(value, selection)
+            print(f'[[TRAIN INT]]: {value}, {selection}')
+            when, where, exp = agent.train(state, sai=sai, reward=1, problem_info=problem_info, ret_train_expl=True, foci_of_attention=foas)
+            log_transaction(None, 'Train', when, where, exp, idx+1 == len(steps), None, s, seen)
+            state[selection]['value'] = str(value)
             state[selection]['contentEditable'] = False
             state[selection]['is_empty'] = False
-        sai = generate_sai(answer)
-        when, where, exp = agent.train(state, sai=sai, reward=1, problem_info=problem_info, ret_train_expl=True, foci_of_attention=None)
-        log_transaction(None, 'Train', when, where, exp, False, None, answer, seen)
+        # sai = generate_sai(answer)
+        # when, where, exp = agent.train(state, sai=sai, reward=1, problem_info=problem_info, ret_train_expl=True, foci_of_attention=None)
+        # log_transaction(None, 'Train', when, where, exp, False, None, answer, seen)
     elif ptype == PTYPE_PRACTICE:
         ss = {f"step_{idx+1}_concept_{concept}": f'{step}' for idx, step in enumerate(steps)}
         prev_actions = []
@@ -392,7 +395,7 @@ def read_problems():
     return study, post
 
 
-STUDY_PROBLEM_NUM = 10
+STUDY_PROBLEM_NUM = 1
 CONCEPT_NUM = 1
 def get_post_test_problems(study, post, ktype):
     global seen_answers
