@@ -1,0 +1,13 @@
+Agent,Concept,Problem,Knowledge,Type,Result,Action,When-Part,Where-Part,How-Part,Intermediate,Seen,AL Ans,Correct Ans,Time
+SPSP-S-1,2,[2][args:150-5-90-9],Skill,study,NA,Train,None,{('r2c1'&'r1c2'&'r1c4')},Concatenate2(?.v&?.v):(r1c2&r1c4)->r2c1,False,True,None,('r2c1', '150/5', ('r1c2', 'r1c4')),12:30:14
+SPSP-S-1,2,[2][args:150-5-90-9],Skill,study,NA,Train,None,{('r2c1'&'r1c2'&'r1c4')&('r2c3'&'r1c8'&'r1c10')},Concatenate2(?.v&?.v):(r1c8&r1c10)->r2c3,False,True,None,('r2c3', '90/9', ('r1c8', 'r1c10')),12:30:14
+SPSP-S-1,2,[2][args:150-5-90-9],Skill,study,NA,Train,N/A,N/A,NO EXP,False,True,None,('r3c1', '30', ('r2c1',)),12:30:14
+SPSP-S-1,2,[2][args:150-5-90-9],Skill,study,NA,Train,N/A,N/A,NO EXP,False,True,None,('r3c3', '10', ('r2c3',)),12:30:14
+SPSP-S-1,2,[2][args:150-5-90-9],Skill,study,NA,Train,None,{('r4c1'&'r3c1'&'r3c3')&('r2c1'&'r1c2'&'r1c4')&('r2c3'&'r1c8'&'r1c10')},Concatenate2(?.v&?.v):(r3c1&r3c3)->r4c1,False,True,None,('r4c1', '30/10', ('r3c1', 'r3c3')),12:30:14
+SPSP-S-1,2,[2][args:150-5-90-9],Skill,study,NA,Train,N/A,N/A,NO EXP,True,True,None,('answer', 3, ('r4c1',)),12:30:14
+SPSP-S-1,2,[2][args:110-5-121-11],Skill,posttest,INCORRECT,Request,...,[1&0],HINT,False,False,None,2,12:30:14
+SPSP-S-1,2,[2][args:150-5-90-9],Skill,posttest,INCORRECT,Request,...,{('r4c1'&'r3c1'&'r3c3')&('r2c1'&'r1c2'&'r1c4')&('r2c3'&'r1c8'&'r1c10')},Concatenate2(?.v&?.v):(r1c2&r1c4)->r2c1 (v: 0.691),None,True,150/5,3,12:30:14
+SPSP-S-1,2,[2][args:150-5-90-9],Skill,posttest,INCORRECT,Request,...,{('r4c1'&'r3c1'&'r3c3')&('r2c1'&'r1c2'&'r1c4')&('r2c3'&'r1c8'&'r1c10')},Concatenate2(?.v&?.v):(r1c2&r1c4)->r2c1 (v: 0.997),None,True,150/5,3,12:30:14
+SPSP-S-1,2,[2][args:150-5-90-9],Skill,posttest,INCORRECT,Request,...,[1&0],HINT,False,True,None,3,12:30:14
+SPSP-S-1,2,[2][args:216-4-87-29],Skill,posttest,INCORRECT,Request,...,{('r4c1'&'r3c1'&'r3c3')&('r2c1'&'r1c2'&'r1c4')&('r2c3'&'r1c8'&'r1c10')},Concatenate2(?.v&?.v):(r1c2&r1c4)->r2c1 (v: 0.994),None,False,216/4,18,12:30:14
+SPSP-S-1,2,[2][args:360-6-135-9],Skill,posttest,INCORRECT,Request,...,{('r4c1'&'r3c1'&'r3c3')&('r2c1'&'r1c2'&'r1c4')&('r2c3'&'r1c8'&'r1c10')},Concatenate2(?.v&?.v):(r1c2&r1c4)->r2c1 (v: 0.998),None,False,360/6,4,12:30:14

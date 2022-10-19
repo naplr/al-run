@@ -104,16 +104,16 @@ def populate_1(args, state):
 
 def populate_2(args, state):
     state['r1c1'] = get_state_field('r1c1', '(', False)
-    state['r1c2'] = get_state_field('r1c1',args[0], False)
-    state['r1c3'] = get_state_field('r1c1',',', False)
-    state['r1c4'] = get_state_field('r1c1',args[1], False)
-    state['r1c5'] = get_state_field('r1c1',')', False)
-    state['r1c6'] = get_state_field('r1c1','SUN', False)
-    state['r1c7'] = get_state_field('r1c1','(', False)
-    state['r1c8'] = get_state_field('r1c1',args[2], False)
-    state['r1c9'] = get_state_field('r1c1',',', False)
-    state['r1c10'] = get_state_field('r1c1',args[3], False)
-    state['r1c11'] = get_state_field('r1c1',')', False)
+    state['r1c2'] = get_state_field('r1c2',args[0], False)
+    state['r1c3'] = get_state_field('r1c3',',', False)
+    state['r1c4'] = get_state_field('r1c4',args[1], False)
+    state['r1c5'] = get_state_field('r1c5',')', False)
+    state['r1c6'] = get_state_field('r1c6','SUN', False)
+    state['r1c7'] = get_state_field('r1c7','(', False)
+    state['r1c8'] = get_state_field('r1c8',args[2], False)
+    state['r1c9'] = get_state_field('r1c9',',', False)
+    state['r1c10'] = get_state_field('r1c10',args[3], False)
+    state['r1c11'] = get_state_field('r1c11',')', False)
 
 
 def _populate_2(args, state):
@@ -185,9 +185,9 @@ def get_steps(p):
         s1 = str(int(args[0]/args[1]))
         s2 = str(int(args[2]/args[3]))
         return [
-            ('r2c1', f'{args[0]}/{args[1]}', ('r1c1', 'r1c4')),
+            ('r2c1', f'{args[0]}/{args[1]}', ('r1c2', 'r1c4')),
             # ('r2c2', '/', None),
-            ('r2c3', f'{args[0]}/{args[1]}', ('r1c8', 'r1c10')),
+            ('r2c3', f'{args[2]}/{args[3]}', ('r1c8', 'r1c10')),
             ('r3c1', s1, ('r2c1', )),
             # ('r3c2', '/', ('r2c2', )),
             ('r3c3', s2, ('r2c3', )),
