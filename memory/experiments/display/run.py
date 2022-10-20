@@ -6,42 +6,16 @@ from sklearn import tree
 from matplotlib import pyplot as plt
 
 
-from apprentice.agents.MemoryAgent import MemoryAgent
-from apprentice.agents.ModularAgent import ModularAgent
 from apprentice.working_memory import fo_planner_operators
 
 from algutils import get_state_and_answer, generate_sai
-from memory.config import KTYPE_SKILL, KTYPE_FACT, COND_SPPP, COND_SPSP, TT_POSTTEST, TT_STUDY, PTYPE_PRACTICE, PTYPE_DEMO
+from memory.shared.config import *
+from memory.shared.const import *
 import memory.shared.helper as helper
 
 import colorama
 from colorama import Fore, Back
 
-DEBUG = True
-AGENT_TYPE = 'memory'
-# AGENT_TYPE = 'modular'
-
-LOG_CORRECT = "LOG_CORRECT"
-LOG_WRONG = "LOG_WRONG"
-LOG_HINT = "LOG_HINT"
-LOG_DEMO = "LOG_DEMO"
-LOG_POST = "LOG_POST"
-# LOG_PRACTICE = "LOG_PRACT"
-
-ATYPE_SPPP = "SPPP_TYPE"
-ATYPE_SPSP = "SPSP_TYPE"
-ATYPE_F = "F_TYPE"
-ATYPE_S = "S_TYPE"
-
-'''
-2 Types -> facts and skills
-
-fact -> get numbers + symbol -> answer
-skill -> get numbers + symbol -> do the immediate value -> answer
-
-study -> post-test
-
-'''
 
 logs = {}
 agent_logs = {}
@@ -170,47 +144,11 @@ def log_transaction(result, action, when_part, where_part, how_part, isInt, al_a
     transaction_logs.append(l)
 
 
-def create_agent(name, alpha, tau, c, s, beta, b_practice, b_study):
-    if AGENT_TYPE == 'memory':
-        agent = MemoryAgent(
-            agent_name=name,
-            # feature_set=["equals"],
-            # function_set=["add", "subtract", "multiply", "divide", "pow", "ripfloatvalue"],
-            # function_set=["add", "subtract", "multiply", "divide", "pow", "inverse"],
-            # function_set=["concatenate2", "concatenate3", "solve", "ripfloatvalue"],
-            function_set=["concatenate2", "solve", "ripfloatvalue"],
-            feature_set=[],
-            when_learner="decisiontree",
-            # when_learner="alwaystrue",
-            where_learner="mostspecific",
-            planner="numba",
-            search_depth=3,
-            alpha=alpha,
-            tau=tau,
-            c=c,
-            s=s,
-            beta=beta,
-            b_practice=b_practice,
-            b_study=b_study,
-            print_log=DEBUG,
-            # use_memory=False
-        )
-    else:
-        agent = ModularAgent(
-            agent_name=name,
-            feature_set=["equals"],
-            function_set=["add", "subtract", "multiply", "divide", "pow"],
-            when_learner="decisiontree",
-            where_learner="mostspecific",
-        )
-    return agent
-
-
 def run_problem(agent, p, ptype, ktype, ttype):
     global current_agent, current_concept, current_problem, current_ktype, current_ttype, current_ptype
 
     state, answer, choices, steps = get_state_and_answer(p)
-    name = f"{p['concept']}, args: {str(p['args'])}, ans: {p['ans']}, {ktype}, {ttype}"
+    name = f"{p['concept']}, args: {str(p['args'])}, ans: {p['ans']}, {ktype}, {ttype}, {ptype}"
     seen = p.get('seen', False)
 
     current_agent = agent.agent_name
@@ -278,6 +216,7 @@ def _run_problem_skill(agent, concept, state, answer, steps, ptype, ttype, name,
             selection, value, foas = s
             sai = generate_sai(value, selection)
             print(f'[[TRAIN INT]]: {value}, {selection}')
+            print(sai)
             when, where, exp = agent.train(state, sai=sai, reward=1, problem_info=problem_info, ret_train_expl=True, foci_of_attention=foas)
             log_transaction(None, 'Train', when, where, exp, idx+1 == len(steps), None, s, seen)
             state[selection]['value'] = str(value)
@@ -287,7 +226,7 @@ def _run_problem_skill(agent, concept, state, answer, steps, ptype, ttype, name,
         # when, where, exp = agent.train(state, sai=sai, reward=1, problem_info=problem_info, ret_train_expl=True, foci_of_attention=None)
         # log_transaction(None, 'Train', when, where, exp, False, None, answer, seen)
     elif ptype == PTYPE_PRACTICE:
-        ss = {f"step_{idx+1}_concept_{concept}": f'{step}' for idx, step in enumerate(steps)}
+        # ss = {f"step_{idx+1}_concept_{concept}": f'{step}' for idx, step in enumerate(steps)}
         prev_actions = []
         while True:
             res, info = agent.request(state, problem_info=problem_info)
@@ -305,7 +244,26 @@ def _run_problem_skill(agent, concept, state, answer, steps, ptype, ttype, name,
             val = res["inputs"]["value"]
             selection = res['selection']
             rhs_id = res["rhs_id"]
-            if selection in ss.keys():
+            if selection == 'answer':
+                correct = str(val) == str(answer)
+                log_transaction(correct, 'Request', info['when'], info['where'], info['skill'], False, val, answer, seen)
+                if ttype == TT_STUDY:
+                    rhs_id = res["rhs_id"]
+                    sai = generate_sai(val)
+                    rew = 1 if correct else -1
+                    agent.train(state, sai=sai, reward=rew, rhs_id=rhs_id, problem_info=problem_info)
+
+                    for (st, sai, rhs_id) in prev_actions:
+                        agent.train(st, sai=sai, reward=rew, rhs_id=rhs_id, problem_info=problem_info)
+
+                if correct:
+                    log(LOG_CORRECT, agent.agent_name, KTYPE_SKILL, ttype, info, val, answer, seen)
+                else:
+                    log(LOG_WRONG, agent.agent_name, KTYPE_SKILL, ttype, info, val, answer, seen)
+                    # if ttype == TT_STUDY:
+                    #     sai = generate_sai(answer)
+                    #     agent.train(state, sai=sai, reward=1, problem_info=problem_info)
+            else:
                 print(f'INTERMEDIATE SEL: {selection}')
                 log_transaction(None, 'Request', info['when'], info['where'], info['skill'], True, val, None, seen)
 
@@ -319,28 +277,8 @@ def _run_problem_skill(agent, concept, state, answer, steps, ptype, ttype, name,
                 state[selection]['is_empty'] = False
                 continue
 
-            if selection == 'answer':
-                correct = str(val) == str(answer)
-                log_transaction(correct, 'Request', info['when'], info['where'], info['skill'], False, val, answer, seen)
-                if ttype == TT_STUDY:
-                    rhs_id = res["rhs_id"]
-                    sai = generate_sai(val)
-                    rew = 1 if correct else -1
-                    agent.train(state, sai=sai, reward=rew, rhs_id=rhs_id, problem_info=problem_info)
-
-                    for (st, sai, rhs_id) in prev_actions:
-                        agent.train(st, sai=sai, reward=rew*0.5, rhs_id=rhs_id, problem_info=problem_info)
-
-                if correct:
-                    log(LOG_CORRECT, agent.agent_name, KTYPE_SKILL, ttype, info, val, answer, seen)
-                else:
-                    log(LOG_WRONG, agent.agent_name, KTYPE_SKILL, ttype, info, val, answer, seen)
-                    # if ttype == TT_STUDY:
-                    #     sai = generate_sai(answer)
-                    #     agent.train(state, sai=sai, reward=1, problem_info=problem_info)
-            else:
-                log(LOG_WRONG, agent.agent_name, KTYPE_SKILL, ttype, info, val, answer, seen)
-                log_transaction(False, 'Request', info['when'], info['where'], info['skill'], None, val, answer, seen)
+                # log(LOG_WRONG, agent.agent_name, KTYPE_SKILL, ttype, info, val, answer, seen)
+                # log_transaction(False, 'Request', info['when'], info['where'], info['skill'], None, val, answer, seen)
             return
 
 
@@ -390,64 +328,11 @@ def show_result():
     ))
 
 
-STUDY_PROBLEM_NUM = 1
-CONCEPT_NUM = 1
-def get_post_test_problems(study, post, ktype):
-    global seen_answers
-    seen_answers = []
-
-    post_problems = []
-    problems_by_concept = []
-    for c, problems in study.items():
-        # if c in [1, '1']:
-        # if c in [1, 2, 4, 5, '1', '2', '4', '5']:
-        if c in [1, 3, 4, 5, '1', '3', '4', '5']:
-            continue 
-        seen = []
-        study_problems = []
-        if ktype == KTYPE_FACT:
-            selected = choice(problems)
-            selected['seen'] = True
-            seen.append(selected['ans'])
-            for _ in range(STUDY_PROBLEM_NUM):
-                study_problems.append(selected)
-        elif ktype == KTYPE_SKILL:
-            print(len(problems))
-            problems = sample(problems, STUDY_PROBLEM_NUM)
-            # problems = problems + problems
-            # problems = problems + problems + problems + problems + problems + problems
-            seen = [p['ans'] for p in problems]
-
-            selected = problems[0]
-            selected['seen'] = True
-
-            study_problems.extend(problems)
-
-        seen_answers.append(str(selected['ans']))
-        problems_by_concept.append(study_problems)
-
-        problems = sample(post[c], 3)
-        while any([True if p['ans'] in seen else False for p in problems]):
-            problems = sample(post[c], 3)
-
-        # print(seen)
-        # print([s['ans'] for s in problems])
-        for _ in range(3):
-            problems.append(selected)
-        post_problems.extend(problems)
-
-    print(seen_answers)
-    temps = zip(*problems_by_concept)
-    study_problems = list(chain(*temps))
-    shuffle(post_problems)
-
-    return study_problems, post_problems
-
 def run_agent(parameters):
     agent_name, alpha, tau, c, s, beta, b_practice, b_study, condition, knowledge_type, study_problems, post_problems = parameters
     print(f"RUNNING: {agent_name}")
-    agent = create_agent(agent_name, alpha, tau, c, s, beta, b_practice, b_study)
-    study, post = get_post_test_problems(study_problems, post_problems, knowledge_type)
+    agent = helper.create_agent(agent_name, alpha, tau, c, s, beta, b_practice, b_study)
+    study, post = helper.get_post_test_problems(study_problems, post_problems, knowledge_type)
 
     # run study
     for idx, p in enumerate(study):
@@ -474,100 +359,11 @@ def run_agent(parameters):
     global transaction_logs
     tlogs = ['Agent,Concept,Problem,Knowledge,Type,Result,Action,When-Part,Where-Part,How-Part,Intermediate,Seen,AL Ans,Correct Ans,Time\n']
     tlogs.extend(transaction_logs)
-    with open(f"logs/{agent_name}-transaction_logs.csv", 'w+') as f:
+    with open(f"logs/{agent_name}-txlogs.csv", 'w+') as f:
         f.writelines(tlogs)
 
 
-def run_debug(agent, a, b, c):
-    print(f'{a}, {b}, {c}')
-    ans = a + c
-    ans = str(ans)
-    # state = {
-    #     'a': { 'id': 'a', 'value': float(a), 'contentEditable': False, 'dom_class': 'CTATTextInput', 'type': 'TextField' },
-    #     'b': { 'id': 'b', 'value': float(b), 'contentEditable': False, 'dom_class': 'CTATTextInput', 'type': 'TextField' },
-    #     'c': { 'id': 'c', 'value': float(c), 'contentEditable': False, 'dom_class': 'CTATTextInput', 'type': 'TextField' },
-    #     'ans': { 'id': 'ans', 'value': '', 'contentEditable': True, 'dom_class': 'CTATTextInput', 'type': 'TextField' },
-    # }
-    state = {
-        'a': { 'id': 'a', 'value': str(a), 'contentEditable': False },
-        'b': { 'id': 'b', 'value': str(b), 'contentEditable': False },
-        'c': { 'id': 'c', 'value': str(c), 'contentEditable': False },
-        'ans': { 'id': 'ans', 'value': '', 'contentEditable': True },
-    }
-    res, _ = agent.request(state)
-    if len(res) == 0:
-        print(f"HINT {ans}")
-        sai = generate_sai(ans, 'ans', 'Update')
-        # agent.train(state, sai, 1, foci_of_attention=['a', 'c'])
-        agent.train(state, sai=sai, reward=1, foci_of_attention=['a', 'c'])
-    else:
-        sel, act, val = res['selection'], res['action'], res["inputs"]["value"]
-        sai = generate_sai(val, sel, act)
-
-        correct = val == ans
-        if correct:
-            print(f"[CORRECT] {sel}-{act}-{val} ({res['rhs_id']})")
-            agent.train(state, sai=sai, reward=1, rhs_id=res['rhs_id'], foci_of_attention=['a', 'c'])
-        else:
-            print(f"[WRONG] {sel}-{act}-{val} ({res['rhs_id']})")
-            agent.train(state, sai=sai, reward=-1, rhs_id=res['rhs_id'], foci_of_attention=['a', 'c'])
-
-            sai = generate_sai(ans, 'ans', 'Update')
-            # agent.train(state, sai, 1, foci_of_attention=['a', 'c'])
-            agent.train(state, sai=sai, reward=1, foci_of_attention=['a', 'c'])
-            print(f"DEMONSTRATE {ans}")
-
-N = 1
-def _debug():
-    alpha, tau, c, s = 0.177, -0.7, 0.277, 1 # 0.0786
-    beta, b_practice, b_study = 5, 1, 0.01
-    agent = create_agent("TEST_DEBUG", alpha, tau, c, s, beta, b_practice, b_study)
-    for _ in range(N):
-        a, b, c = sample(range(1, 50), 3)
-        run_debug(agent, a, b, c)
-        print("==" * 20)
-    run_debug(agent, 10, 11, 11)
-    print("==" * 20)
-    run_debug(agent, 2, 2, 8)
-    print("==" * 20)
-
-
 def main():
-    colorama.init(autoreset=True)
-
-    # alpha, tau, c, s = 0.177, -0.7, 0.277, 1 # 0.0786
-    alpha, tau, c, s = 0.177, -1, 0.277, 0.0786
-    # beta, b_practice, b_study = 3.4, 1, 0.01
-    beta, b_practice, b_study = 5, 1, 0.01
-
-    study_problems, post_problems = helper.read_problems()
-    # print(study_problems['1'])
-    outname = f"res.pkl"
-    num_set = 15
-    for i in range(num_set):
-        print("Running agent set: {}/{}".format(i+1, num_set))
-        run_agent(f'SPPP-F-{i+1}', alpha, tau, c, s, beta, b_practice, b_study, COND_SPPP, KTYPE_FACT, study_problems, post_problems)
-        run_agent(f'SPSP-F-{i+1}', alpha, tau, c, s, beta, b_practice, b_study, COND_SPSP, KTYPE_FACT, study_problems, post_problems)
-        run_agent(f'SPPP-S-{i+1}', alpha, tau, c, s, beta, b_practice, b_study, COND_SPPP, KTYPE_SKILL, study_problems, post_problems)
-        run_agent(f'SPSP-S-{i+1}', alpha, tau, c, s, beta, b_practice, b_study, COND_SPSP, KTYPE_SKILL, study_problems, post_problems)
-
-        if DEBUG:
-            print()
-            print("=" * 20)
-            print()
-            print()
-
-        show_result()
-        pickle.dump(logs, open(outname, "wb"))
-
-        global transaction_logs
-        tlogs = ['Agent,Concept,Problem,Knowledge,Type,Result,Action,When-Part,Where-Part,How-Part,Intermediate,Seen,AL Ans,Correct Ans,Time\n']
-        tlogs.extend(transaction_logs)
-        with open("transaction_logs.csv", 'w+') as f:
-            f.writelines(tlogs)
-        # pickle.dump(agent_logs, open("agent_logs.pkl", "wb"))
-
-def run_pool():
     colorama.init(autoreset=True)
 
     alpha, tau, c, s = 0.177, -0.7, 0.277, 1 # 0.0786
@@ -592,9 +388,7 @@ def run_pool():
 
 
 if __name__ == "__main__":
-    # main()
-
     tic = time.time()
-    run_pool()
+    main()
     toc = time.time()
     print(f'[loop] Done in {toc-tic:.4f} seconds')

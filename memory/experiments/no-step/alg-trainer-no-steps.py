@@ -8,7 +8,7 @@ from apprentice.agents.ModularAgent import ModularAgent
 from apprentice.working_memory import fo_planner_operators
 
 from algutils_nosteps import get_state_and_answer, generate_sai, solutions
-from memory.config import KTYPE_SKILL, KTYPE_FACT, COND_SPPP, COND_SPSP, TT_POSTTEST, TT_STUDY, PTYPE_PRACTICE, PTYPE_DEMO
+from memory.shared.config import KTYPE_SKILL, KTYPE_FACT, COND_SPPP, COND_SPSP, TT_POSTTEST, TT_STUDY, PTYPE_PRACTICE, PTYPE_DEMO
 
 import colorama
 from colorama import Fore, Back
