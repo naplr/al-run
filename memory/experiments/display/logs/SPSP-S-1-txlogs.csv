@@ -1,38 +1,33 @@
 Agent,Concept,Problem,Knowledge,Type,Result,Action,When-Part,Where-Part,How-Part,Intermediate,Seen,AL Ans,Correct Ans,Time
-SPSP-S-1,2,[2][args:252-6-84-12],Skill,study,NA,Train,None,{('r2c1'&'r1c2'&'r1c4')},Concatenate2(?.v&?.v):(r1c2&r1c4)->r2c1,False,True,None,('r2c1', '252/6', ('r1c2', 'r1c4')),16:59:07
-SPSP-S-1,2,[2][args:252-6-84-12],Skill,study,NA,Train,None,{('r2c1'&'r1c2'&'r1c4')&('r2c3'&'r1c8'&'r1c10')},Concatenate2(?.v&?.v):(r1c8&r1c10)->r2c3,False,True,None,('r2c3', '84/12', ('r1c8', 'r1c10')),16:59:07
-SPSP-S-1,2,[2][args:252-6-84-12],Skill,study,NA,Train,None,{('r3c1'&'r2c1')},Solve(?.v):(r2c1)->r3c1,False,True,None,('r3c1', '42', ('r2c1',)),16:59:07
-SPSP-S-1,2,[2][args:252-6-84-12],Skill,study,NA,Train,None,{('r3c1'&'r2c1')&('r3c3'&'r2c3')},Solve(?.v):(r2c3)->r3c3,False,True,None,('r3c3', '7', ('r2c3',)),16:59:07
-SPSP-S-1,2,[2][args:252-6-84-12],Skill,study,NA,Train,None,{('r2c1'&'r1c2'&'r1c4')&('r2c3'&'r1c8'&'r1c10')&('r4c1'&'r3c1'&'r3c3')},Concatenate2(?.v&?.v):(r3c1&r3c3)->r4c1,False,True,None,('r4c1', '42/7', ('r3c1', 'r3c3')),16:59:07
-SPSP-S-1,2,[2][args:252-6-84-12],Skill,study,NA,Train,None,{('r3c1'&'r2c1')&('r3c3'&'r2c3')&('answer'&'r4c1')},Solve(?.v):(r4c1)->answer,True,True,None,('answer', 6, ('r4c1',)),16:59:07
-SPSP-S-1,2,[2][args:126-3-54-9],Skill,practice,INCORRECT,Request,...,[1&0],HINT,False,False,None,7,16:59:07
-SPSP-S-1,2,[2][args:216-4-87-29],Skill,posttest,NA,Request,...,{('r2c1'&'r1c2'&'r1c4')&('r2c3'&'r1c8'&'r1c10')&('r4c1'&'r3c1'&'r3c3')},Concatenate2(?.v&?.v):(r1c2&r1c4)->r2c1 (v: 0.666),True,False,216/4,None,16:59:07
-SPSP-S-1,2,[2][args:216-4-87-29],Skill,posttest,NA,Request,...,{('r2c1'&'r1c2'&'r1c4')&('r2c3'&'r1c8'&'r1c10')&('r4c1'&'r3c1'&'r3c3')},Concatenate2(?.v&?.v):(r1c8&r1c10)->r2c3 (v: 0.666),True,False,87/29,None,16:59:07
-SPSP-S-1,2,[2][args:216-4-87-29],Skill,posttest,INCORRECT,Request,...,[1&0],HINT,False,False,None,18,16:59:07
-SPSP-S-1,2,[2][args:252-6-84-12],Skill,posttest,NA,Request,...,{('r2c1'&'r1c2'&'r1c4')&('r2c3'&'r1c8'&'r1c10')&('r4c1'&'r3c1'&'r3c3')},Concatenate2(?.v&?.v):(r1c2&r1c4)->r2c1 (v: 0.994),True,True,252/6,None,16:59:07
-SPSP-S-1,2,[2][args:252-6-84-12],Skill,posttest,NA,Request,...,{('r2c1'&'r1c2'&'r1c4')&('r2c3'&'r1c8'&'r1c10')&('r4c1'&'r3c1'&'r3c3')},Concatenate2(?.v&?.v):(r1c8&r1c10)->r2c3 (v: 0.994),True,True,84/12,None,16:59:07
-SPSP-S-1,2,[2][args:252-6-84-12],Skill,posttest,NA,Request,...,{('r3c1'&'r2c1')&('r3c3'&'r2c3')&('answer'&'r4c1')},Solve(?.v):(r2c1)->r3c1 (v: 0.656),True,True,42,None,16:59:07
-SPSP-S-1,2,[2][args:252-6-84-12],Skill,posttest,INCORRECT,Request,...,[1&0],HINT,False,True,None,6,16:59:07
-SPSP-S-1,2,[2][args:252-6-84-12],Skill,posttest,NA,Request,...,{('r2c1'&'r1c2'&'r1c4')&('r2c3'&'r1c8'&'r1c10')&('r4c1'&'r3c1'&'r3c3')},Concatenate2(?.v&?.v):(r1c2&r1c4)->r2c1 (v: 0.990),True,True,252/6,None,16:59:07
-SPSP-S-1,2,[2][args:252-6-84-12],Skill,posttest,NA,Request,...,{('r2c1'&'r1c2'&'r1c4')&('r2c3'&'r1c8'&'r1c10')&('r4c1'&'r3c1'&'r3c3')},Concatenate2(?.v&?.v):(r1c8&r1c10)->r2c3 (v: 0.990),True,True,84/12,None,16:59:07
-SPSP-S-1,2,[2][args:252-6-84-12],Skill,posttest,NA,Request,...,{('r3c1'&'r2c1')&('r3c3'&'r2c3')&('answer'&'r4c1')},Solve(?.v):(r2c1)->r3c1 (v: 0.993),True,True,42,None,16:59:07
-SPSP-S-1,2,[2][args:252-6-84-12],Skill,posttest,NA,Request,...,{('r3c1'&'r2c1')&('r3c3'&'r2c3')&('answer'&'r4c1')},Solve(?.v):(r2c3)->r3c3 (v: 0.645),True,True,7,None,16:59:07
-SPSP-S-1,2,[2][args:252-6-84-12],Skill,posttest,INCORRECT,Request,...,[1&0],HINT,False,True,None,6,16:59:07
-SPSP-S-1,2,[2][args:45-3-120-24],Skill,posttest,NA,Request,...,{('r2c1'&'r1c2'&'r1c4')&('r2c3'&'r1c8'&'r1c10')&('r4c1'&'r3c1'&'r3c3')},Concatenate2(?.v&?.v):(r1c2&r1c4)->r2c1 (v: 0.986),True,False,45/3,None,16:59:07
-SPSP-S-1,2,[2][args:45-3-120-24],Skill,posttest,NA,Request,...,{('r2c1'&'r1c2'&'r1c4')&('r2c3'&'r1c8'&'r1c10')&('r4c1'&'r3c1'&'r3c3')},Concatenate2(?.v&?.v):(r1c8&r1c10)->r2c3 (v: 0.986),True,False,120/24,None,16:59:07
-SPSP-S-1,2,[2][args:45-3-120-24],Skill,posttest,NA,Request,...,{('r3c1'&'r2c1')&('r3c3'&'r2c3')&('answer'&'r4c1')},Solve(?.v):(r2c1)->r3c1 (v: 0.988),True,False,15,None,16:59:07
-SPSP-S-1,2,[2][args:45-3-120-24],Skill,posttest,NA,Request,...,{('r3c1'&'r2c1')&('r3c3'&'r2c3')&('answer'&'r4c1')},Solve(?.v):(r2c3)->r3c3 (v: 0.992),True,False,5,None,16:59:07
-SPSP-S-1,2,[2][args:45-3-120-24],Skill,posttest,NA,Request,...,{('r2c1'&'r1c2'&'r1c4')&('r2c3'&'r1c8'&'r1c10')&('r4c1'&'r3c1'&'r3c3')},Concatenate2(?.v&?.v):(r3c1&r3c3)->r4c1 (v: 0.634),True,False,15/5,None,16:59:07
-SPSP-S-1,2,[2][args:45-3-120-24],Skill,posttest,CORRECT,Request,...,{('r3c1'&'r2c1')&('r3c3'&'r2c3')&('answer'&'r4c1')},Solve(?.v):(r4c1)->answer (v: 0.634),False,False,3,3,16:59:07
-SPSP-S-1,2,[2][args:110-5-121-11],Skill,posttest,NA,Request,...,{('r2c1'&'r1c2'&'r1c4')&('r2c3'&'r1c8'&'r1c10')&('r4c1'&'r3c1'&'r3c3')},Concatenate2(?.v&?.v):(r1c2&r1c4)->r2c1 (v: 0.983),True,False,110/5,None,16:59:07
-SPSP-S-1,2,[2][args:110-5-121-11],Skill,posttest,NA,Request,...,{('r2c1'&'r1c2'&'r1c4')&('r2c3'&'r1c8'&'r1c10')&('r4c1'&'r3c1'&'r3c3')},Concatenate2(?.v&?.v):(r1c8&r1c10)->r2c3 (v: 0.983),True,False,121/11,None,16:59:07
-SPSP-S-1,2,[2][args:110-5-121-11],Skill,posttest,NA,Request,...,{('r3c1'&'r2c1')&('r3c3'&'r2c3')&('answer'&'r4c1')},Solve(?.v):(r2c1)->r3c1 (v: 0.984),True,False,22,None,16:59:07
-SPSP-S-1,2,[2][args:110-5-121-11],Skill,posttest,NA,Request,...,{('r3c1'&'r2c1')&('r3c3'&'r2c3')&('answer'&'r4c1')},Solve(?.v):(r2c3)->r3c3 (v: 0.987),True,False,11,None,16:59:07
-SPSP-S-1,2,[2][args:110-5-121-11],Skill,posttest,NA,Request,...,{('r2c1'&'r1c2'&'r1c4')&('r2c3'&'r1c8'&'r1c10')&('r4c1'&'r3c1'&'r3c3')},Concatenate2(?.v&?.v):(r3c1&r3c3)->r4c1 (v: 0.991),True,False,22/11,None,16:59:07
-SPSP-S-1,2,[2][args:110-5-121-11],Skill,posttest,CORRECT,Request,...,{('r3c1'&'r2c1')&('r3c3'&'r2c3')&('answer'&'r4c1')},Solve(?.v):(r4c1)->answer (v: 0.991),False,False,2,2,16:59:07
-SPSP-S-1,2,[2][args:252-6-84-12],Skill,posttest,NA,Request,...,{('r2c1'&'r1c2'&'r1c4')&('r2c3'&'r1c8'&'r1c10')&('r4c1'&'r3c1'&'r3c3')},Concatenate2(?.v&?.v):(r1c2&r1c4)->r2c1 (v: 0.979),True,True,252/6,None,16:59:07
-SPSP-S-1,2,[2][args:252-6-84-12],Skill,posttest,NA,Request,...,{('r2c1'&'r1c2'&'r1c4')&('r2c3'&'r1c8'&'r1c10')&('r4c1'&'r3c1'&'r3c3')},Concatenate2(?.v&?.v):(r1c8&r1c10)->r2c3 (v: 0.979),True,True,84/12,None,16:59:07
-SPSP-S-1,2,[2][args:252-6-84-12],Skill,posttest,NA,Request,...,{('r3c1'&'r2c1')&('r3c3'&'r2c3')&('answer'&'r4c1')},Solve(?.v):(r2c1)->r3c1 (v: 0.981),True,True,42,None,16:59:07
-SPSP-S-1,2,[2][args:252-6-84-12],Skill,posttest,NA,Request,...,{('r3c1'&'r2c1')&('r3c3'&'r2c3')&('answer'&'r4c1')},Solve(?.v):(r2c3)->r3c3 (v: 0.983),True,True,7,None,16:59:08
-SPSP-S-1,2,[2][args:252-6-84-12],Skill,posttest,NA,Request,...,{('r2c1'&'r1c2'&'r1c4')&('r2c3'&'r1c8'&'r1c10')&('r4c1'&'r3c1'&'r3c3')},Concatenate2(?.v&?.v):(r3c1&r3c3)->r4c1 (v: 0.986),True,True,42/7,None,16:59:08
-SPSP-S-1,2,[2][args:252-6-84-12],Skill,posttest,CORRECT,Request,...,{('r3c1'&'r2c1')&('r3c3'&'r2c3')&('answer'&'r4c1')},Solve(?.v):(r4c1)->answer (v: 0.986),False,True,6,6,16:59:08
+SPSP-S-1,2,[2][args:252-6-84-12],Skill,study,NA,Train,None,{('r2c1'&'r1c2'&'r1c4')},Division(?.v&?.v):(r1c2&r1c4)->r2c1,False,True,None,('r2c1', '252/6', ('r1c2', 'r1c4')),16:04:03
+SPSP-S-1,2,[2][args:252-6-84-12],Skill,study,NA,Train,None,{('r2c2'&)},/:()->r2c2,False,True,None,('r2c2', '/', None),16:04:03
+SPSP-S-1,2,[2][args:252-6-84-12],Skill,study,NA,Train,None,{('r2c3'&'r1c8'&'r1c10')&('r2c1'&'r1c2'&'r1c4')},Division(?.v&?.v):(r1c8&r1c10)->r2c3,False,True,None,('r2c3', '84/12', ('r1c8', 'r1c10')),16:04:03
+SPSP-S-1,2,[2][args:252-6-84-12],Skill,study,NA,Train,N/A,N/A,NO EXP,False,True,None,('r3c1', '42', ('r2c1',)),16:04:03
+SPSP-S-1,2,[2][args:252-6-84-12],Skill,study,NA,Train,None,{('r3c2'&)&('r2c2'&)},/:()->r3c2,False,True,None,('r3c2', '/', ('r2c2',)),16:04:03
+SPSP-S-1,2,[2][args:252-6-84-12],Skill,study,NA,Train,N/A,N/A,NO EXP,False,True,None,('r3c3', '7', ('r2c3',)),16:04:03
+SPSP-S-1,2,[2][args:252-6-84-12],Skill,study,NA,Train,None,{('r2c3'&'r1c8'&'r1c10')&('r2c1'&'r1c2'&'r1c4')&('r4c1'&'r3c1'&'r3c3')},Division(?.v&?.v):(r3c1&r3c3)->r4c1,False,True,None,('r4c1', '42/7', ('r3c1', 'r3c3')),16:04:03
+SPSP-S-1,2,[2][args:252-6-84-12],Skill,study,NA,Train,N/A,N/A,NO EXP,True,True,None,('answer', 6, ('r4c1',)),16:04:03
+SPSP-S-1,2,[2][args:126-3-54-9],Skill,practice,INCORRECT,Request,...,[1&0],HINT,False,False,None,7,16:04:03
+SPSP-S-1,2,[2][args:45-3-120-24],Skill,posttest,NA,Request,...,{('r2c3'&'r1c8'&'r1c10')&('r2c1'&'r1c2'&'r1c4')&('r4c1'&'r3c1'&'r3c3')},Division(?.v&?.v):(r1c8&r1c10)->r2c3 (v: 0.683),True,False,120/24,None,16:04:03
+SPSP-S-1,2,[2][args:45-3-120-24],Skill,posttest,NA,Request,...,{('r2c3'&'r1c8'&'r1c10')&('r2c1'&'r1c2'&'r1c4')&('r4c1'&'r3c1'&'r3c3')},Division(?.v&?.v):(r1c2&r1c4)->r2c1 (v: 0.668),True,False,45/3,None,16:04:03
+SPSP-S-1,2,[2][args:45-3-120-24],Skill,posttest,INCORRECT,Request,...,[1&0],HINT,False,False,None,3,16:04:03
+SPSP-S-1,2,[2][args:216-4-87-29],Skill,posttest,NA,Request,...,{('r2c3'&'r1c8'&'r1c10')&('r2c1'&'r1c2'&'r1c4')&('r4c1'&'r3c1'&'r3c3')},Division(?.v&?.v):(r1c8&r1c10)->r2c3 (v: 0.994),True,False,87/29,None,16:04:03
+SPSP-S-1,2,[2][args:216-4-87-29],Skill,posttest,NA,Request,...,{('r2c3'&'r1c8'&'r1c10')&('r2c1'&'r1c2'&'r1c4')&('r4c1'&'r3c1'&'r3c3')},Division(?.v&?.v):(r1c2&r1c4)->r2c1 (v: 0.994),True,False,216/4,None,16:04:03
+SPSP-S-1,2,[2][args:216-4-87-29],Skill,posttest,NA,Request,...,{('r3c2'&)&('r2c2'&)},/:()->r3c2 (v: 0.664),True,False,/,None,16:04:03
+SPSP-S-1,2,[2][args:216-4-87-29],Skill,posttest,INCORRECT,Request,...,[0&0],HINT,False,False,None,18,16:04:03
+SPSP-S-1,2,[2][args:252-6-84-12],Skill,posttest,NA,Request,...,{('r2c3'&'r1c8'&'r1c10')&('r2c1'&'r1c2'&'r1c4')&('r4c1'&'r3c1'&'r3c3')},Division(?.v&?.v):(r1c8&r1c10)->r2c3 (v: 0.990),True,True,84/12,None,16:04:03
+SPSP-S-1,2,[2][args:252-6-84-12],Skill,posttest,NA,Request,...,{('r2c3'&'r1c8'&'r1c10')&('r2c1'&'r1c2'&'r1c4')&('r4c1'&'r3c1'&'r3c3')},Division(?.v&?.v):(r1c2&r1c4)->r2c1 (v: 0.990),True,True,252/6,None,16:04:03
+SPSP-S-1,2,[2][args:252-6-84-12],Skill,posttest,NA,Request,...,{('r3c2'&)&('r2c2'&)},/:()->r3c2 (v: 0.993),True,True,/,None,16:04:04
+SPSP-S-1,2,[2][args:252-6-84-12],Skill,posttest,INCORRECT,Request,...,[0&0],HINT,False,True,None,6,16:04:04
+SPSP-S-1,2,[2][args:252-6-84-12],Skill,posttest,NA,Request,...,{('r2c3'&'r1c8'&'r1c10')&('r2c1'&'r1c2'&'r1c4')&('r4c1'&'r3c1'&'r3c3')},Division(?.v&?.v):(r1c8&r1c10)->r2c3 (v: 0.987),True,True,84/12,None,16:04:04
+SPSP-S-1,2,[2][args:252-6-84-12],Skill,posttest,NA,Request,...,{('r2c3'&'r1c8'&'r1c10')&('r2c1'&'r1c2'&'r1c4')&('r4c1'&'r3c1'&'r3c3')},Division(?.v&?.v):(r1c2&r1c4)->r2c1 (v: 0.987),True,True,252/6,None,16:04:04
+SPSP-S-1,2,[2][args:252-6-84-12],Skill,posttest,NA,Request,...,{('r3c2'&)&('r2c2'&)},/:()->r3c2 (v: 0.989),True,True,/,None,16:04:04
+SPSP-S-1,2,[2][args:252-6-84-12],Skill,posttest,INCORRECT,Request,...,[0&0],HINT,False,True,None,6,16:04:04
+SPSP-S-1,2,[2][args:288-12-18-9],Skill,posttest,NA,Request,...,{('r2c3'&'r1c8'&'r1c10')&('r2c1'&'r1c2'&'r1c4')&('r4c1'&'r3c1'&'r3c3')},Division(?.v&?.v):(r1c8&r1c10)->r2c3 (v: 0.984),True,False,18/9,None,16:04:04
+SPSP-S-1,2,[2][args:288-12-18-9],Skill,posttest,NA,Request,...,{('r2c3'&'r1c8'&'r1c10')&('r2c1'&'r1c2'&'r1c4')&('r4c1'&'r3c1'&'r3c3')},Division(?.v&?.v):(r1c2&r1c4)->r2c1 (v: 0.984),True,False,288/12,None,16:04:04
+SPSP-S-1,2,[2][args:288-12-18-9],Skill,posttest,NA,Request,...,{('r3c2'&)&('r2c2'&)},/:()->r3c2 (v: 0.986),True,False,/,None,16:04:04
+SPSP-S-1,2,[2][args:288-12-18-9],Skill,posttest,INCORRECT,Request,...,[0&0],HINT,False,False,None,12,16:04:04
+SPSP-S-1,2,[2][args:252-6-84-12],Skill,posttest,NA,Request,...,{('r2c3'&'r1c8'&'r1c10')&('r2c1'&'r1c2'&'r1c4')&('r4c1'&'r3c1'&'r3c3')},Division(?.v&?.v):(r1c8&r1c10)->r2c3 (v: 0.982),True,True,84/12,None,16:04:04
+SPSP-S-1,2,[2][args:252-6-84-12],Skill,posttest,NA,Request,...,{('r2c3'&'r1c8'&'r1c10')&('r2c1'&'r1c2'&'r1c4')&('r4c1'&'r3c1'&'r3c3')},Division(?.v&?.v):(r1c2&r1c4)->r2c1 (v: 0.982),True,True,252/6,None,16:04:04
+SPSP-S-1,2,[2][args:252-6-84-12],Skill,posttest,NA,Request,...,{('r3c2'&)&('r2c2'&)},/:()->r3c2 (v: 0.984),True,True,/,None,16:04:04
+SPSP-S-1,2,[2][args:252-6-84-12],Skill,posttest,INCORRECT,Request,...,[0&0],HINT,False,True,None,6,16:04:04

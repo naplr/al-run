@@ -17,8 +17,9 @@ def create_agent(name, alpha, tau, c, s, beta, b_practice, b_study):
             # function_set=["add", "subtract", "multiply", "divide", "pow", "ripfloatvalue"],
             # function_set=["add", "subtract", "multiply", "divide", "pow", "inverse"],
             # function_set=["concatenate2", "concatenate3", "solve", "ripfloatvalue"],
-            # function_set=["concatenate2", "solve", "ripfloatvalue"],
-            function_set=["concatenate2", "solve", "ripstrvalue"],
+            # function_set=["division", "concatenate3", "solve", "ripfloatvalue"],
+            # function_set=["division", "concatenate3", "solve", "ripfloatvalue", "ripstrvalue"],
+            function_set=["division", "solve", "ripstrvalue", "strtofloat"],
             feature_set=[],
             when_learner="decisiontree",
             # when_learner="alwaystrue",
@@ -48,7 +49,6 @@ def create_agent(name, alpha, tau, c, s, beta, b_practice, b_study):
 
 def read_problems():
     study = pickle.load(open('../../data/alg-study.pkl', 'rb'))
-    print(study['2'])
     post = pickle.load(open('../../data/alg-post.pkl', 'rb'))
     return study, post
 
