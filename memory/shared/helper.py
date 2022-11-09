@@ -93,6 +93,14 @@ def generate_sai(val, selection='answer', action="UpdateTextField"):
     return Sai(selection=selection, action=action, inputs={'value': f'{val}'})
 
 
+def append(n, p):
+    if n == 'answer':
+        return n
+
+    # return n
+    return f"{n}_concept_{p['concept']}"
+
+
 IIDDXX = 0
 def random_num():
     global IIDDXX
