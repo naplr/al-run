@@ -1,8 +1,11 @@
 ### ALGEBRA ###
 
 STUDY_PROBLEM_NUM = 10
-CONCEPT_NUM = 4
-SELECTED_PROBLEMS = list(map(str, [2, 3, 4, 5]))
+# CONCEPTS = [2, 3, 4]
+# CONCEPTS = [2, 3, 4, 5]
+CONCEPTS = [1, ]
+CONCEPT_NUM = len(CONCEPTS)
+SELECTED_PROBLEMS = list(map(str, CONCEPTS))
 
 DEBUG = True
 AGENT_TYPE = 'memory'

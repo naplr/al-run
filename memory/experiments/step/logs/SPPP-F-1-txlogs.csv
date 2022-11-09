@@ -1,0 +1,68 @@
+Agent,Concept,Problem,Knowledge,Type,Result,Action,When-Part,Where-Part,How-Part,Intermediate,Seen,AL Ans,Correct Ans,Time
+SPPP-F-1,2,[2][args:180-12-115-23],Fact,practice,INCORRECT,Request,...,[0&0],HINT,False,True,None,3,11:11:34
+SPPP-F-1,2,[2][args:180-12-115-23],Fact,practice,NA,Train,None,{('answer'&)},3.0:()->answer,False,True,None,3,11:11:42
+SPPP-F-1,3,[3][args:98-2-7],Fact,practice,INCORRECT,Request,...,{('answer'&)},3.0:()->answer (v: 0.749),False,True,3.0,7,11:11:42
+SPPP-F-1,4,[4][args:2-6],Fact,practice,INCORRECT,Request,...,{('answer'&)},7.0:()->answer (v: 0.749),False,True,7.0,39,11:11:42
+SPPP-F-1,5,[5][args:7-356-475],Fact,practice,INCORRECT,Request,...,[1&0],HINT,False,True,None,17,11:11:42
+SPPP-F-1,5,[5][args:7-356-475],Fact,practice,NA,Train,None,{('answer'&)},17.0:()->answer,False,True,None,17,11:11:42
+SPPP-F-1,2,[2][args:180-12-115-23],Fact,practice,INCORRECT,Request,...,{('answer'&)},17.0:()->answer (v: 0.749),False,True,17.0,3,11:11:43
+SPPP-F-1,3,[3][args:98-2-7],Fact,practice,INCORRECT,Request,...,{('answer'&)},7.0:()->answer (v: 0.991),False,True,7.0,7,11:11:43
+SPPP-F-1,4,[4][args:2-6],Fact,practice,INCORRECT,Request,...,[1&0],HINT,False,True,None,39,11:11:43
+SPPP-F-1,4,[4][args:2-6],Fact,practice,NA,Train,None,{('answer'&)},39.0:()->answer,False,True,None,39,11:11:43
+SPPP-F-1,5,[5][args:7-356-475],Fact,practice,INCORRECT,Request,...,{('answer'&)},17.0:()->answer (v: 0.991),False,True,17.0,17,11:11:43
+SPPP-F-1,2,[2][args:180-12-115-23],Fact,practice,INCORRECT,Request,...,{('answer'&)},3.0:()->answer (v: 0.985),False,True,3.0,3,11:11:43
+SPPP-F-1,3,[3][args:98-2-7],Fact,practice,INCORRECT,Request,...,{('answer'&)},7.0:()->answer (v: 0.985),False,True,7.0,7,11:11:43
+SPPP-F-1,4,[4][args:2-6],Fact,practice,INCORRECT,Request,...,{('answer'&)},39.0:()->answer (v: 0.737),False,True,39.0,39,11:11:44
+SPPP-F-1,5,[5][args:7-356-475],Fact,practice,INCORRECT,Request,...,{('answer'&)},17.0:()->answer (v: 0.985),False,True,17.0,17,11:11:44
+SPPP-F-1,2,[2][args:180-12-115-23],Fact,practice,INCORRECT,Request,...,{('answer'&)},3.0:()->answer (v: 0.980),False,True,3.0,3,11:11:44
+SPPP-F-1,3,[3][args:98-2-7],Fact,practice,INCORRECT,Request,...,{('answer'&)},7.0:()->answer (v: 0.980),False,True,7.0,7,11:11:44
+SPPP-F-1,4,[4][args:2-6],Fact,practice,INCORRECT,Request,...,{('answer'&)},39.0:()->answer (v: 0.981),False,True,39.0,39,11:11:45
+SPPP-F-1,5,[5][args:7-356-475],Fact,practice,INCORRECT,Request,...,{('answer'&)},17.0:()->answer (v: 0.980),False,True,17.0,17,11:11:45
+SPPP-F-1,2,[2][args:180-12-115-23],Fact,practice,INCORRECT,Request,...,{('answer'&)},3.0:()->answer (v: 0.977),False,True,3.0,3,11:11:45
+SPPP-F-1,3,[3][args:98-2-7],Fact,practice,INCORRECT,Request,...,{('answer'&)},7.0:()->answer (v: 0.977),False,True,7.0,7,11:11:45
+SPPP-F-1,4,[4][args:2-6],Fact,practice,INCORRECT,Request,...,{('answer'&)},39.0:()->answer (v: 0.967),False,True,39.0,39,11:11:46
+SPPP-F-1,5,[5][args:7-356-475],Fact,practice,INCORRECT,Request,...,{('answer'&)},17.0:()->answer (v: 0.977),False,True,17.0,17,11:11:46
+SPPP-F-1,2,[2][args:180-12-115-23],Fact,practice,INCORRECT,Request,...,{('answer'&)},3.0:()->answer (v: 0.974),False,True,3.0,3,11:11:46
+SPPP-F-1,3,[3][args:98-2-7],Fact,practice,INCORRECT,Request,...,{('answer'&)},7.0:()->answer (v: 0.974),False,True,7.0,7,11:11:46
+SPPP-F-1,4,[4][args:2-6],Fact,practice,INCORRECT,Request,...,{('answer'&)},39.0:()->answer (v: 0.955),False,True,39.0,39,11:11:47
+SPPP-F-1,5,[5][args:7-356-475],Fact,practice,INCORRECT,Request,...,{('answer'&)},17.0:()->answer (v: 0.974),False,True,17.0,17,11:11:47
+SPPP-F-1,2,[2][args:180-12-115-23],Fact,practice,INCORRECT,Request,...,{('answer'&)},3.0:()->answer (v: 0.971),False,True,3.0,3,11:11:47
+SPPP-F-1,3,[3][args:98-2-7],Fact,practice,INCORRECT,Request,...,{('answer'&)},7.0:()->answer (v: 0.971),False,True,7.0,7,11:11:47
+SPPP-F-1,4,[4][args:2-6],Fact,practice,INCORRECT,Request,...,{('answer'&)},39.0:()->answer (v: 0.943),False,True,39.0,39,11:11:48
+SPPP-F-1,5,[5][args:7-356-475],Fact,practice,INCORRECT,Request,...,{('answer'&)},17.0:()->answer (v: 0.971),False,True,17.0,17,11:11:48
+SPPP-F-1,2,[2][args:180-12-115-23],Fact,practice,INCORRECT,Request,...,{('answer'&)},3.0:()->answer (v: 0.968),False,True,3.0,3,11:11:48
+SPPP-F-1,3,[3][args:98-2-7],Fact,practice,INCORRECT,Request,...,{('answer'&)},7.0:()->answer (v: 0.968),False,True,7.0,7,11:11:48
+SPPP-F-1,4,[4][args:2-6],Fact,practice,INCORRECT,Request,...,{('answer'&)},39.0:()->answer (v: 0.933),False,True,39.0,39,11:11:49
+SPPP-F-1,5,[5][args:7-356-475],Fact,practice,INCORRECT,Request,...,{('answer'&)},17.0:()->answer (v: 0.968),False,True,17.0,17,11:11:49
+SPPP-F-1,2,[2][args:180-12-115-23],Fact,practice,INCORRECT,Request,...,{('answer'&)},3.0:()->answer (v: 0.965),False,True,3.0,3,11:11:49
+SPPP-F-1,3,[3][args:98-2-7],Fact,practice,INCORRECT,Request,...,{('answer'&)},7.0:()->answer (v: 0.965),False,True,7.0,7,11:11:49
+SPPP-F-1,4,[4][args:2-6],Fact,practice,INCORRECT,Request,...,{('answer'&)},39.0:()->answer (v: 0.924),False,True,39.0,39,11:11:50
+SPPP-F-1,5,[5][args:7-356-475],Fact,practice,INCORRECT,Request,...,{('answer'&)},17.0:()->answer (v: 0.965),False,True,17.0,17,11:11:50
+SPPP-F-1,2,[2][args:180-12-115-23],Fact,practice,INCORRECT,Request,...,{('answer'&)},3.0:()->answer (v: 0.963),False,True,3.0,3,11:11:50
+SPPP-F-1,3,[3][args:98-2-7],Fact,practice,INCORRECT,Request,...,{('answer'&)},7.0:()->answer (v: 0.963),False,True,7.0,7,11:11:51
+SPPP-F-1,4,[4][args:2-6],Fact,practice,INCORRECT,Request,...,{('answer'&)},39.0:()->answer (v: 0.915),False,True,39.0,39,11:11:51
+SPPP-F-1,5,[5][args:7-356-475],Fact,practice,INCORRECT,Request,...,{('answer'&)},17.0:()->answer (v: 0.963),False,True,17.0,17,11:11:51
+SPPP-F-1,4,[4][args:4-12],Fact,posttest,INCORRECT,Request,...,{('answer'&)},39.0:()->answer (v: 0.834),False,False,39.0,20739,11:11:52
+SPPP-F-1,5,[5][args:7-356-475],Fact,posttest,INCORRECT,Request,...,{('answer'&)},17.0:()->answer (v: 0.940),False,True,17.0,17,11:11:52
+SPPP-F-1,3,[3][args:98-2-7],Fact,posttest,INCORRECT,Request,...,{('answer'&)},7.0:()->answer (v: 0.939),False,True,7.0,7,11:11:52
+SPPP-F-1,3,[3][args:840-2-10],Fact,posttest,INCORRECT,Request,...,{('answer'&)},7.0:()->answer (v: 0.997),False,False,7.0,42,11:11:52
+SPPP-F-1,4,[4][args:2-6],Fact,posttest,INCORRECT,Request,...,{('answer'&)},39.0:()->answer (v: 0.839),False,True,39.0,39,11:11:52
+SPPP-F-1,3,[3][args:225-5-5],Fact,posttest,INCORRECT,Request,...,{('answer'&)},7.0:()->answer (v: 0.942),False,False,7.0,9,11:11:52
+SPPP-F-1,5,[5][args:7-356-475],Fact,posttest,INCORRECT,Request,...,{('answer'&)},17.0:()->answer (v: 0.939),False,True,17.0,17,11:11:52
+SPPP-F-1,4,[4][args:3-15],Fact,posttest,INCORRECT,Request,...,{('answer'&)},39.0:()->answer (v: 0.830),False,False,39.0,3380,11:11:52
+SPPP-F-1,5,[5][args:13-37-154],Fact,posttest,INCORRECT,Request,...,{('answer'&)},17.0:()->answer (v: 0.939),False,False,17.0,9,11:11:52
+SPPP-F-1,5,[5][args:18-93-291],Fact,posttest,INCORRECT,Request,...,{('answer'&)},17.0:()->answer (v: 0.997),False,False,17.0,11,11:11:52
+SPPP-F-1,2,[2][args:360-6-135-9],Fact,posttest,INCORRECT,Request,...,{('answer'&)},3.0:()->answer (v: 0.937),False,False,3.0,4,11:11:52
+SPPP-F-1,3,[3][args:98-2-7],Fact,posttest,INCORRECT,Request,...,{('answer'&)},7.0:()->answer (v: 0.937),False,True,7.0,7,11:11:52
+SPPP-F-1,4,[4][args:2-6],Fact,posttest,INCORRECT,Request,...,{('answer'&)},39.0:()->answer (v: 0.827),False,True,39.0,39,11:11:52
+SPPP-F-1,2,[2][args:216-4-87-29],Fact,posttest,INCORRECT,Request,...,{('answer'&)},3.0:()->answer (v: 0.941),False,False,3.0,18,11:11:52
+SPPP-F-1,3,[3][args:98-2-7],Fact,posttest,INCORRECT,Request,...,{('answer'&)},7.0:()->answer (v: 0.937),False,True,7.0,7,11:11:52
+SPPP-F-1,5,[5][args:23-423-584],Fact,posttest,INCORRECT,Request,...,{('answer'&)},17.0:()->answer (v: 0.937),False,False,17.0,7,11:11:52
+SPPP-F-1,2,[2][args:110-5-121-11],Fact,posttest,INCORRECT,Request,...,{('answer'&)},3.0:()->answer (v: 0.936),False,False,3.0,2,11:11:52
+SPPP-F-1,4,[4][args:1-8],Fact,posttest,INCORRECT,Request,...,{('answer'&)},39.0:()->answer (v: 0.824),False,False,39.0,16,11:11:52
+SPPP-F-1,2,[2][args:180-12-115-23],Fact,posttest,INCORRECT,Request,...,{('answer'&)},3.0:()->answer (v: 0.936),False,True,3.0,3,11:11:52
+SPPP-F-1,4,[4][args:2-6],Fact,posttest,INCORRECT,Request,...,[1&0],HINT,False,True,None,39,11:11:52
+SPPP-F-1,5,[5][args:7-356-475],Fact,posttest,INCORRECT,Request,...,{('answer'&)},17.0:()->answer (v: 0.937),False,True,17.0,17,11:11:52
+SPPP-F-1,2,[2][args:180-12-115-23],Fact,posttest,INCORRECT,Request,...,{('answer'&)},3.0:()->answer (v: 0.935),False,True,3.0,3,11:11:52
+SPPP-F-1,2,[2][args:180-12-115-23],Fact,posttest,INCORRECT,Request,...,{('answer'&)},3.0:()->answer (v: 0.997),False,True,3.0,3,11:11:52
+SPPP-F-1,3,[3][args:448-7-8],Fact,posttest,INCORRECT,Request,...,{('answer'&)},7.0:()->answer (v: 0.935),False,False,7.0,8,11:11:52

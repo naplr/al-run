@@ -1,0 +1,31 @@
+Agent,Concept,Problem,Knowledge,Type,Result,Action,When-Part,Where-Part,How-Part,Intermediate,Seen,AL Ans,Correct Ans,Time
+SPSP-S-1,1,[1][args:5-3],Skill,study,NA,Train,None,{('step_1_concept_1'&'arg_1_concept_1'&'arg_2_concept_1')},Pow(?.v&?.v):(arg_1_concept_1&arg_2_concept_1)->step_1_concept_1,False,True,None,('step_1_concept_1', 125, ('arg_1_concept_1', 'arg_2_concept_1')),11:36:34
+SPSP-S-1,1,[1][args:5-3],Skill,study,NA,Train,None,{('answer'&'step_1_concept_1')},Inverse(?.v):(step_1_concept_1)->answer,True,True,None,('answer', 521, ('step_1_concept_1',)),11:36:34
+SPSP-S-1,1,[1][args:9-3],Skill,practice,INCORRECT,Request,...,[1&0],HINT,False,False,None,927,11:36:34
+SPSP-S-1,1,[1][args:10-2],Skill,study,NA,Train,None,{('step_1_concept_1'&'arg_1_concept_1'&'arg_2_concept_1')},Pow(?.v&?.v):(arg_1_concept_1&arg_2_concept_1)->step_1_concept_1,False,False,None,('step_1_concept_1', 100, ('arg_1_concept_1', 'arg_2_concept_1')),11:36:34
+SPSP-S-1,1,[1][args:10-2],Skill,study,NA,Train,N/A,N/A,NO EXP,True,False,None,('answer', 1, ('step_1_concept_1',)),11:36:34
+SPSP-S-1,1,[1][args:8-2],Skill,practice,NA,Request,...,{('step_1_concept_1'&'arg_1_concept_1'&'arg_2_concept_1')},Pow(?.v&?.v):(arg_1_concept_1&arg_2_concept_1)->step_1_concept_1 (v: 0.842),True,False,64,None,11:36:34
+SPSP-S-1,1,[1][args:8-2],Skill,practice,INCORRECT,Request,...,[1&0],HINT,False,False,None,46,11:36:34
+SPSP-S-1,1,[1][args:7-3],Skill,study,NA,Train,None,{('step_1_concept_1'&'arg_1_concept_1'&'arg_2_concept_1')},Pow(?.v&?.v):(arg_1_concept_1&arg_2_concept_1)->step_1_concept_1,False,False,None,('step_1_concept_1', 343, ('arg_1_concept_1', 'arg_2_concept_1')),11:36:34
+SPSP-S-1,1,[1][args:7-3],Skill,study,NA,Train,None,{('answer'&'step_1_concept_1')},Inverse(?.v):(step_1_concept_1)->answer,True,False,None,('answer', 343, ('step_1_concept_1',)),11:36:34
+SPSP-S-1,1,[1][args:12-2],Skill,practice,NA,Request,...,{('step_1_concept_1'&'arg_1_concept_1'&'arg_2_concept_1')},Pow(?.v&?.v):(arg_1_concept_1&arg_2_concept_1)->step_1_concept_1 (v: 0.989),True,False,144,None,11:36:34
+SPSP-S-1,1,[1][args:12-2],Skill,practice,CORRECT,Request,...,{('answer'&'step_1_concept_1')},Inverse(?.v):(step_1_concept_1)->answer (v: 0.802),False,False,441,441,11:36:34
+SPSP-S-1,1,[1][args:2-5],Skill,study,NA,Train,None,{('step_1_concept_1'&'arg_1_concept_1'&'arg_2_concept_1')},Pow(?.v&?.v):(arg_1_concept_1&arg_2_concept_1)->step_1_concept_1,False,False,None,('step_1_concept_1', 32, ('arg_1_concept_1', 'arg_2_concept_1')),11:36:34
+SPSP-S-1,1,[1][args:2-5],Skill,study,NA,Train,None,{('answer'&'step_1_concept_1')},Inverse(?.v):(step_1_concept_1)->answer,True,False,None,('answer', 23, ('step_1_concept_1',)),11:36:34
+SPSP-S-1,1,[1][args:23-1],Skill,practice,NA,Request,...,{('step_1_concept_1'&'arg_1_concept_1'&'arg_2_concept_1')},Pow(?.v&?.v):(arg_1_concept_1&arg_2_concept_1)->step_1_concept_1 (v: 0.980),True,False,None,None,11:36:34
+SPSP-S-1,1,[1][args:23-1],Skill,practice,INCORRECT,Request,...,{('answer'&'step_1_concept_1')},Inverse(?.v):(step_1_concept_1)->answer (v: 0.989),False,False,None,32,11:36:35
+SPSP-S-1,1,[1][args:6-3],Skill,study,NA,Train,None,{('step_1_concept_1'&'arg_1_concept_1'&'arg_2_concept_1')},Pow(?.v&?.v):(arg_1_concept_1&arg_2_concept_1)->step_1_concept_1,False,False,None,('step_1_concept_1', 216, ('arg_1_concept_1', 'arg_2_concept_1')),11:36:35
+SPSP-S-1,1,[1][args:6-3],Skill,study,NA,Train,None,{('answer'&'step_1_concept_1')},Inverse(?.v):(step_1_concept_1)->answer,True,False,None,('answer', 612, ('step_1_concept_1',)),11:36:35
+SPSP-S-1,1,[1][args:3-4],Skill,practice,NA,Request,...,{('step_1_concept_1'&'arg_1_concept_1'&'arg_2_concept_1')},Pow(?.v&?.v):(arg_1_concept_1&arg_2_concept_1)->step_1_concept_1 (v: 0.971),True,False,81,None,11:36:35
+SPSP-S-1,1,[1][args:3-4],Skill,practice,CORRECT,Request,...,{('answer'&'step_1_concept_1')},Inverse(?.v):(step_1_concept_1)->answer (v: 0.981),False,False,18,18,11:36:35
+SPSP-S-1,1,[1][args:5-3],Skill,posttest,NA,Request,...,{('step_1_concept_1'&'arg_1_concept_1'&'arg_2_concept_1')},Pow(?.v&?.v):(arg_1_concept_1&arg_2_concept_1)->step_1_concept_1 (v: 0.954),True,True,125,None,11:36:35
+SPSP-S-1,1,[1][args:5-3],Skill,posttest,CORRECT,Request,...,{('answer'&'step_1_concept_1')},Inverse(?.v):(step_1_concept_1)->answer (v: 0.964),False,True,521,521,11:36:35
+SPSP-S-1,1,[1][args:11-2],Skill,posttest,NA,Request,...,{('step_1_concept_1'&'arg_1_concept_1'&'arg_2_concept_1')},Pow(?.v&?.v):(arg_1_concept_1&arg_2_concept_1)->step_1_concept_1 (v: 0.951),True,False,121,None,11:36:35
+SPSP-S-1,1,[1][args:11-2],Skill,posttest,CORRECT,Request,...,{('answer'&'step_1_concept_1')},Inverse(?.v):(step_1_concept_1)->answer (v: 0.961),False,False,121,121,11:36:35
+SPSP-S-1,1,[1][args:5-3],Skill,posttest,NA,Request,...,{('step_1_concept_1'&'arg_1_concept_1'&'arg_2_concept_1')},Pow(?.v&?.v):(arg_1_concept_1&arg_2_concept_1)->step_1_concept_1 (v: 0.947),True,True,125,None,11:36:35
+SPSP-S-1,1,[1][args:5-3],Skill,posttest,CORRECT,Request,...,{('answer'&'step_1_concept_1')},Inverse(?.v):(step_1_concept_1)->answer (v: 0.957),False,True,521,521,11:36:35
+SPSP-S-1,1,[1][args:5-3],Skill,posttest,NA,Request,...,{('step_1_concept_1'&'arg_1_concept_1'&'arg_2_concept_1')},Pow(?.v&?.v):(arg_1_concept_1&arg_2_concept_1)->step_1_concept_1 (v: 0.944),True,True,125,None,11:36:35
+SPSP-S-1,1,[1][args:5-3],Skill,posttest,CORRECT,Request,...,{('answer'&'step_1_concept_1')},Inverse(?.v):(step_1_concept_1)->answer (v: 0.954),False,True,521,521,11:36:35
+SPSP-S-1,1,[1][args:2-4],Skill,posttest,INCORRECT,Request,...,[1&0],HINT,False,False,None,61,11:36:35
+SPSP-S-1,1,[1][args:15-2],Skill,posttest,NA,Request,...,{('step_1_concept_1'&'arg_1_concept_1'&'arg_2_concept_1')},Pow(?.v&?.v):(arg_1_concept_1&arg_2_concept_1)->step_1_concept_1 (v: 0.939),True,False,225,None,11:36:35
+SPSP-S-1,1,[1][args:15-2],Skill,posttest,CORRECT,Request,...,{('answer'&'step_1_concept_1')},Inverse(?.v):(step_1_concept_1)->answer (v: 0.950),False,False,522,522,11:36:35

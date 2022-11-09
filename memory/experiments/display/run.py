@@ -1,397 +1,178 @@
-import sys, json, pickle, copy, time, multiprocessing
-from random import randint, choice, shuffle, sample
-from itertools import chain
-from datetime import datetime
-from sklearn import tree
-from matplotlib import pyplot as plt
+import time
+import memory.shared.runner as runner
+from memory.shared.helper import get_state_field
 
 
-from apprentice.working_memory import fo_planner_operators
+def get_state_and_answer(p):
+    state = {
+        'r1c1': get_state_field('r1c1', '', False),
+        'r1c2': get_state_field('r1c2', '', False),
+        'r1c3': get_state_field('r1c3', '', False),
+        'r1c4': get_state_field('r1c4', '', False),
+        'r1c5': get_state_field('r1c5', '', False),
+        'r1c6': get_state_field('r1c6', '', False),
+        'r1c7': get_state_field('r1c7', '', False),
+        'r1c8': get_state_field('r1c8', '', False),
+        'r1c9': get_state_field('r1c9', '', False),
+        'r1c10': get_state_field('r1c10', '', False),
+        'r1c11': get_state_field('r1c11', '', False),
+        'r2c1': get_state_field('r2c1', '', True),
+        'r2c2': get_state_field('r2c2', '', True),
+        'r2c3': get_state_field('r2c3', '', True),
+        # 'r2c4': get_state_field('r2c4', '', True),
+        # 'r2c5': get_state_field('r2c5', '', True),
+        # 'r2c6': get_state_field('r2c6', '', True),
+        # 'r2c7': get_state_field('r2c7', '', True),
+        # 'r2c8': get_state_field('r2c8', '', True),
+        # 'r2c9': get_state_field('r2c9', '', True),
+        # 'r2c10': get_state_field('r2c10', '', True),
+        # 'r2c11': get_state_field('r2c11', '', True),
+        'r3c1': get_state_field('r3c1', '', True),
+        'r3c2': get_state_field('r3c2', '', True),
+        'r3c3': get_state_field('r3c3', '', True),
+        # 'r3c4': get_state_field('r3c4', '', True),
+        # 'r3c5': get_state_field('r3c5', '', True),
+        # 'r3c6': get_state_field('r3c6', '', True),
+        # 'r3c7': get_state_field('r3c7', '', True),
+        # 'r3c8': get_state_field('r3c8', '', True),
+        # 'r3c9': get_state_field('r3c9', '', True),
+        # 'r3c10': get_state_field('r3c10', '', True),
+        # 'r3c11': get_state_field('r3c11', '', True),
+        'r4c1': get_state_field('r4c1', '', True),
+        'r4c2': get_state_field('r4c2', '', True),
+        'r4c3': get_state_field('r4c3', '', True),
+        'answer': get_state_field('answer', '', True),
+        # 'concept': get_state_field('concept', f"concept-{p['concept']}"),
+    }
 
-from algutils import get_state_and_answer, generate_sai
-from memory.shared.config import *
-from memory.shared.const import *
-import memory.shared.helper as helper
+    populate_states(p, state)
+    answer = p['ans']
+    choices = p['choices']
 
-import colorama
-from colorama import Fore, Back
+    # for k in state:
+    #     state[k]['is_empty'] = state[k]['value'] == ''
 
-
-logs = {}
-agent_logs = {}
-seen_answers = []
-transaction_logs = []
-
-current_agent = ""
-current_problem = ""
-current_concept = ""
-current_ktype = ""
-current_ttype = ""
-current_ptype = ""
-
-def log_result(log_type, agent_name, ktype, ttype, info, seen):
-    global logs
-    if agent_name not in logs:
-        logs[agent_name] = {
-            "study": { "correct": 0, "incorrect": 0, "hint": 0, "demo": 0 },
-            "post": {
-                KTYPE_SKILL: {
-                    "seen": {"correct": 0, "incorrect": 0 },
-                    "unseen": {"correct": 0, "incorrect": 0 },
-                },
-                KTYPE_FACT: {
-                    "seen": {"correct": 0, "incorrect": 0 },
-                    "unseen": {"correct": 0, "incorrect": 0 },
-                }
-            },
-            "type": "", "post_t": 0, "pre_t": 0,
-            "results": []
-        }
-
-    # if (ttype == TT_POSTTEST) \
-    #     and len(logs[agent_name]['results']) > 0 \
-    #     and logs[agent_name]['results'][-1][0]['info']['problem_name'] == info['problem_name']:
-    #     logs[agent_name]['results'][-1].append({
-    #         "ttype": ttype,
-    #         "ktype": ktype,
-    #         "info": info,
-    #         "ltype": log_type
-    #     })
-    # else:
-    logs[agent_name]['results'].append([{
-        "ttype": ttype,
-        "ktype": ktype,
-        "info": info,
-        "ltype": log_type
-    }])
-
-    novelty = "seen" if seen else "unseen"
-
-    if log_type == LOG_HINT:
-        if ttype == TT_STUDY:
-            logs[agent_name][TT_STUDY]['hint'] += 1
-        elif ttype == TT_POSTTEST:
-            logs[agent_name][ttype][ktype][novelty]['incorrect'] += 1
-    elif log_type == LOG_WRONG:
-        if ttype == TT_STUDY:
-            logs[agent_name][TT_STUDY]['incorrect'] += 1
-        elif ttype == TT_POSTTEST:
-            logs[agent_name][ttype][ktype][novelty]['incorrect'] += 1
-    elif log_type == LOG_CORRECT:
-        if ttype == TT_STUDY:
-            logs[agent_name][TT_STUDY]['correct'] += 1
-        elif ttype == TT_POSTTEST:
-            logs[agent_name][ttype][ktype][novelty]['correct'] += 1
-    elif log_type == LOG_DEMO:
-        logs[agent_name]["study"]['demo'] += 1
+    return state, answer, choices, get_steps(p)
 
 
-def log(log_type, agent_name, ktype=None, ttype=TT_STUDY, info=None, al_answer="", correct_answer="", seen=False):
-    # log_result(log_type, agent_name, ktype, ttype, info, str(correct_answer) in seen_answers)
-    print(seen)
-    log_result(log_type, agent_name, ktype, ttype, info, seen)
-
-    if not DEBUG: return
-
-    if log_type == LOG_HINT:
-        print(Back.BLUE + Fore.YELLOW + "HINT")
-    elif log_type == LOG_WRONG:
-        print(Back.RED + Fore.BLACK + f"WRONG: {al_answer}, {correct_answer}")
-    elif log_type == LOG_CORRECT:
-        print(Back.GREEN + Fore.BLACK + f"CORRECT: {al_answer}, {correct_answer}")
-    elif log_type == LOG_DEMO:
-        print(Back.YELLOW + Fore.BLACK + "DEMO")
-    else:
-        print(Back.RED + Fore.WHITE + "SOMETHING WRONG !!!!")
+def populate_1(args, state):
+    state['r1c1'] = get_state_field('r1c1', args[0], False)
+    state['r1c2'] = get_state_field('r1c2', 'DIAMOND', False)
+    state['r1c3'] = get_state_field('r1c3', args[1], False)
 
 
-def log_transaction(result, action, when_part, where_part, how_part, isInt, al_answer, correct_answer, seen):
-    global current_agent, current_concept, current_problem, current_ktype, current_ttype, current_ptype, transaction_logs
-    now = datetime.now()
-    time = now.strftime("%H:%M:%S")
+def populate_2(args, state):
+    state['r1c1'] = get_state_field('r1c1', '(', False)
+    state['r1c2'] = get_state_field('r1c2',args[0], False)
+    state['r1c3'] = get_state_field('r1c3',',', False)
+    state['r1c4'] = get_state_field('r1c4',args[1], False)
+    state['r1c5'] = get_state_field('r1c5',')', False)
+    state['r1c6'] = get_state_field('r1c6','SUN', False)
+    state['r1c7'] = get_state_field('r1c7','(', False)
+    state['r1c8'] = get_state_field('r1c8',args[2], False)
+    state['r1c9'] = get_state_field('r1c9',',', False)
+    state['r1c10'] = get_state_field('r1c10',args[3], False)
+    state['r1c11'] = get_state_field('r1c11',')', False)
 
-    # print(f"result: {str(result)}")
-    if result == None:
-        r = "NA"
-    elif result == True:
-        r = "CORRECT"
-    elif result == False:
-        r = "INCORRECT"
-    else:
-        r = "???"
+def populate_3(args, state):
+    state['r1c1'] = get_state_field('r1c1', args[0], False)
+    state['r1c2'] = get_state_field('r1c2', 'SQUARE', False)
+    state['r1c3'] = get_state_field('r1c3','(', False)
+    state['r1c4'] = get_state_field('r1c4',args[1], False)
+    state['r1c5'] = get_state_field('r1c5',',', False)
+    state['r1c6'] = get_state_field('r1c6',args[2], False)
+    state['r1c7'] = get_state_field('r1c7',')', False)
 
-    if current_ttype == TT_POSTTEST:
-        ttype = 'posttest'
-    elif current_ttype == TT_STUDY and current_ptype == PTYPE_DEMO:
-        ttype = 'study'
-    elif current_ttype == TT_STUDY and current_ptype == PTYPE_PRACTICE:
-        ttype = 'practice'
-    else:
-        ttype = '???'
-
-    ktype = 'Fact' if current_ktype == KTYPE_FACT else 'Skill'
-    how_part = how_part.replace(', ','&')
-    how_part = how_part.replace(',','&')
-    where_part = str(where_part)
-    where_part = where_part.replace(', ','&')
-    where_part = where_part.replace(',','&')
-    when_part = str(when_part)
-    when_part = when_part.replace(', ','&')
-    when_part = when_part.replace(',','&')
-    when_part = when_part.replace('\n', 'CHAR(13)')
-
-    l = f'{current_agent},{current_concept},{current_problem},{ktype},{ttype},{r},{action},{when_part},{where_part},{how_part},{isInt},{seen},{al_answer},{correct_answer},{time}\n'
-    transaction_logs.append(l)
+def populate_4(args, state):
+    state['r1c1'] = get_state_field('r1c1', args[0], False)
+    state['r1c2'] = get_state_field('r1c2', 'CIRCLE', False)
+    state['r1c3'] = get_state_field('r1c3', args[1], False)
 
 
-def run_problem(agent, p, ptype, ktype, ttype):
-    global current_agent, current_concept, current_problem, current_ktype, current_ttype, current_ptype
+def _populate_2(args, state):
+    state['r1c1'] = get_state_field('r1c1', '(', False)
+    state['r1c2'] = get_state_field('r1c1',args[0], False)
+    state['r1c3'] = get_state_field('r1c1',',', False)
+    state['r1c4'] = get_state_field('r1c1',args[1], False)
+    state['r1c5'] = get_state_field('r1c1',')', False)
+    state['r1c6'] = get_state_field('r1c1','SUN', False)
+    state['r1c7'] = get_state_field('r1c1','(', False)
+    state['r1c8'] = get_state_field('r1c1',args[2], False)
+    state['r1c9'] = get_state_field('r1c1',',', False)
+    state['r1c10'] = get_state_field('r1c1',args[3], False)
+    state['r1c11'] = get_state_field('r1c1',')', False)
 
-    state, answer, choices, steps = get_state_and_answer(p)
-    name = f"{p['concept']}, args: {str(p['args'])}, ans: {p['ans']}, {ktype}, {ttype}, {ptype}"
-    seen = p.get('seen', False)
 
-    current_agent = agent.agent_name
-    current_concept = p['concept']
-    current_problem = f"[{p['concept']}][args:{'-'.join([str(a) for a in p['args']])}]"
-    current_ktype = ktype
-    current_ttype = ttype
-    current_ptype = ptype
-
+populate_funcs = [populate_1, populate_2, populate_3, populate_4]
+def populate_states(p, state):
     concept = p['concept']
-
-    if DEBUG: print(name)
-    if ktype == KTYPE_FACT:
-        _run_problem_fact(agent, concept, state, answer, ptype, ttype, name, seen)
-    elif ktype == KTYPE_SKILL:
-        _run_problem_skill(agent, concept, state, answer, steps, ptype, ttype, name, seen)
-
-    print('-' * 20)
+    populate_funcs[int(concept)-1](p['args'], state)
 
 
-def _run_problem_fact(agent, concept, state, answer, ptype, ttype, name, seen):
-    problem_info = {'problem_name': name}
-    if ptype == PTYPE_DEMO:
-        sai = generate_sai(answer)
-        when, where, exp = agent.train(state, sai=sai, reward=1, problem_info=problem_info, ret_train_expl=True)
-        log_transaction(None, 'Train', when, where, exp, False, None, answer, seen)
-        log(LOG_DEMO, agent.agent_name, correct_answer=answer)
-    elif ptype == PTYPE_PRACTICE:
-        res, info = agent.request(state, problem_info=problem_info)
+def get_steps(p):
+    args = p['args']
+    answer = p['ans']
+    if p['concept'] == '1':
+        return [
+            ('r2c1', args[0], ('r1c1', )),
+            ('r2c2', '^', None),
+            ('r2c3', args[1], ('r1c3', )),
+            ('r3c1', args[0] ** args[1], ('r2c1', 'r2c3')),
+            ('answer', answer, ('r4c1', ))
+        ]
 
-        info['problem_name'] = name
-        if len(res) == 0:
-            # Can't answer
-            log(LOG_HINT, agent.agent_name, KTYPE_FACT, ttype, info, correct_answer=answer, seen=seen)
-            log_transaction(False, 'Request', info['when'], info['where'], 'HINT', False, None, answer, seen)
-            if ttype == TT_STUDY:
-                sai = generate_sai(answer)
-                when, where, exp = agent.train(state, sai=sai, reward=1, problem_info=problem_info, ret_train_expl=True)
-                log_transaction(None, 'Train', when, where, exp, False, None, answer, seen)
-        else:
-            val = res["inputs"]["value"]
-            selection = res['selection']
-            correct = str(val) == str(answer) and selection == 'answer'
-            log_transaction(correct, 'Request', info['when'], info['where'], info['skill'], False, val, answer, seen)
-            if ttype == TT_STUDY:
-                rhs_id = res["rhs_id"]
-                sai = generate_sai(val)
-                rew = 1 if correct else -1
-                exp = agent.train(state, sai=sai, reward=rew, rhs_id=rhs_id, problem_info=problem_info, ret_train_expl=True)
-            if correct:
-                log(LOG_CORRECT, agent.agent_name, KTYPE_FACT, ttype, info, val, answer, seen)
-            else:
-                log(LOG_WRONG, agent.agent_name, KTYPE_FACT, ttype, info, val, answer, seen)
-                if ttype == TT_STUDY:
-                    sai = generate_sai(answer)
-                    exp = agent.train(state, sai=sai, reward=1, problem_info=problem_info, ret_train_expl=True)
+    elif p['concept'] == '2':
+        s1 = str(int(args[0]/args[1]))
+        s2 = str(int(args[2]/args[3]))
+        return [
+            ('r2c1', f'{args[0]}/{args[1]}', ('r1c2', 'r1c4')),
+            ('r2c2', '/', None),
+            ('r2c3', f'{args[2]}/{args[3]}', ('r1c8', 'r1c10')),
+            ('r3c1', s1, ('r2c1', )),
+            ('r3c2', '/', ('r2c2', )),
+            ('r3c3', s2, ('r2c3', )),
+            # ('r4c1', f'{s1}/{s2}', ('r3c1', 'r3c2', 'r3c3')),
+            ('r4c1', f'{s1}/{s2}', ('r3c1', 'r3c3')),
+            ('answer', answer, ('r4c1', ))
+        ]
+        
+    elif p['concept'] == '3':
+        s1 = str(int(args[1]*args[2]))
+        return [
+            ('r2c1', f'{args[0]}', ('r1c1',)),
+            ('r2c2', '/', None),
+            ('r2c3', f'{args[1]}*{args[2]}', ('r1c4', 'r1c6')),
+            ('r3c1', f'{args[0]}', ('r2c1', )),
+            ('r3c2', '/', ('r2c2', )),
+            ('r3c3', s1, ('r2c3', )),
+            ('r4c1', f'{args[0]}/{s1}', ('r3c1', 'r3c3')),
+            ('answer', answer, ('r4c1', ))
+        ]
 
+    elif p['concept'] == '4':
+        s1 = str(int(args[1]/args[0]))
+        s2 = str(int(args[1]**args[0]))
+        return [
+            ('r2c1', f'{args[1]}/{args[0]}', ('r1c1', 'r1c3')),
+            ('r2c2', '+', None),
+            ('r2c3', f'{args[1]}^{args[0]}', ('r1c1', 'r1c3')),
+            ('r3c1', s1, ('r2c1', )),
+            ('r3c2', '+', ('r2c2', )),
+            ('r3c3', s2, ('r2c3', )),
+            ('r4c1', f'{s1}+{s2}', ('r3c1', 'r3c3')),
+            ('answer', answer, ('r4c1', ))
+        ]
 
-    # log_transaction(result, action, skill, isInt, al_answer="", correct_answer=""):
-def _run_problem_skill(agent, concept, state, answer, steps, ptype, ttype, name, seen):
-    problem_info = {'problem_name': name}
-    if ptype == PTYPE_DEMO:
-        log(LOG_DEMO, agent.agent_name, correct_answer=answer)
-        for idx, s in enumerate(steps):
-            selection, value, foas = s
-            sai = generate_sai(value, selection)
-            print(f'[[TRAIN INT]]: {value}, {selection}')
-            print(sai)
-            when, where, exp = agent.train(state, sai=sai, reward=1, problem_info=problem_info, ret_train_expl=True, foci_of_attention=foas)
-            print(f'[[Explanation]]: {exp}')
-            log_transaction(None, 'Train', when, where, exp, idx+1 == len(steps), None, s, seen)
-            state[selection]['value'] = str(value)
-            state[selection]['contentEditable'] = False
-            state[selection]['is_empty'] = False
-        # sai = generate_sai(answer)
-        # when, where, exp = agent.train(state, sai=sai, reward=1, problem_info=problem_info, ret_train_expl=True, foci_of_attention=None)
-        # log_transaction(None, 'Train', when, where, exp, False, None, answer, seen)
-    elif ptype == PTYPE_PRACTICE:
-        # ss = {f"step_{idx+1}_concept_{concept}": f'{step}' for idx, step in enumerate(steps)}
-        prev_actions = []
-        while True:
-            res, info = agent.request(state, problem_info=problem_info)
-            info['problem_name'] = name
-            if len(res) == 0:
-                log(LOG_HINT, agent.agent_name, KTYPE_SKILL, ttype, info, correct_answer=answer, seen=seen)
-                log_transaction(False, 'Request', info['when'], info['where'], 'HINT', False, None, answer, seen)
-
-                # if ttype == TT_STUDY:
-                #     # TODO: Also need to provide step by step here?
-                #     sai = generate_sai(answer)
-                #     agent.train(state, sai=sai, reward=1, problem_info=problem_info)
-                return
-
-            val = res["inputs"]["value"]
-            selection = res['selection']
-            rhs_id = res["rhs_id"]
-            if selection == 'answer':
-                correct = str(val) == str(answer)
-                log_transaction(correct, 'Request', info['when'], info['where'], info['skill'], False, val, answer, seen)
-                if ttype == TT_STUDY:
-                    rhs_id = res["rhs_id"]
-                    sai = generate_sai(val)
-                    rew = 1 if correct else -1
-                    agent.train(state, sai=sai, reward=rew, rhs_id=rhs_id, problem_info=problem_info)
-
-                    for (st, sai, rhs_id) in prev_actions:
-                        agent.train(st, sai=sai, reward=rew, rhs_id=rhs_id, problem_info=problem_info)
-
-                if correct:
-                    log(LOG_CORRECT, agent.agent_name, KTYPE_SKILL, ttype, info, val, answer, seen)
-                else:
-                    log(LOG_WRONG, agent.agent_name, KTYPE_SKILL, ttype, info, val, answer, seen)
-                    # if ttype == TT_STUDY:
-                    #     sai = generate_sai(answer)
-                    #     agent.train(state, sai=sai, reward=1, problem_info=problem_info)
-            else:
-                print(f'INTERMEDIATE SEL: {selection}')
-                log_transaction(None, 'Request', info['when'], info['where'], info['skill'], True, val, None, seen)
-
-                cur_state = copy.deepcopy(state)
-                sai = generate_sai(val, selection)
-
-                prev_actions.append((cur_state, sai, rhs_id))
-
-                state[selection]['value'] = str(val)
-                state[selection]['contentEditable'] = False
-                state[selection]['is_empty'] = False
-                continue
-
-                # log(LOG_WRONG, agent.agent_name, KTYPE_SKILL, ttype, info, val, answer, seen)
-                # log_transaction(False, 'Request', info['when'], info['where'], info['skill'], None, val, answer, seen)
-            return
-
-
-def show_result():
-    all_post_s_cor, all_post_f_cor, all_post_s_tot, all_post_f_tot, all_post_cor, all_post_tot = 0, 0, 0, 0, 0, 0
-
-    global logs
-    for name, a in logs.items():
-
-        post_s_cor = a['post'][KTYPE_SKILL]['seen']['correct'] + a['post'][KTYPE_SKILL]['unseen']['correct']
-        post_f_cor = a['post'][KTYPE_FACT]['seen']['correct'] + a['post'][KTYPE_FACT]['unseen']['correct']
-        post_cor = post_s_cor + post_f_cor
-        post_s_tot = post_s_cor + a['post'][KTYPE_SKILL]['seen']['incorrect'] + a['post'][KTYPE_SKILL]['unseen']['incorrect']
-        post_f_tot = post_f_cor + a['post'][KTYPE_FACT]['seen']['incorrect'] + a['post'][KTYPE_FACT]['unseen']['incorrect']
-        post_tot = post_s_tot + post_f_tot
-
-        print(f"Agent: {name}")
-        print("post: {}/{} ({:.2f}), skill: {:.2f}, fact: {:.2f}".format(
-            post_cor, post_tot, post_cor / post_tot,
-            post_s_cor / post_s_tot if post_s_tot > 0 else -1,
-            post_f_cor / post_f_tot if post_f_tot > 0 else -1
-        ))
-
-        study_tot = a['study']['correct'] + a['study']['incorrect'] + a['study']['hint']
-        print("study: {}, {}, {}, demo: {}".format(
-            a['study']['correct'], a['study']['incorrect'],
-            a['study']['hint'], a['study']['demo']
-        ))
-
-        all_post_s_cor += post_s_cor
-        all_post_s_tot += post_s_tot
-        all_post_f_cor += post_f_cor
-        all_post_f_tot += post_f_tot
-        all_post_cor = all_post_s_cor + all_post_f_cor
-        all_post_tot = all_post_s_tot + all_post_f_tot
-
-    all_post_p = all_post_cor / all_post_tot if all_post_tot > 0 else -1
-    post_s_p = all_post_s_cor / all_post_s_tot if all_post_s_tot > 0 else -1
-    post_f_p = all_post_f_cor / all_post_f_tot if all_post_f_tot > 0 else -1
-
-    print()
-    print("Total: ")
-    print("Post: {}/{} ({:.2f}), skill: {}/{} ({:.2f}), fact: {}/{} ({:.2f})".format(
-        all_post_cor, all_post_tot, all_post_p,
-        all_post_s_cor, all_post_s_tot, post_s_p,
-        all_post_f_cor, all_post_f_tot, post_f_p
-    ))
-
-
-def run_agent(parameters):
-    agent_name, function_set, alpha, tau, c, s, beta, b_practice, b_study, condition, knowledge_type, study_problems, post_problems = parameters
-    print(f"RUNNING: {agent_name}")
-    agent = helper.create_agent(agent_name, function_set, alpha, tau, c, s, beta, b_practice, b_study)
-    study, post = helper.get_post_test_problems(study_problems, post_problems, knowledge_type)
-
-    # run study
-    for idx, p in enumerate(study):
-        if condition == COND_SPPP:
-            ptype = PTYPE_DEMO if idx < int(idx / CONCEPT_NUM) == 0 else PTYPE_PRACTICE
-        elif condition == COND_SPSP:
-            ptype = PTYPE_DEMO if int(idx / CONCEPT_NUM) % 2 == 0 else PTYPE_PRACTICE
-        run_problem(agent, p, ptype, knowledge_type, TT_STUDY)
-
-    ft = 0.625
-    st = 0.2
-    wait_time = ft if knowledge_type == KTYPE_FACT else st
-    agent.update_activation_for_post_test(wait_time*2)
-
-    # run post
-    for p in post:
-        run_problem(agent, p, PTYPE_PRACTICE, knowledge_type, TT_POSTTEST)
-
-    logs[agent_name]['type'] = knowledge_type
-    logs[agent_name]['cond'] = condition
-
-    pickle.dump(logs, open(f'logs/{agent_name}-res.pkl', "wb"))
-
-    global transaction_logs
-    tlogs = ['Agent,Concept,Problem,Knowledge,Type,Result,Action,When-Part,Where-Part,How-Part,Intermediate,Seen,AL Ans,Correct Ans,Time\n']
-    tlogs.extend(transaction_logs)
-    with open(f"logs/{agent_name}-txlogs.csv", 'w+') as f:
-        f.writelines(tlogs)
+    elif p['concept'] == '5':
+        return [p['args'][2] - p['args'][1]]
 
 
 def main():
-    colorama.init(autoreset=True)
-
-    alpha, tau, c, s = 0.177, -0.7, 0.277, 1 # 0.0786
-    beta, b_practice, b_study = 5, 1, 0.01
-
-    study_problems, post_problems = helper.read_problems()
-    num_set = 1
-
     # function_set=["concatenate2", "concatenate3", "solve", "ripfloatvalue"],
     # function_set=["division", "concatenate3", "solve", "ripfloatvalue"],
     # function_set=["division", "concatenate3", "solve", "ripfloatvalue", "ripstrvalue"],
     function_set=["addition", "multiplication", "division", "powering", "solve", "ripstrvalue", "strtofloat"]
-
-    # run_agent([f'SPPP-F-0', alpha, tau, c, s, beta, b_practice, b_study, COND_SPPP, KTYPE_FACT, study_problems, post_problems])
-    # run_agent([f'SPSP-F-0', alpha, tau, c, s, beta, b_practice, b_study, COND_SPSP, KTYPE_FACT, study_problems, post_problems])
-    # run_agent([f'SPSP-S-1', alpha, tau, c, s, beta, b_practice, b_study, COND_SPSP, KTYPE_SKILL, study_problems, post_problems])
-    pool = multiprocessing.Pool()
-    
-    agents = []
-    for i in range(num_set):
-        agents.append([f'SPPP-F-{i+1}', function_set, alpha, tau, c, s, beta, b_practice, b_study, COND_SPPP, KTYPE_FACT, study_problems, post_problems])
-        agents.append([f'SPSP-F-{i+1}', function_set, alpha, tau, c, s, beta, b_practice, b_study, COND_SPSP, KTYPE_FACT, study_problems, post_problems])
-        agents.append([f'SPPP-S-{i+1}', function_set, alpha, tau, c, s, beta, b_practice, b_study, COND_SPPP, KTYPE_SKILL, study_problems, post_problems])
-        agents.append([f'SPSP-S-{i+1}', function_set, alpha, tau, c, s, beta, b_practice, b_study, COND_SPSP, KTYPE_SKILL, study_problems, post_problems])
-
-    pool.map(run_agent, agents)
-    show_result()
+    runner.run(function_set, get_state_and_answer)
 
 
 if __name__ == "__main__":

@@ -32,7 +32,7 @@ def get_state_and_answer(p):
         'step_1_concept_5': get_state_field('step_1_concept_5','', True),
     }
 
-    for idx, a in enumerate(['args']):
+    for idx, a in enumerate(p['args']):
         # name = f'arg_{idx+1}'
         name = f"arg_{idx+1}_concept_{p['concept']}"
         state[name] = get_state_field(name, a)
@@ -78,7 +78,7 @@ def get_steps(p):
         ]
 
 def main():
-    function_set=["add", "subtract", "multiply", "divide", "pow", "ripfloatvalue"]
+    function_set=["add", "subtract", "multiply", "divide", "pow", "inverse", "ripfloatvalue"]
     runner.run(function_set, get_state_and_answer)
 
 if __name__ == "__main__":
