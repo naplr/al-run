@@ -58,7 +58,7 @@ def get_state_and_answer(p):
         'r1c10': get_state_field('r1c10', '', False),
         'r1c11': get_state_field('r1c11', '', False),
         'r2c1': get_state_field('r2c1', '', True),
-        'r2c2': get_state_field('r2c2', '/', False),
+        'r2c2': get_state_field('r2c2', '', True),
         'r2c3': get_state_field('r2c3', '', True),
         # 'r2c4': get_state_field('r2c4', '', True),
         # 'r2c5': get_state_field('r2c5', '', True),
@@ -115,6 +115,20 @@ def populate_2(args, state):
     state['r1c10'] = get_state_field('r1c10',args[3], False)
     state['r1c11'] = get_state_field('r1c11',')', False)
 
+def populate_3(args, state):
+    state['r1c1'] = get_state_field('r1c1', args[0], False)
+    state['r1c2'] = get_state_field('r1c2', 'SQUARE', False)
+    state['r1c3'] = get_state_field('r1c3','(', False)
+    state['r1c4'] = get_state_field('r1c4',args[1], False)
+    state['r1c5'] = get_state_field('r1c5',',', False)
+    state['r1c6'] = get_state_field('r1c6',args[2], False)
+    state['r1c7'] = get_state_field('r1c7',')', False)
+
+def populate_4(args, state):
+    state['r1c1'] = get_state_field('r1c1', args[0], False)
+    state['r1c2'] = get_state_field('r1c2', 'CIRCLE', False)
+    state['r1c3'] = get_state_field('r1c3', args[1], False)
+
 
 def _populate_2(args, state):
     state['r1c1'] = get_state_field('r1c1', '(', False)
@@ -130,7 +144,7 @@ def _populate_2(args, state):
     state['r1c11'] = get_state_field('r1c1',')', False)
 
 
-populate_funcs = [populate_1, populate_2]
+populate_funcs = [populate_1, populate_2, populate_3, populate_4]
 def populate_states(p, state):
     concept = p['concept']
     populate_funcs[int(concept)-1](p['args'], state)
@@ -197,12 +211,32 @@ def get_steps(p):
         ]
         
     elif p['concept'] == '3':
-        return [p['args'][1] * p['args'][2]]
-    elif p['concept'] == '4':
+        s1 = str(int(args[1]*args[2]))
         return [
-            p['args'][1] / p['args'][0],
-            p['args'][1] ** p['args'][0]
+            ('r2c1', f'{args[0]}', ('r1c1',)),
+            ('r2c2', '/', None),
+            ('r2c3', f'{args[1]}*{args[2]}', ('r1c4', 'r1c6')),
+            ('r3c1', f'{args[0]}', ('r2c1', )),
+            ('r3c2', '/', ('r2c2', )),
+            ('r3c3', s1, ('r2c3', )),
+            ('r4c1', f'{args[0]}/{s1}', ('r3c1', 'r3c3')),
+            ('answer', answer, ('r4c1', ))
         ]
+
+    elif p['concept'] == '4':
+        s1 = str(int(args[1]/args[0]))
+        s2 = str(int(args[1]**args[0]))
+        return [
+            ('r2c1', f'{args[1]}/{args[0]}', ('r1c1', 'r1c3')),
+            ('r2c2', '+', None),
+            ('r2c3', f'{args[1]}^{args[0]}', ('r1c1', 'r1c3')),
+            ('r3c1', s1, ('r2c1', )),
+            ('r3c2', '+', ('r2c2', )),
+            ('r3c3', s2, ('r2c3', )),
+            ('r4c1', f'{s1}+{s2}', ('r3c1', 'r3c3')),
+            ('answer', answer, ('r4c1', ))
+        ]
+
     elif p['concept'] == '5':
         return [p['args'][2] - p['args'][1]]
 

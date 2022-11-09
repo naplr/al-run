@@ -218,6 +218,7 @@ def _run_problem_skill(agent, concept, state, answer, steps, ptype, ttype, name,
             print(f'[[TRAIN INT]]: {value}, {selection}')
             print(sai)
             when, where, exp = agent.train(state, sai=sai, reward=1, problem_info=problem_info, ret_train_expl=True, foci_of_attention=foas)
+            print(f'[[Explanation]]: {exp}')
             log_transaction(None, 'Train', when, where, exp, idx+1 == len(steps), None, s, seen)
             state[selection]['value'] = str(value)
             state[selection]['contentEditable'] = False
@@ -329,9 +330,9 @@ def show_result():
 
 
 def run_agent(parameters):
-    agent_name, alpha, tau, c, s, beta, b_practice, b_study, condition, knowledge_type, study_problems, post_problems = parameters
+    agent_name, function_set, alpha, tau, c, s, beta, b_practice, b_study, condition, knowledge_type, study_problems, post_problems = parameters
     print(f"RUNNING: {agent_name}")
-    agent = helper.create_agent(agent_name, alpha, tau, c, s, beta, b_practice, b_study)
+    agent = helper.create_agent(agent_name, function_set, alpha, tau, c, s, beta, b_practice, b_study)
     study, post = helper.get_post_test_problems(study_problems, post_problems, knowledge_type)
 
     # run study
@@ -372,18 +373,24 @@ def main():
     study_problems, post_problems = helper.read_problems()
     num_set = 1
 
-    run_agent([f'SPSP-S-1', alpha, tau, c, s, beta, b_practice, b_study, COND_SPSP, KTYPE_SKILL, study_problems, post_problems])
-    # pool = multiprocessing.Pool()
+    # function_set=["concatenate2", "concatenate3", "solve", "ripfloatvalue"],
+    # function_set=["division", "concatenate3", "solve", "ripfloatvalue"],
+    # function_set=["division", "concatenate3", "solve", "ripfloatvalue", "ripstrvalue"],
+    function_set=["addition", "multiplication", "division", "powering", "solve", "ripstrvalue", "strtofloat"]
+
+    # run_agent([f'SPPP-F-0', alpha, tau, c, s, beta, b_practice, b_study, COND_SPPP, KTYPE_FACT, study_problems, post_problems])
+    # run_agent([f'SPSP-F-0', alpha, tau, c, s, beta, b_practice, b_study, COND_SPSP, KTYPE_FACT, study_problems, post_problems])
+    # run_agent([f'SPSP-S-1', alpha, tau, c, s, beta, b_practice, b_study, COND_SPSP, KTYPE_SKILL, study_problems, post_problems])
+    pool = multiprocessing.Pool()
     
-    # agents = []
-    # for i in range(num_set):
-    #     agents.append([f'SPPP-F-{i+1}', alpha, tau, c, s, beta, b_practice, b_study, COND_SPPP, KTYPE_FACT, study_problems, post_problems])
-    #     agents.append([f'SPSP-F-{i+1}', alpha, tau, c, s, beta, b_practice, b_study, COND_SPSP, KTYPE_FACT, study_problems, post_problems])
-    #     agents.append([f'SPPP-S-{i+1}', alpha, tau, c, s, beta, b_practice, b_study, COND_SPPP, KTYPE_SKILL, study_problems, post_problems])
-    #     agents.append([f'SPSP-S-{i+1}', alpha, tau, c, s, beta, b_practice, b_study, COND_SPSP, KTYPE_SKILL, study_problems, post_problems])
+    agents = []
+    for i in range(num_set):
+        agents.append([f'SPPP-F-{i+1}', function_set, alpha, tau, c, s, beta, b_practice, b_study, COND_SPPP, KTYPE_FACT, study_problems, post_problems])
+        agents.append([f'SPSP-F-{i+1}', function_set, alpha, tau, c, s, beta, b_practice, b_study, COND_SPSP, KTYPE_FACT, study_problems, post_problems])
+        agents.append([f'SPPP-S-{i+1}', function_set, alpha, tau, c, s, beta, b_practice, b_study, COND_SPPP, KTYPE_SKILL, study_problems, post_problems])
+        agents.append([f'SPSP-S-{i+1}', function_set, alpha, tau, c, s, beta, b_practice, b_study, COND_SPSP, KTYPE_SKILL, study_problems, post_problems])
 
-
-    # pool.map(run_agent, agents)
+    pool.map(run_agent, agents)
     show_result()
 
 

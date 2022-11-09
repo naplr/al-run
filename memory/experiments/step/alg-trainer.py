@@ -1,4 +1,4 @@
-import sys, json, pickle, copy
+import sys, json, pickle, copy, time, multiprocessing
 from random import randint, choice, shuffle, sample
 from itertools import chain
 from datetime import datetime
@@ -6,41 +6,13 @@ from sklearn import tree
 from matplotlib import pyplot as plt
 
 
-from apprentice.agents.MemoryAgent import MemoryAgent
-from apprentice.agents.ModularAgent import ModularAgent
-from apprentice.working_memory import fo_planner_operators
-
 from algutils import get_state_and_answer, generate_sai
-from config import KTYPE_SKILL, KTYPE_FACT, COND_SPPP, COND_SPSP, TT_POSTTEST, TT_STUDY, PTYPE_PRACTICE, PTYPE_DEMO
+from memory.shared.config import *
+from memory.shared.const import *
+import memory.shared.helper as helper
 
 import colorama
 from colorama import Fore, Back
-
-DEBUG = True
-AGENT_TYPE = 'memory'
-# AGENT_TYPE = 'modular'
-
-LOG_CORRECT = "LOG_CORRECT"
-LOG_WRONG = "LOG_WRONG"
-LOG_HINT = "LOG_HINT"
-LOG_DEMO = "LOG_DEMO"
-LOG_POST = "LOG_POST"
-# LOG_PRACTICE = "LOG_PRACT"
-
-ATYPE_SPPP = "SPPP_TYPE"
-ATYPE_SPSP = "SPSP_TYPE"
-ATYPE_F = "F_TYPE"
-ATYPE_S = "S_TYPE"
-
-'''
-2 Types -> facts and skills
-
-fact -> get numbers + symbol -> answer
-skill -> get numbers + symbol -> do the immediate value -> answer
-
-study -> post-test
-
-'''
 
 logs = {}
 agent_logs = {}
@@ -167,38 +139,6 @@ def log_transaction(result, action, when_part, where_part, how_part, isInt, al_a
 
     l = f'{current_agent},{current_concept},{current_problem},{ktype},{ttype},{r},{action},{when_part},{where_part},{how_part},{isInt},{seen},{al_answer},{correct_answer},{time}\n'
     transaction_logs.append(l)
-
-
-def create_agent(name, alpha, tau, c, s, beta, b_practice, b_study):
-    if AGENT_TYPE == 'memory':
-        agent = MemoryAgent(
-            agent_name=name,
-            # feature_set=["equals"],
-            function_set=["add", "subtract", "multiply", "divide", "pow", "inverse"],
-            feature_set=["is_number"],
-            when_learner="decisiontree",
-            # when_learner="alwaystrue",
-            where_learner="mostspecific",
-            search_depth=1,
-            alpha=alpha,
-            tau=tau,
-            c=c,
-            s=s,
-            beta=beta,
-            b_practice=b_practice,
-            b_study=b_study,
-            print_log=DEBUG,
-            # use_memory=False
-        )
-    else:
-        agent = ModularAgent(
-            agent_name=name,
-            feature_set=["equals"],
-            function_set=["add", "subtract", "multiply", "divide", "pow"],
-            when_learner="decisiontree",
-            where_learner="mostspecific",
-        )
-    return agent
 
 
 def run_problem(agent, p, ptype, ktype, ttype):
@@ -386,67 +326,11 @@ def show_result():
     ))
 
 
-def read_problems():
-    study = pickle.load(open('./alg-study.pkl', 'rb'))
-    post = pickle.load(open('./alg-post.pkl', 'rb'))
-    return study, post
-
-
-STUDY_PROBLEM_NUM = 10
-def get_post_test_problems(study, post, ktype):
-    global seen_answers
-    seen_answers = []
-
-    post_problems = []
-    problems_by_concept = []
-    for c, problems in study.items():
-        # if c != '5' and c != 5:
-        #     continue
-        seen = []
-        study_problems = []
-        if ktype == KTYPE_FACT:
-            selected = choice(problems)
-            selected['seen'] = True
-            seen.append(selected['ans'])
-            for _ in range(STUDY_PROBLEM_NUM):
-                study_problems.append(selected)
-        elif ktype == KTYPE_SKILL:
-            print(len(problems))
-            problems = sample(problems, STUDY_PROBLEM_NUM)
-            # problems = problems + problems
-            # problems = problems + problems + problems + problems + problems + problems
-            seen = [p['ans'] for p in problems]
-
-            selected = problems[0]
-            selected['seen'] = True
-
-            study_problems.extend(problems)
-
-        seen_answers.append(str(selected['ans']))
-        problems_by_concept.append(study_problems)
-
-        problems = sample(post[c], 3)
-        while any([True if p['ans'] in seen else False for p in problems]):
-            problems = sample(post[c], 3)
-
-        # print(seen)
-        # print([s['ans'] for s in problems])
-        for _ in range(3):
-            problems.append(selected)
-        post_problems.extend(problems)
-
-    print(seen_answers)
-    temps = zip(*problems_by_concept)
-    study_problems = list(chain(*temps))
-    shuffle(post_problems)
-
-    return study_problems, post_problems
-
-
-def run_agent(agent_name, alpha, tau, c, s, beta, b_practice, b_study, condition, knowledge_type, study_problems, post_problems):
+def run_agent(parameters):
+    agent_name, function_set, alpha, tau, c, s, beta, b_practice, b_study, condition, knowledge_type, study_problems, post_problems = parameters
     print(f"RUNNING: {agent_name}")
-    agent = create_agent(agent_name, alpha, tau, c, s, beta, b_practice, b_study)
-    study, post = get_post_test_problems(study_problems, post_problems, knowledge_type)
+    agent = helper.create_agent(agent_name, function_set, alpha, tau, c, s, beta, b_practice, b_study)
+    study, post = helper.get_post_test_problems(study_problems, post_problems, knowledge_type)
 
     # print(len([p for p in post if p.get('seen', False)]))
     # return
@@ -472,96 +356,34 @@ def run_agent(agent_name, alpha, tau, c, s, beta, b_practice, b_study, condition
     logs[agent_name]['cond'] = condition
 
 
-def run_debug(agent, a, b, c):
-    print(f'{a}, {b}, {c}')
-    ans = a + c
-    ans = str(ans)
-    # state = {
-    #     'a': { 'id': 'a', 'value': float(a), 'contentEditable': False, 'dom_class': 'CTATTextInput', 'type': 'TextField' },
-    #     'b': { 'id': 'b', 'value': float(b), 'contentEditable': False, 'dom_class': 'CTATTextInput', 'type': 'TextField' },
-    #     'c': { 'id': 'c', 'value': float(c), 'contentEditable': False, 'dom_class': 'CTATTextInput', 'type': 'TextField' },
-    #     'ans': { 'id': 'ans', 'value': '', 'contentEditable': True, 'dom_class': 'CTATTextInput', 'type': 'TextField' },
-    # }
-    state = {
-        'a': { 'id': 'a', 'value': str(a), 'contentEditable': False },
-        'b': { 'id': 'b', 'value': str(b), 'contentEditable': False },
-        'c': { 'id': 'c', 'value': str(c), 'contentEditable': False },
-        'ans': { 'id': 'ans', 'value': '', 'contentEditable': True },
-    }
-    res, _ = agent.request(state)
-    if len(res) == 0:
-        print(f"HINT {ans}")
-        sai = generate_sai(ans, 'ans', 'Update')
-        # agent.train(state, sai, 1, foci_of_attention=['a', 'c'])
-        agent.train(state, sai=sai, reward=1, foci_of_attention=['a', 'c'])
-    else:
-        sel, act, val = res['selection'], res['action'], res["inputs"]["value"]
-        sai = generate_sai(val, sel, act)
-
-        correct = val == ans
-        if correct:
-            print(f"[CORRECT] {sel}-{act}-{val} ({res['rhs_id']})")
-            agent.train(state, sai=sai, reward=1, rhs_id=res['rhs_id'], foci_of_attention=['a', 'c'])
-        else:
-            print(f"[WRONG] {sel}-{act}-{val} ({res['rhs_id']})")
-            agent.train(state, sai=sai, reward=-1, rhs_id=res['rhs_id'], foci_of_attention=['a', 'c'])
-
-            sai = generate_sai(ans, 'ans', 'Update')
-            # agent.train(state, sai, 1, foci_of_attention=['a', 'c'])
-            agent.train(state, sai=sai, reward=1, foci_of_attention=['a', 'c'])
-            print(f"DEMONSTRATE {ans}")
-
-N = 1
-def _debug():
-    alpha, tau, c, s = 0.177, -0.7, 0.277, 1 # 0.0786
-    beta, b_practice, b_study = 5, 1, 0.01
-    agent = create_agent("TEST_DEBUG", alpha, tau, c, s, beta, b_practice, b_study)
-    for _ in range(N):
-        a, b, c = sample(range(1, 50), 3)
-        run_debug(agent, a, b, c)
-        print("==" * 20)
-    run_debug(agent, 10, 11, 11)
-    print("==" * 20)
-    run_debug(agent, 2, 2, 8)
-    print("==" * 20)
-
-
 def main():
     colorama.init(autoreset=True)
 
-    # alpha, tau, c, s = 0.177, -0.7, 0.277, 1 # 0.0786
-    alpha, tau, c, s = 0.177, -1, 0.277, 0.0786
-    # beta, b_practice, b_study = 3.4, 1, 0.01
+    alpha, tau, c, s = 0.177, -0.7, 0.277, 1 # 0.0786
     beta, b_practice, b_study = 5, 1, 0.01
 
-    study_problems, post_problems = read_problems()
-    # print(study_problems['1'])
-    outname = f"res.pkl"
-    num_set = 15
+    study_problems, post_problems = helper.read_problems()
+    num_set = 1
+
+    function_set=["add", "subtract", "multiply", "divide", "pow", "ripfloatvalue"]
+
+    # run_agent([f'SPPP-F-0', alpha, tau, c, s, beta, b_practice, b_study, COND_SPPP, KTYPE_FACT, study_problems, post_problems])
+    # run_agent([f'SPSP-F-0', function_set, alpha, tau, c, s, beta, b_practice, b_study, COND_SPSP, KTYPE_FACT, study_problems, post_problems])
+    run_agent([f'SPSP-S-1', function_set, alpha, tau, c, s, beta, b_practice, b_study, COND_SPSP, KTYPE_SKILL, study_problems, post_problems])
+    return
+
+    pool = multiprocessing.Pool()
+    
+    agents = []
     for i in range(num_set):
-        print("Running agent set: {}/{}".format(i+1, num_set))
-        run_agent(f'SPPP-F-{i+1}', alpha, tau, c, s, beta, b_practice, b_study, COND_SPPP, KTYPE_FACT, study_problems, post_problems)
-        run_agent(f'SPSP-F-{i+1}', alpha, tau, c, s, beta, b_practice, b_study, COND_SPSP, KTYPE_FACT, study_problems, post_problems)
-        run_agent(f'SPPP-S-{i+1}', alpha, tau, c, s, beta, b_practice, b_study, COND_SPPP, KTYPE_SKILL, study_problems, post_problems)
-        run_agent(f'SPSP-S-{i+1}', alpha, tau, c, s, beta, b_practice, b_study, COND_SPSP, KTYPE_SKILL, study_problems, post_problems)
+        agents.append([f'SPPP-F-{i+1}', function_set, alpha, tau, c, s, beta, b_practice, b_study, COND_SPPP, KTYPE_FACT, study_problems, post_problems])
+        agents.append([f'SPSP-F-{i+1}', function_set, alpha, tau, c, s, beta, b_practice, b_study, COND_SPSP, KTYPE_FACT, study_problems, post_problems])
+        agents.append([f'SPPP-S-{i+1}', function_set, alpha, tau, c, s, beta, b_practice, b_study, COND_SPPP, KTYPE_SKILL, study_problems, post_problems])
+        agents.append([f'SPSP-S-{i+1}', function_set, alpha, tau, c, s, beta, b_practice, b_study, COND_SPSP, KTYPE_SKILL, study_problems, post_problems])
 
-        if DEBUG:
-            print()
-            print("=" * 20)
-            print()
-            print()
-
-        show_result()
-        pickle.dump(logs, open(outname, "wb"))
-
-        global transaction_logs
-        tlogs = ['Agent,Concept,Problem,Knowledge,Type,Result,Action,When-Part,Where-Part,How-Part,Intermediate,Seen,AL Ans,Correct Ans,Time\n']
-        tlogs.extend(transaction_logs)
-        with open("transaction_logs.csv", 'w+') as f:
-            f.writelines(tlogs)
-        # pickle.dump(agent_logs, open("agent_logs.pkl", "wb"))
+    pool.map(run_agent, agents)
+    show_result()
 
 
 if __name__ == "__main__":
     main()
-    # _debug()

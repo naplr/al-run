@@ -4,27 +4,23 @@ from random import choice, sample, shuffle
 
 from apprentice.agents.MemoryAgent import MemoryAgent
 from apprentice.agents.ModularAgent import ModularAgent
+from apprentice.working_memory.representation import Sai
 
 from memory.shared.config import *
 from memory.shared.const import *
 
 
-def create_agent(name, alpha, tau, c, s, beta, b_practice, b_study):
+def create_agent(name, function_set, alpha, tau, c, s, beta, b_practice, b_study):
     if AGENT_TYPE == 'memory':
         agent = MemoryAgent(
             agent_name=name,
+            function_set=function_set,
             # feature_set=["equals"],
-            # function_set=["add", "subtract", "multiply", "divide", "pow", "ripfloatvalue"],
-            # function_set=["add", "subtract", "multiply", "divide", "pow", "inverse"],
-            # function_set=["concatenate2", "concatenate3", "solve", "ripfloatvalue"],
-            # function_set=["division", "concatenate3", "solve", "ripfloatvalue"],
-            # function_set=["division", "concatenate3", "solve", "ripfloatvalue", "ripstrvalue"],
-            function_set=["division", "solve", "ripstrvalue", "strtofloat"],
             feature_set=[],
             when_learner="decisiontree",
             # when_learner="alwaystrue",
             where_learner="mostspecific",
-            planner="numba",
+            planner=PLANNER,
             search_depth=3,
             alpha=alpha,
             tau=tau,
@@ -68,8 +64,8 @@ def get_post_test_problems(study, post, ktype):
             for _ in range(STUDY_PROBLEM_NUM):
                 study_problems.append(selected)
         elif ktype == KTYPE_SKILL:
-            # problems = sample(problems, STUDY_PROBLEM_NUM)
-            problems = [problems[3], problems[2]]
+            problems = sample(problems, STUDY_PROBLEM_NUM)
+            # problems = [problems[3], problems[2]]
             seen = [p['ans'] for p in problems]
 
             selected = problems[0]
@@ -91,3 +87,16 @@ def get_post_test_problems(study, post, ktype):
     shuffle(post_problems)
 
     return study_problems, post_problems
+
+
+def generate_sai(val, selection='answer', action="UpdateTextField"):
+    return Sai(selection=selection, action=action, inputs={'value': f'{val}'})
+
+
+IIDDXX = 0
+def random_num():
+    global IIDDXX
+
+    IIDDXX += 1
+    return (IIDDXX % 15) + 1
+    # return randint(1, 15)

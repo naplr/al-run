@@ -1,11 +1,12 @@
 ### ALGEBRA ###
 
-STUDY_PROBLEM_NUM = 2
-CONCEPT_NUM = 1
-SELECTED_PROBLEMS = list(map(str, [2]))
+STUDY_PROBLEM_NUM = 10
+CONCEPT_NUM = 4
+SELECTED_PROBLEMS = list(map(str, [2, 3, 4, 5]))
 
 DEBUG = True
 AGENT_TYPE = 'memory'
+PLANNER = 'numba'
 
 ### GEOMETRY ###
 
