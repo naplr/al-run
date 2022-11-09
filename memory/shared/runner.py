@@ -186,7 +186,11 @@ def _run_problem_fact(agent, concept, state, answer, ptype, ttype, name, seen):
         else:
             val = res["inputs"]["value"]
             selection = res['selection']
-            correct = str(val) == str(answer) and selection == 'answer'
+            # correct = str(val) == str(answer) and selection == 'answer'
+            try:
+                correct = (val != None) and (str(int(val)) == str(answer)) and selection == 'answer'
+            except:
+                correct = False
             log_transaction(correct, 'Request', info['when'], info['where'], info['skill'], False, val, answer, seen)
             if ttype == TT_STUDY:
                 rhs_id = res["rhs_id"]
@@ -241,7 +245,11 @@ def _run_problem_skill(agent, concept, state, answer, steps, ptype, ttype, name,
             selection = res['selection']
             rhs_id = res["rhs_id"]
             if selection == 'answer':
-                correct = str(val) == str(answer)
+                try:
+                    correct = (val != None) and (str(int(val)) == str(answer))
+                except:
+                    correct = False
+
                 log_transaction(correct, 'Request', info['when'], info['where'], info['skill'], False, val, answer, seen)
                 if ttype == TT_STUDY:
                     rhs_id = res["rhs_id"]
@@ -334,7 +342,7 @@ def run_agent(parameters):
     # run study
     for idx, p in enumerate(study):
         if condition == COND_SPPP:
-            ptype = PTYPE_DEMO if idx < int(idx / CONCEPT_NUM) == 0 else PTYPE_PRACTICE
+            ptype = PTYPE_DEMO if int(idx / CONCEPT_NUM) == 0 else PTYPE_PRACTICE
         elif condition == COND_SPSP:
             ptype = PTYPE_DEMO if int(idx / CONCEPT_NUM) % 2 == 0 else PTYPE_PRACTICE
         run_problem(agent, p, ptype, knowledge_type, TT_STUDY, state_func)
@@ -367,13 +375,14 @@ def run(function_set, state_func):
     beta, b_practice, b_study = 5, 1, 0.01
 
     study_problems, post_problems = helper.read_problems()
-    num_set = 1
+    num_set = 5
 
     # run_agent([f'SPPP-F-0', function_set, alpha, tau, c, s, beta, b_practice, b_study, COND_SPPP, KTYPE_FACT, study_problems, post_problems, state_func])
     # run_agent([f'SPSP-F-0', function_set, alpha, tau, c, s, beta, b_practice, b_study, COND_SPSP, KTYPE_FACT, study_problems, post_problems, state_func])
-    run_agent([f'SPSP-S-1', function_set, alpha, tau, c, s, beta, b_practice, b_study, COND_SPSP, KTYPE_SKILL, study_problems, post_problems, state_func])
-    show_result()
-    return
+    # run_agent([f'SPPP-S-1', function_set, alpha, tau, c, s, beta, b_practice, b_study, COND_SPPP, KTYPE_SKILL, study_problems, post_problems, state_func])
+    # run_agent([f'SPSP-S-1', function_set, alpha, tau, c, s, beta, b_practice, b_study, COND_SPSP, KTYPE_SKILL, study_problems, post_problems, state_func])
+    # show_result()
+    # return
 
     pool = multiprocessing.Pool()
     agents = []

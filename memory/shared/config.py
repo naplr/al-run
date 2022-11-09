@@ -2,8 +2,7 @@
 
 STUDY_PROBLEM_NUM = 10
 # CONCEPTS = [2, 3, 4]
-# CONCEPTS = [2, 3, 4, 5]
-CONCEPTS = [1, ]
+CONCEPTS = [1, 2, 3, 4, 5]
 CONCEPT_NUM = len(CONCEPTS)
 SELECTED_PROBLEMS = list(map(str, CONCEPTS))
 

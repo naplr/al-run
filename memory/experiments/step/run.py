@@ -4,6 +4,7 @@ import memory.shared.runner as runner
 import memory.shared.helper as helper
 from memory.shared.helper import get_state_field
 
+SPECIFIC = True
 
 def get_state_and_answer(p):
     state = {

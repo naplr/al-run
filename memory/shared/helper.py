@@ -22,7 +22,7 @@ def create_agent(name, function_set, alpha, tau, c, s, beta, b_practice, b_study
             # when_learner="alwaystrue",
             where_learner="mostspecific",
             planner=PLANNER,
-            search_depth=3,
+            search_depth=2,
             alpha=alpha,
             tau=tau,
             c=c,
@@ -31,7 +31,7 @@ def create_agent(name, function_set, alpha, tau, c, s, beta, b_practice, b_study
             b_practice=b_practice,
             b_study=b_study,
             print_log=DEBUG,
-            # use_memory=False
+            use_memory=False
         )
     else:
         agent = ModularAgent(
