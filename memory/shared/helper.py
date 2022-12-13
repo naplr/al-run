@@ -22,7 +22,8 @@ def create_agent(name, function_set, alpha, tau, c, s, beta, b_practice, b_study
             # when_learner="alwaystrue",
             where_learner="mostspecific",
             planner=PLANNER,
-            search_depth=2,
+            # search_depth=2,
+            search_depth=5,
             alpha=alpha,
             tau=tau,
             c=c,
@@ -94,12 +95,10 @@ def generate_sai(val, selection='answer', action="UpdateTextField"):
     return Sai(selection=selection, action=action, inputs={'value': f'{val}'})
 
 
-def append(n, p):
+def append(n, p, specific):
     if n == 'answer':
         return n
-
-    # return n
-    return f"{n}_concept_{p['concept']}"
+    return f"{n}_concept_{p['concept']}" if specific else n
 
 
 IIDDXX = 0

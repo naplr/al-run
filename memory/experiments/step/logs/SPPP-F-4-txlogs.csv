@@ -1,241 +1,161 @@
 Agent,Concept,Problem,Knowledge,Type,Result,Action,When-Part,Where-Part,How-Part,Intermediate,Seen,AL Ans,Correct Ans,Time
-SPPP-F-1,1,[1][args:6-3],Fact,study,NA,Train,None,{('answer'&'arg_1_concept_1'&'arg_2_concept_1')},Inverse(Pow(?.v&?.v)):(arg_1_concept_1&arg_2_concept_1)->answer,False,True,None,612,12:15:55
-SPPP-F-1,2,[2][args:240-5-72-24],Fact,study,NA,Train,None,{('answer'&)},16.0:()->answer,False,True,None,16,12:15:55
-SPPP-F-1,3,[3][args:98-2-7],Fact,study,NA,Train,None,{('answer'&'arg_3_concept_3')},?.v:(arg_3_concept_3)->answer,False,True,None,7,12:15:55
-SPPP-F-1,4,[4][args:4-8],Fact,study,NA,Train,None,{('answer'&)},4098.0:()->answer,False,True,None,4098,12:15:56
-SPPP-F-1,5,[5][args:9-121-400],Fact,study,NA,Train,None,{('answer'&'arg_2_concept_5'&'arg_1_concept_5')},Inverse(Divide(?.v&?.v)):(arg_2_concept_5&arg_1_concept_5)->answer,False,True,None,31,12:15:56
-SPPP-F-1,1,[1][args:6-3],Fact,practice,CORRECT,Request,...,{('answer'&'arg_1_concept_1'&'arg_2_concept_1')},Inverse(Pow(?.v&?.v)):(arg_1_concept_1&arg_2_concept_1)->answer (v: None),False,True,612,612,12:15:56
-SPPP-F-1,2,[2][args:240-5-72-24],Fact,practice,CORRECT,Request,...,{('answer'&)},16.0:()->answer (v: None),False,True,16.0,16,12:15:57
-SPPP-F-1,3,[3][args:98-2-7],Fact,practice,CORRECT,Request,...,{('answer'&'arg_3_concept_3')},?.v:(arg_3_concept_3)->answer (v: None),False,True,7,7,12:15:58
-SPPP-F-1,4,[4][args:4-8],Fact,practice,CORRECT,Request,...,{('answer'&)},4098.0:()->answer (v: None),False,True,4098.0,4098,12:15:58
-SPPP-F-1,5,[5][args:9-121-400],Fact,practice,CORRECT,Request,...,{('answer'&'arg_2_concept_5'&'arg_1_concept_5')},Inverse(Divide(?.v&?.v)):(arg_2_concept_5&arg_1_concept_5)->answer (v: None),False,True,31,31,12:15:59
-SPPP-F-1,1,[1][args:6-3],Fact,practice,CORRECT,Request,...,{('answer'&'arg_1_concept_1'&'arg_2_concept_1')},Inverse(Pow(?.v&?.v)):(arg_1_concept_1&arg_2_concept_1)->answer (v: None),False,True,612,612,12:16:00
-SPPP-F-1,2,[2][args:240-5-72-24],Fact,practice,CORRECT,Request,...,{('answer'&)},16.0:()->answer (v: None),False,True,16.0,16,12:16:01
-SPPP-F-1,3,[3][args:98-2-7],Fact,practice,CORRECT,Request,...,{('answer'&'arg_3_concept_3')},?.v:(arg_3_concept_3)->answer (v: None),False,True,7,7,12:16:02
-SPPP-F-1,4,[4][args:4-8],Fact,practice,CORRECT,Request,...,{('answer'&)},4098.0:()->answer (v: None),False,True,4098.0,4098,12:16:03
-SPPP-F-1,5,[5][args:9-121-400],Fact,practice,CORRECT,Request,...,{('answer'&'arg_2_concept_5'&'arg_1_concept_5')},Inverse(Divide(?.v&?.v)):(arg_2_concept_5&arg_1_concept_5)->answer (v: None),False,True,31,31,12:16:03
-SPPP-F-1,1,[1][args:6-3],Fact,practice,CORRECT,Request,...,{('answer'&'arg_1_concept_1'&'arg_2_concept_1')},Inverse(Pow(?.v&?.v)):(arg_1_concept_1&arg_2_concept_1)->answer (v: None),False,True,612,612,12:16:04
-SPPP-F-1,2,[2][args:240-5-72-24],Fact,practice,CORRECT,Request,...,{('answer'&)},16.0:()->answer (v: None),False,True,16.0,16,12:16:04
-SPPP-F-1,3,[3][args:98-2-7],Fact,practice,CORRECT,Request,...,{('answer'&'arg_3_concept_3')},?.v:(arg_3_concept_3)->answer (v: None),False,True,7,7,12:16:05
-SPPP-F-1,4,[4][args:4-8],Fact,practice,CORRECT,Request,...,{('answer'&)},4098.0:()->answer (v: None),False,True,4098.0,4098,12:16:05
-SPPP-F-1,5,[5][args:9-121-400],Fact,practice,CORRECT,Request,...,{('answer'&'arg_2_concept_5'&'arg_1_concept_5')},Inverse(Divide(?.v&?.v)):(arg_2_concept_5&arg_1_concept_5)->answer (v: None),False,True,31,31,12:16:06
-SPPP-F-1,1,[1][args:6-3],Fact,practice,CORRECT,Request,...,{('answer'&'arg_1_concept_1'&'arg_2_concept_1')},Inverse(Pow(?.v&?.v)):(arg_1_concept_1&arg_2_concept_1)->answer (v: None),False,True,612,612,12:16:06
-SPPP-F-1,2,[2][args:240-5-72-24],Fact,practice,CORRECT,Request,...,{('answer'&)},16.0:()->answer (v: None),False,True,16.0,16,12:16:07
-SPPP-F-1,3,[3][args:98-2-7],Fact,practice,CORRECT,Request,...,{('answer'&'arg_3_concept_3')},?.v:(arg_3_concept_3)->answer (v: None),False,True,7,7,12:16:07
-SPPP-F-1,4,[4][args:4-8],Fact,practice,CORRECT,Request,...,{('answer'&)},4098.0:()->answer (v: None),False,True,4098.0,4098,12:16:08
-SPPP-F-1,5,[5][args:9-121-400],Fact,practice,CORRECT,Request,...,{('answer'&'arg_2_concept_5'&'arg_1_concept_5')},Inverse(Divide(?.v&?.v)):(arg_2_concept_5&arg_1_concept_5)->answer (v: None),False,True,31,31,12:16:08
-SPPP-F-1,1,[1][args:6-3],Fact,practice,CORRECT,Request,...,{('answer'&'arg_1_concept_1'&'arg_2_concept_1')},Inverse(Pow(?.v&?.v)):(arg_1_concept_1&arg_2_concept_1)->answer (v: None),False,True,612,612,12:16:09
-SPPP-F-1,2,[2][args:240-5-72-24],Fact,practice,CORRECT,Request,...,{('answer'&)},16.0:()->answer (v: None),False,True,16.0,16,12:16:09
-SPPP-F-1,3,[3][args:98-2-7],Fact,practice,CORRECT,Request,...,{('answer'&'arg_3_concept_3')},?.v:(arg_3_concept_3)->answer (v: None),False,True,7,7,12:16:10
-SPPP-F-1,4,[4][args:4-8],Fact,practice,CORRECT,Request,...,{('answer'&)},4098.0:()->answer (v: None),False,True,4098.0,4098,12:16:10
-SPPP-F-1,5,[5][args:9-121-400],Fact,practice,CORRECT,Request,...,{('answer'&'arg_2_concept_5'&'arg_1_concept_5')},Inverse(Divide(?.v&?.v)):(arg_2_concept_5&arg_1_concept_5)->answer (v: None),False,True,31,31,12:16:11
-SPPP-F-1,1,[1][args:6-3],Fact,practice,CORRECT,Request,...,{('answer'&'arg_1_concept_1'&'arg_2_concept_1')},Inverse(Pow(?.v&?.v)):(arg_1_concept_1&arg_2_concept_1)->answer (v: None),False,True,612,612,12:16:12
-SPPP-F-1,2,[2][args:240-5-72-24],Fact,practice,CORRECT,Request,...,{('answer'&)},16.0:()->answer (v: None),False,True,16.0,16,12:16:12
-SPPP-F-1,3,[3][args:98-2-7],Fact,practice,CORRECT,Request,...,{('answer'&'arg_3_concept_3')},?.v:(arg_3_concept_3)->answer (v: None),False,True,7,7,12:16:13
-SPPP-F-1,4,[4][args:4-8],Fact,practice,CORRECT,Request,...,{('answer'&)},4098.0:()->answer (v: None),False,True,4098.0,4098,12:16:13
-SPPP-F-1,5,[5][args:9-121-400],Fact,practice,CORRECT,Request,...,{('answer'&'arg_2_concept_5'&'arg_1_concept_5')},Inverse(Divide(?.v&?.v)):(arg_2_concept_5&arg_1_concept_5)->answer (v: None),False,True,31,31,12:16:14
-SPPP-F-1,1,[1][args:6-3],Fact,practice,CORRECT,Request,...,{('answer'&'arg_1_concept_1'&'arg_2_concept_1')},Inverse(Pow(?.v&?.v)):(arg_1_concept_1&arg_2_concept_1)->answer (v: None),False,True,612,612,12:16:14
-SPPP-F-1,2,[2][args:240-5-72-24],Fact,practice,CORRECT,Request,...,{('answer'&)},16.0:()->answer (v: None),False,True,16.0,16,12:16:15
-SPPP-F-1,3,[3][args:98-2-7],Fact,practice,CORRECT,Request,...,{('answer'&'arg_3_concept_3')},?.v:(arg_3_concept_3)->answer (v: None),False,True,7,7,12:16:16
-SPPP-F-1,4,[4][args:4-8],Fact,practice,CORRECT,Request,...,{('answer'&)},4098.0:()->answer (v: None),False,True,4098.0,4098,12:16:16
-SPPP-F-1,5,[5][args:9-121-400],Fact,practice,CORRECT,Request,...,{('answer'&'arg_2_concept_5'&'arg_1_concept_5')},Inverse(Divide(?.v&?.v)):(arg_2_concept_5&arg_1_concept_5)->answer (v: None),False,True,31,31,12:16:17
-SPPP-F-1,1,[1][args:6-3],Fact,practice,CORRECT,Request,...,{('answer'&'arg_1_concept_1'&'arg_2_concept_1')},Inverse(Pow(?.v&?.v)):(arg_1_concept_1&arg_2_concept_1)->answer (v: None),False,True,612,612,12:16:17
-SPPP-F-1,2,[2][args:240-5-72-24],Fact,practice,CORRECT,Request,...,{('answer'&)},16.0:()->answer (v: None),False,True,16.0,16,12:16:18
-SPPP-F-1,3,[3][args:98-2-7],Fact,practice,CORRECT,Request,...,{('answer'&'arg_3_concept_3')},?.v:(arg_3_concept_3)->answer (v: None),False,True,7,7,12:16:18
-SPPP-F-1,4,[4][args:4-8],Fact,practice,CORRECT,Request,...,{('answer'&)},4098.0:()->answer (v: None),False,True,4098.0,4098,12:16:19
-SPPP-F-1,5,[5][args:9-121-400],Fact,practice,CORRECT,Request,...,{('answer'&'arg_2_concept_5'&'arg_1_concept_5')},Inverse(Divide(?.v&?.v)):(arg_2_concept_5&arg_1_concept_5)->answer (v: None),False,True,31,31,12:16:20
-SPPP-F-1,1,[1][args:6-3],Fact,practice,CORRECT,Request,...,{('answer'&'arg_1_concept_1'&'arg_2_concept_1')},Inverse(Pow(?.v&?.v)):(arg_1_concept_1&arg_2_concept_1)->answer (v: None),False,True,612,612,12:16:20
-SPPP-F-1,2,[2][args:240-5-72-24],Fact,practice,CORRECT,Request,...,{('answer'&)},16.0:()->answer (v: None),False,True,16.0,16,12:16:21
-SPPP-F-1,3,[3][args:98-2-7],Fact,practice,CORRECT,Request,...,{('answer'&'arg_3_concept_3')},?.v:(arg_3_concept_3)->answer (v: None),False,True,7,7,12:16:21
-SPPP-F-1,4,[4][args:4-8],Fact,practice,CORRECT,Request,...,{('answer'&)},4098.0:()->answer (v: None),False,True,4098.0,4098,12:16:22
-SPPP-F-1,5,[5][args:9-121-400],Fact,practice,CORRECT,Request,...,{('answer'&'arg_2_concept_5'&'arg_1_concept_5')},Inverse(Divide(?.v&?.v)):(arg_2_concept_5&arg_1_concept_5)->answer (v: None),False,True,31,31,12:16:22
-SPPP-F-1,2,[2][args:240-5-72-24],Fact,posttest,CORRECT,Request,...,{('answer'&)},16.0:()->answer (v: None),False,True,16.0,16,12:16:23
-SPPP-F-1,4,[4][args:2-4],Fact,posttest,INCORRECT,Request,...,[2&2],HINT,False,False,None,18,12:16:23
-SPPP-F-1,4,[4][args:2-8],Fact,posttest,INCORRECT,Request,...,[2&2],HINT,False,False,None,68,12:16:23
-SPPP-F-1,4,[4][args:4-8],Fact,posttest,CORRECT,Request,...,{('answer'&)},4098.0:()->answer (v: None),False,True,4098.0,4098,12:16:23
-SPPP-F-1,3,[3][args:225-5-5],Fact,posttest,INCORRECT,Request,...,{('answer'&'arg_3_concept_3')},?.v:(arg_3_concept_3)->answer (v: None),False,False,5,9,12:16:23
-SPPP-F-1,2,[2][args:216-4-87-29],Fact,posttest,INCORRECT,Request,...,[2&2],HINT,False,False,None,18,12:16:24
-SPPP-F-1,5,[5][args:9-121-400],Fact,posttest,CORRECT,Request,...,{('answer'&'arg_2_concept_5'&'arg_1_concept_5')},Inverse(Divide(?.v&?.v)):(arg_2_concept_5&arg_1_concept_5)->answer (v: None),False,True,31,31,12:16:24
-SPPP-F-1,1,[1][args:6-3],Fact,posttest,CORRECT,Request,...,{('answer'&'arg_1_concept_1'&'arg_2_concept_1')},Inverse(Pow(?.v&?.v)):(arg_1_concept_1&arg_2_concept_1)->answer (v: None),False,True,612,612,12:16:24
-SPPP-F-1,1,[1][args:4-4],Fact,posttest,CORRECT,Request,...,{('answer'&'arg_1_concept_1'&'arg_2_concept_1')},Inverse(Pow(?.v&?.v)):(arg_1_concept_1&arg_2_concept_1)->answer (v: None),False,False,652,652,12:16:24
-SPPP-F-1,5,[5][args:13-37-154],Fact,posttest,INCORRECT,Request,...,{('answer'&'arg_2_concept_5'&'arg_1_concept_5')},Inverse(Divide(?.v&?.v)):(arg_2_concept_5&arg_1_concept_5)->answer (v: None),False,False,2,9,12:16:24
-SPPP-F-1,2,[2][args:240-5-72-24],Fact,posttest,CORRECT,Request,...,{('answer'&)},16.0:()->answer (v: None),False,True,16.0,16,12:16:24
-SPPP-F-1,2,[2][args:360-6-135-9],Fact,posttest,INCORRECT,Request,...,[2&2],HINT,False,False,None,4,12:16:24
-SPPP-F-1,5,[5][args:9-121-400],Fact,posttest,CORRECT,Request,...,{('answer'&'arg_2_concept_5'&'arg_1_concept_5')},Inverse(Divide(?.v&?.v)):(arg_2_concept_5&arg_1_concept_5)->answer (v: None),False,True,31,31,12:16:24
-SPPP-F-1,4,[4][args:4-8],Fact,posttest,CORRECT,Request,...,{('answer'&)},4098.0:()->answer (v: None),False,True,4098.0,4098,12:16:24
-SPPP-F-1,3,[3][args:693-7-3],Fact,posttest,INCORRECT,Request,...,{('answer'&'arg_3_concept_3')},?.v:(arg_3_concept_3)->answer (v: None),False,False,3,33,12:16:24
-SPPP-F-1,4,[4][args:4-8],Fact,posttest,CORRECT,Request,...,{('answer'&)},4098.0:()->answer (v: None),False,True,4098.0,4098,12:16:24
-SPPP-F-1,2,[2][args:288-12-18-9],Fact,posttest,INCORRECT,Request,...,[2&2],HINT,False,False,None,12,12:16:24
-SPPP-F-1,3,[3][args:98-2-7],Fact,posttest,CORRECT,Request,...,{('answer'&'arg_3_concept_3')},?.v:(arg_3_concept_3)->answer (v: None),False,True,7,7,12:16:25
-SPPP-F-1,3,[3][args:98-2-7],Fact,posttest,CORRECT,Request,...,{('answer'&'arg_3_concept_3')},?.v:(arg_3_concept_3)->answer (v: None),False,True,7,7,12:16:25
-SPPP-F-1,1,[1][args:15-2],Fact,posttest,CORRECT,Request,...,{('answer'&'arg_1_concept_1'&'arg_2_concept_1')},Inverse(Pow(?.v&?.v)):(arg_1_concept_1&arg_2_concept_1)->answer (v: None),False,False,522,522,12:16:25
-SPPP-F-1,2,[2][args:240-5-72-24],Fact,posttest,CORRECT,Request,...,{('answer'&)},16.0:()->answer (v: None),False,True,16.0,16,12:16:25
-SPPP-F-1,5,[5][args:9-121-400],Fact,posttest,CORRECT,Request,...,{('answer'&'arg_2_concept_5'&'arg_1_concept_5')},Inverse(Divide(?.v&?.v)):(arg_2_concept_5&arg_1_concept_5)->answer (v: None),False,True,31,31,12:16:25
-SPPP-F-1,3,[3][args:312-3-4],Fact,posttest,INCORRECT,Request,...,{('answer'&'arg_3_concept_3')},?.v:(arg_3_concept_3)->answer (v: None),False,False,4,26,12:16:25
-SPPP-F-1,3,[3][args:98-2-7],Fact,posttest,CORRECT,Request,...,{('answer'&'arg_3_concept_3')},?.v:(arg_3_concept_3)->answer (v: None),False,True,7,7,12:16:25
-SPPP-F-1,1,[1][args:10-1],Fact,posttest,CORRECT,Request,...,{('answer'&'arg_1_concept_1'&'arg_2_concept_1')},Inverse(Pow(?.v&?.v)):(arg_1_concept_1&arg_2_concept_1)->answer (v: None),False,False,01,1,12:16:25
-SPPP-F-1,5,[5][args:23-423-584],Fact,posttest,INCORRECT,Request,...,{('answer'&'arg_2_concept_5'&'arg_1_concept_5')},Inverse(Divide(?.v&?.v)):(arg_2_concept_5&arg_1_concept_5)->answer (v: None),False,False,81,7,12:16:25
-SPPP-F-1,5,[5][args:5-79-199],Fact,posttest,INCORRECT,Request,...,{('answer'&'arg_2_concept_5'&'arg_1_concept_5')},Inverse(Divide(?.v&?.v)):(arg_2_concept_5&arg_1_concept_5)->answer (v: None),False,False,51,24,12:16:25
-SPPP-F-1,4,[4][args:1-8],Fact,posttest,INCORRECT,Request,...,[2&2],HINT,False,False,None,16,12:16:25
-SPPP-F-1,1,[1][args:6-3],Fact,posttest,CORRECT,Request,...,{('answer'&'arg_1_concept_1'&'arg_2_concept_1')},Inverse(Pow(?.v&?.v)):(arg_1_concept_1&arg_2_concept_1)->answer (v: None),False,True,612,612,12:16:25
-SPPP-F-1,1,[1][args:6-3],Fact,posttest,CORRECT,Request,...,{('answer'&'arg_1_concept_1'&'arg_2_concept_1')},Inverse(Pow(?.v&?.v)):(arg_1_concept_1&arg_2_concept_1)->answer (v: None),False,True,612,612,12:16:25
-SPSP-F-3,1,[1][args:3-4],Fact,study,NA,Train,None,{('answer'&'arg_1_concept_1'&'arg_2_concept_1')},Inverse(Pow(?.v&?.v)):(arg_1_concept_1&arg_2_concept_1)->answer,False,True,None,18,12:16:26
-SPSP-F-3,2,[2][args:165-3-143-13],Fact,study,NA,Train,None,{('answer'&)},5.0:()->answer,False,True,None,5,12:16:26
-SPSP-F-3,3,[3][args:162-6-3],Fact,study,NA,Train,None,{('answer'&'arg_2_concept_3'&'arg_3_concept_3')},Add(?.v&?.v):(arg_2_concept_3&arg_3_concept_3)->answer,False,True,None,9,12:16:26
-SPSP-F-3,4,[4][args:3-21],Fact,study,NA,Train,None,{('answer'&)},9268.0:()->answer,False,True,None,9268,12:16:27
-SPSP-F-3,5,[5][args:21-110-656],Fact,study,NA,Train,None,{('answer'&)},26.0:()->answer,False,True,None,26,12:16:27
-SPSP-F-3,1,[1][args:3-4],Fact,practice,CORRECT,Request,...,{('answer'&'arg_1_concept_1'&'arg_2_concept_1')},Inverse(Pow(?.v&?.v)):(arg_1_concept_1&arg_2_concept_1)->answer (v: None),False,True,18,18,12:16:27
-SPSP-F-3,2,[2][args:165-3-143-13],Fact,practice,CORRECT,Request,...,{('answer'&)},5.0:()->answer (v: None),False,True,5.0,5,12:16:27
-SPSP-F-3,3,[3][args:162-6-3],Fact,practice,CORRECT,Request,...,{('answer'&'arg_2_concept_3'&'arg_3_concept_3')},Add(?.v&?.v):(arg_2_concept_3&arg_3_concept_3)->answer (v: None),False,True,9,9,12:16:28
-SPSP-F-3,4,[4][args:3-21],Fact,practice,CORRECT,Request,...,{('answer'&)},9268.0:()->answer (v: None),False,True,9268.0,9268,12:16:29
-SPSP-F-3,5,[5][args:21-110-656],Fact,practice,CORRECT,Request,...,{('answer'&)},26.0:()->answer (v: None),False,True,26.0,26,12:16:29
-SPSP-F-3,1,[1][args:3-4],Fact,study,NA,Train,None,{('answer'&'arg_1_concept_1'&'arg_2_concept_1')},Inverse(Pow(?.v&?.v)):(arg_1_concept_1&arg_2_concept_1)->answer,False,True,None,18,12:16:30
-SPSP-F-3,2,[2][args:165-3-143-13],Fact,study,NA,Train,None,{('answer'&)},5.0:()->answer,False,True,None,5,12:16:31
-SPSP-F-3,3,[3][args:162-6-3],Fact,study,NA,Train,None,{('answer'&'arg_2_concept_3'&'arg_3_concept_3')},Add(?.v&?.v):(arg_2_concept_3&arg_3_concept_3)->answer,False,True,None,9,12:16:31
-SPSP-F-3,4,[4][args:3-21],Fact,study,NA,Train,None,{('answer'&)},9268.0:()->answer,False,True,None,9268,12:16:32
-SPSP-F-3,5,[5][args:21-110-656],Fact,study,NA,Train,None,{('answer'&)},26.0:()->answer,False,True,None,26,12:16:33
-SPSP-F-3,1,[1][args:3-4],Fact,practice,CORRECT,Request,...,{('answer'&'arg_1_concept_1'&'arg_2_concept_1')},Inverse(Pow(?.v&?.v)):(arg_1_concept_1&arg_2_concept_1)->answer (v: None),False,True,18,18,12:16:33
-SPSP-F-3,2,[2][args:165-3-143-13],Fact,practice,CORRECT,Request,...,{('answer'&)},5.0:()->answer (v: None),False,True,5.0,5,12:16:33
-SPSP-F-3,3,[3][args:162-6-3],Fact,practice,CORRECT,Request,...,{('answer'&'arg_2_concept_3'&'arg_3_concept_3')},Add(?.v&?.v):(arg_2_concept_3&arg_3_concept_3)->answer (v: None),False,True,9,9,12:16:34
-SPSP-F-3,4,[4][args:3-21],Fact,practice,CORRECT,Request,...,{('answer'&)},9268.0:()->answer (v: None),False,True,9268.0,9268,12:16:35
-SPSP-F-3,5,[5][args:21-110-656],Fact,practice,CORRECT,Request,...,{('answer'&)},26.0:()->answer (v: None),False,True,26.0,26,12:16:35
-SPSP-F-3,1,[1][args:3-4],Fact,study,NA,Train,None,{('answer'&'arg_1_concept_1'&'arg_2_concept_1')},Inverse(Pow(?.v&?.v)):(arg_1_concept_1&arg_2_concept_1)->answer,False,True,None,18,12:16:36
-SPSP-F-3,2,[2][args:165-3-143-13],Fact,study,NA,Train,None,{('answer'&)},5.0:()->answer,False,True,None,5,12:16:37
-SPSP-F-3,3,[3][args:162-6-3],Fact,study,NA,Train,None,{('answer'&'arg_2_concept_3'&'arg_3_concept_3')},Add(?.v&?.v):(arg_2_concept_3&arg_3_concept_3)->answer,False,True,None,9,12:16:37
-SPSP-F-3,4,[4][args:3-21],Fact,study,NA,Train,None,{('answer'&)},9268.0:()->answer,False,True,None,9268,12:16:38
-SPSP-F-3,5,[5][args:21-110-656],Fact,study,NA,Train,None,{('answer'&)},26.0:()->answer,False,True,None,26,12:16:39
-SPSP-F-3,1,[1][args:3-4],Fact,practice,CORRECT,Request,...,{('answer'&'arg_1_concept_1'&'arg_2_concept_1')},Inverse(Pow(?.v&?.v)):(arg_1_concept_1&arg_2_concept_1)->answer (v: None),False,True,18,18,12:16:39
-SPSP-F-3,2,[2][args:165-3-143-13],Fact,practice,CORRECT,Request,...,{('answer'&)},5.0:()->answer (v: None),False,True,5.0,5,12:16:39
-SPSP-F-3,3,[3][args:162-6-3],Fact,practice,CORRECT,Request,...,{('answer'&'arg_2_concept_3'&'arg_3_concept_3')},Add(?.v&?.v):(arg_2_concept_3&arg_3_concept_3)->answer (v: None),False,True,9,9,12:16:40
-SPSP-F-3,4,[4][args:3-21],Fact,practice,CORRECT,Request,...,{('answer'&)},9268.0:()->answer (v: None),False,True,9268.0,9268,12:16:41
-SPSP-F-3,5,[5][args:21-110-656],Fact,practice,CORRECT,Request,...,{('answer'&)},26.0:()->answer (v: None),False,True,26.0,26,12:16:42
-SPSP-F-3,1,[1][args:3-4],Fact,study,NA,Train,None,{('answer'&'arg_1_concept_1'&'arg_2_concept_1')},Inverse(Pow(?.v&?.v)):(arg_1_concept_1&arg_2_concept_1)->answer,False,True,None,18,12:16:43
-SPSP-F-3,2,[2][args:165-3-143-13],Fact,study,NA,Train,None,{('answer'&)},5.0:()->answer,False,True,None,5,12:16:43
-SPSP-F-3,3,[3][args:162-6-3],Fact,study,NA,Train,None,{('answer'&'arg_2_concept_3'&'arg_3_concept_3')},Add(?.v&?.v):(arg_2_concept_3&arg_3_concept_3)->answer,False,True,None,9,12:16:44
-SPSP-F-3,4,[4][args:3-21],Fact,study,NA,Train,None,{('answer'&)},9268.0:()->answer,False,True,None,9268,12:16:44
-SPSP-F-3,5,[5][args:21-110-656],Fact,study,NA,Train,None,{('answer'&)},26.0:()->answer,False,True,None,26,12:16:45
-SPSP-F-3,1,[1][args:3-4],Fact,practice,CORRECT,Request,...,{('answer'&'arg_1_concept_1'&'arg_2_concept_1')},Inverse(Pow(?.v&?.v)):(arg_1_concept_1&arg_2_concept_1)->answer (v: None),False,True,18,18,12:16:45
-SPSP-F-3,2,[2][args:165-3-143-13],Fact,practice,CORRECT,Request,...,{('answer'&)},5.0:()->answer (v: None),False,True,5.0,5,12:16:45
-SPSP-F-3,3,[3][args:162-6-3],Fact,practice,CORRECT,Request,...,{('answer'&'arg_2_concept_3'&'arg_3_concept_3')},Add(?.v&?.v):(arg_2_concept_3&arg_3_concept_3)->answer (v: None),False,True,9,9,12:16:46
-SPSP-F-3,4,[4][args:3-21],Fact,practice,CORRECT,Request,...,{('answer'&)},9268.0:()->answer (v: None),False,True,9268.0,9268,12:16:47
-SPSP-F-3,5,[5][args:21-110-656],Fact,practice,CORRECT,Request,...,{('answer'&)},26.0:()->answer (v: None),False,True,26.0,26,12:16:47
-SPSP-F-3,1,[1][args:3-4],Fact,study,NA,Train,None,{('answer'&'arg_1_concept_1'&'arg_2_concept_1')},Inverse(Pow(?.v&?.v)):(arg_1_concept_1&arg_2_concept_1)->answer,False,True,None,18,12:16:49
-SPSP-F-3,2,[2][args:165-3-143-13],Fact,study,NA,Train,None,{('answer'&)},5.0:()->answer,False,True,None,5,12:16:50
-SPSP-F-3,3,[3][args:162-6-3],Fact,study,NA,Train,None,{('answer'&'arg_2_concept_3'&'arg_3_concept_3')},Add(?.v&?.v):(arg_2_concept_3&arg_3_concept_3)->answer,False,True,None,9,12:16:50
-SPSP-F-3,4,[4][args:3-21],Fact,study,NA,Train,None,{('answer'&)},9268.0:()->answer,False,True,None,9268,12:16:51
-SPSP-F-3,5,[5][args:21-110-656],Fact,study,NA,Train,None,{('answer'&)},26.0:()->answer,False,True,None,26,12:16:52
-SPSP-F-3,1,[1][args:3-4],Fact,practice,CORRECT,Request,...,{('answer'&'arg_1_concept_1'&'arg_2_concept_1')},Inverse(Pow(?.v&?.v)):(arg_1_concept_1&arg_2_concept_1)->answer (v: None),False,True,18,18,12:16:52
-SPSP-F-3,2,[2][args:165-3-143-13],Fact,practice,CORRECT,Request,...,{('answer'&)},5.0:()->answer (v: None),False,True,5.0,5,12:16:52
-SPSP-F-3,3,[3][args:162-6-3],Fact,practice,CORRECT,Request,...,{('answer'&'arg_2_concept_3'&'arg_3_concept_3')},Add(?.v&?.v):(arg_2_concept_3&arg_3_concept_3)->answer (v: None),False,True,9,9,12:16:53
-SPSP-F-3,4,[4][args:3-21],Fact,practice,CORRECT,Request,...,{('answer'&)},9268.0:()->answer (v: None),False,True,9268.0,9268,12:16:54
-SPSP-F-3,5,[5][args:21-110-656],Fact,practice,CORRECT,Request,...,{('answer'&)},26.0:()->answer (v: None),False,True,26.0,26,12:16:54
-SPSP-F-3,2,[2][args:165-3-143-13],Fact,posttest,CORRECT,Request,...,{('answer'&)},5.0:()->answer (v: None),False,True,5.0,5,12:16:55
-SPSP-F-3,1,[1][args:3-4],Fact,posttest,CORRECT,Request,...,{('answer'&'arg_1_concept_1'&'arg_2_concept_1')},Inverse(Pow(?.v&?.v)):(arg_1_concept_1&arg_2_concept_1)->answer (v: None),False,True,18,18,12:16:55
-SPSP-F-3,2,[2][args:360-6-135-9],Fact,posttest,INCORRECT,Request,...,{('answer'&)},5.0:()->answer (v: None),False,False,5.0,4,12:16:55
-SPSP-F-3,1,[1][args:2-4],Fact,posttest,CORRECT,Request,...,{('answer'&'arg_1_concept_1'&'arg_2_concept_1')},Inverse(Pow(?.v&?.v)):(arg_1_concept_1&arg_2_concept_1)->answer (v: None),False,False,61,61,12:16:56
-SPSP-F-3,5,[5][args:21-110-656],Fact,posttest,CORRECT,Request,...,{('answer'&)},26.0:()->answer (v: None),False,True,26.0,26,12:16:56
-SPSP-F-3,5,[5][args:18-93-291],Fact,posttest,INCORRECT,Request,...,{('answer'&)},26.0:()->answer (v: None),False,False,26.0,11,12:16:56
-SPSP-F-3,5,[5][args:23-423-584],Fact,posttest,INCORRECT,Request,...,{('answer'&)},26.0:()->answer (v: None),False,False,26.0,7,12:16:56
-SPSP-F-3,3,[3][args:162-6-3],Fact,posttest,CORRECT,Request,...,{('answer'&'arg_2_concept_3'&'arg_3_concept_3')},Add(?.v&?.v):(arg_2_concept_3&arg_3_concept_3)->answer (v: None),False,True,9,9,12:16:56
-SPSP-F-3,4,[4][args:2-4],Fact,posttest,INCORRECT,Request,...,{('answer'&)},9268.0:()->answer (v: None),False,False,9268.0,18,12:16:56
-SPSP-F-3,5,[5][args:21-110-656],Fact,posttest,CORRECT,Request,...,{('answer'&)},26.0:()->answer (v: None),False,True,26.0,26,12:16:57
-SPSP-F-3,4,[4][args:3-21],Fact,posttest,CORRECT,Request,...,{('answer'&)},9268.0:()->answer (v: None),False,True,9268.0,9268,12:16:57
-SPSP-F-3,5,[5][args:21-110-656],Fact,posttest,CORRECT,Request,...,{('answer'&)},26.0:()->answer (v: None),False,True,26.0,26,12:16:57
-SPSP-F-3,2,[2][args:165-3-143-13],Fact,posttest,CORRECT,Request,...,{('answer'&)},5.0:()->answer (v: None),False,True,5.0,5,12:16:57
-SPSP-F-3,4,[4][args:3-15],Fact,posttest,INCORRECT,Request,...,{('answer'&)},9268.0:()->answer (v: None),False,False,9268.0,3380,12:16:57
-SPSP-F-3,3,[3][args:693-7-3],Fact,posttest,INCORRECT,Request,...,{('answer'&'arg_2_concept_3'&'arg_3_concept_3')},Add(?.v&?.v):(arg_2_concept_3&arg_3_concept_3)->answer (v: None),False,False,10,33,12:16:57
-SPSP-F-3,3,[3][args:162-6-3],Fact,posttest,CORRECT,Request,...,{('answer'&'arg_2_concept_3'&'arg_3_concept_3')},Add(?.v&?.v):(arg_2_concept_3&arg_3_concept_3)->answer (v: None),False,True,9,9,12:16:57
-SPSP-F-3,1,[1][args:10-1],Fact,posttest,CORRECT,Request,...,{('answer'&'arg_1_concept_1'&'arg_2_concept_1')},Inverse(Pow(?.v&?.v)):(arg_1_concept_1&arg_2_concept_1)->answer (v: None),False,False,01,1,12:16:57
-SPSP-F-3,1,[1][args:3-4],Fact,posttest,CORRECT,Request,...,{('answer'&'arg_1_concept_1'&'arg_2_concept_1')},Inverse(Pow(?.v&?.v)):(arg_1_concept_1&arg_2_concept_1)->answer (v: None),False,True,18,18,12:16:57
-SPSP-F-3,5,[5][args:13-37-154],Fact,posttest,INCORRECT,Request,...,{('answer'&)},26.0:()->answer (v: None),False,False,26.0,9,12:16:57
-SPSP-F-3,3,[3][args:162-6-3],Fact,posttest,CORRECT,Request,...,{('answer'&'arg_2_concept_3'&'arg_3_concept_3')},Add(?.v&?.v):(arg_2_concept_3&arg_3_concept_3)->answer (v: None),False,True,9,9,12:16:57
-SPSP-F-3,4,[4][args:3-21],Fact,posttest,CORRECT,Request,...,{('answer'&)},9268.0:()->answer (v: None),False,True,9268.0,9268,12:16:58
-SPSP-F-3,4,[4][args:1-8],Fact,posttest,INCORRECT,Request,...,{('answer'&)},9268.0:()->answer (v: None),False,False,9268.0,16,12:16:58
-SPSP-F-3,2,[2][args:288-12-18-9],Fact,posttest,INCORRECT,Request,...,{('answer'&)},5.0:()->answer (v: None),False,False,5.0,12,12:16:58
-SPSP-F-3,4,[4][args:3-21],Fact,posttest,CORRECT,Request,...,{('answer'&)},9268.0:()->answer (v: None),False,True,9268.0,9268,12:16:58
-SPSP-F-3,3,[3][args:840-2-10],Fact,posttest,INCORRECT,Request,...,{('answer'&'arg_2_concept_3'&'arg_3_concept_3')},Add(?.v&?.v):(arg_2_concept_3&arg_3_concept_3)->answer (v: None),False,False,12,42,12:16:58
-SPSP-F-3,3,[3][args:312-3-4],Fact,posttest,INCORRECT,Request,...,{('answer'&'arg_2_concept_3'&'arg_3_concept_3')},Add(?.v&?.v):(arg_2_concept_3&arg_3_concept_3)->answer (v: None),False,False,7,26,12:16:58
-SPSP-F-3,2,[2][args:216-4-87-29],Fact,posttest,INCORRECT,Request,...,{('answer'&)},5.0:()->answer (v: None),False,False,5.0,18,12:16:58
-SPSP-F-3,1,[1][args:3-4],Fact,posttest,CORRECT,Request,...,{('answer'&'arg_1_concept_1'&'arg_2_concept_1')},Inverse(Pow(?.v&?.v)):(arg_1_concept_1&arg_2_concept_1)->answer (v: None),False,True,18,18,12:16:58
-SPSP-F-3,2,[2][args:165-3-143-13],Fact,posttest,CORRECT,Request,...,{('answer'&)},5.0:()->answer (v: None),False,True,5.0,5,12:16:59
-SPSP-F-3,1,[1][args:15-2],Fact,posttest,CORRECT,Request,...,{('answer'&'arg_1_concept_1'&'arg_2_concept_1')},Inverse(Pow(?.v&?.v)):(arg_1_concept_1&arg_2_concept_1)->answer (v: None),False,False,522,522,12:16:59
-SPPP-F-4,1,[1][args:5-3],Fact,study,NA,Train,None,{('answer'&'arg_1_concept_1'&'arg_2_concept_1')},Inverse(Pow(?.v&?.v)):(arg_1_concept_1&arg_2_concept_1)->answer,False,True,None,521,12:16:59
-SPPP-F-4,2,[2][args:588-6-112-8],Fact,study,NA,Train,None,{('answer'&)},7.0:()->answer,False,True,None,7,12:16:59
-SPPP-F-4,3,[3][args:99-11-3],Fact,study,NA,Train,None,{('answer'&'arg_3_concept_3')},?.v:(arg_3_concept_3)->answer,False,True,None,3,12:17:00
-SPPP-F-4,4,[4][args:2-12],Fact,study,NA,Train,None,{('answer'&)},150.0:()->answer,False,True,None,150,12:17:01
-SPPP-F-4,5,[5][args:5-151-256],Fact,study,NA,Train,None,{('answer'&)},21.0:()->answer,False,True,None,21,12:17:02
-SPPP-F-4,1,[1][args:5-3],Fact,practice,CORRECT,Request,...,{('answer'&'arg_1_concept_1'&'arg_2_concept_1')},Inverse(Pow(?.v&?.v)):(arg_1_concept_1&arg_2_concept_1)->answer (v: None),False,True,521,521,12:17:02
-SPPP-F-4,2,[2][args:588-6-112-8],Fact,practice,CORRECT,Request,...,{('answer'&)},7.0:()->answer (v: None),False,True,7.0,7,12:17:03
-SPPP-F-4,3,[3][args:99-11-3],Fact,practice,CORRECT,Request,...,{('answer'&'arg_3_concept_3')},?.v:(arg_3_concept_3)->answer (v: None),False,True,3,3,12:17:03
-SPPP-F-4,4,[4][args:2-12],Fact,practice,CORRECT,Request,...,{('answer'&)},150.0:()->answer (v: None),False,True,150.0,150,12:17:04
-SPPP-F-4,5,[5][args:5-151-256],Fact,practice,CORRECT,Request,...,{('answer'&)},21.0:()->answer (v: None),False,True,21.0,21,12:17:04
-SPPP-F-4,1,[1][args:5-3],Fact,practice,CORRECT,Request,...,{('answer'&'arg_1_concept_1'&'arg_2_concept_1')},Inverse(Pow(?.v&?.v)):(arg_1_concept_1&arg_2_concept_1)->answer (v: None),False,True,521,521,12:17:05
-SPPP-F-4,2,[2][args:588-6-112-8],Fact,practice,CORRECT,Request,...,{('answer'&)},7.0:()->answer (v: None),False,True,7.0,7,12:17:05
-SPPP-F-4,3,[3][args:99-11-3],Fact,practice,CORRECT,Request,...,{('answer'&'arg_3_concept_3')},?.v:(arg_3_concept_3)->answer (v: None),False,True,3,3,12:17:06
-SPPP-F-4,4,[4][args:2-12],Fact,practice,CORRECT,Request,...,{('answer'&)},150.0:()->answer (v: None),False,True,150.0,150,12:17:06
-SPPP-F-4,5,[5][args:5-151-256],Fact,practice,CORRECT,Request,...,{('answer'&)},21.0:()->answer (v: None),False,True,21.0,21,12:17:07
-SPPP-F-4,1,[1][args:5-3],Fact,practice,CORRECT,Request,...,{('answer'&'arg_1_concept_1'&'arg_2_concept_1')},Inverse(Pow(?.v&?.v)):(arg_1_concept_1&arg_2_concept_1)->answer (v: None),False,True,521,521,12:17:08
-SPPP-F-4,2,[2][args:588-6-112-8],Fact,practice,CORRECT,Request,...,{('answer'&)},7.0:()->answer (v: None),False,True,7.0,7,12:17:09
-SPPP-F-4,3,[3][args:99-11-3],Fact,practice,CORRECT,Request,...,{('answer'&'arg_3_concept_3')},?.v:(arg_3_concept_3)->answer (v: None),False,True,3,3,12:17:09
-SPPP-F-4,4,[4][args:2-12],Fact,practice,CORRECT,Request,...,{('answer'&)},150.0:()->answer (v: None),False,True,150.0,150,12:17:10
-SPPP-F-4,5,[5][args:5-151-256],Fact,practice,CORRECT,Request,...,{('answer'&)},21.0:()->answer (v: None),False,True,21.0,21,12:17:10
-SPPP-F-4,1,[1][args:5-3],Fact,practice,CORRECT,Request,...,{('answer'&'arg_1_concept_1'&'arg_2_concept_1')},Inverse(Pow(?.v&?.v)):(arg_1_concept_1&arg_2_concept_1)->answer (v: None),False,True,521,521,12:17:10
-SPPP-F-4,2,[2][args:588-6-112-8],Fact,practice,CORRECT,Request,...,{('answer'&)},7.0:()->answer (v: None),False,True,7.0,7,12:17:11
-SPPP-F-4,3,[3][args:99-11-3],Fact,practice,CORRECT,Request,...,{('answer'&'arg_3_concept_3')},?.v:(arg_3_concept_3)->answer (v: None),False,True,3,3,12:17:12
-SPPP-F-4,4,[4][args:2-12],Fact,practice,CORRECT,Request,...,{('answer'&)},150.0:()->answer (v: None),False,True,150.0,150,12:17:12
-SPPP-F-4,5,[5][args:5-151-256],Fact,practice,CORRECT,Request,...,{('answer'&)},21.0:()->answer (v: None),False,True,21.0,21,12:17:13
-SPPP-F-4,1,[1][args:5-3],Fact,practice,CORRECT,Request,...,{('answer'&'arg_1_concept_1'&'arg_2_concept_1')},Inverse(Pow(?.v&?.v)):(arg_1_concept_1&arg_2_concept_1)->answer (v: None),False,True,521,521,12:17:13
-SPPP-F-4,2,[2][args:588-6-112-8],Fact,practice,CORRECT,Request,...,{('answer'&)},7.0:()->answer (v: None),False,True,7.0,7,12:17:13
-SPPP-F-4,3,[3][args:99-11-3],Fact,practice,CORRECT,Request,...,{('answer'&'arg_3_concept_3')},?.v:(arg_3_concept_3)->answer (v: None),False,True,3,3,12:17:14
-SPPP-F-4,4,[4][args:2-12],Fact,practice,CORRECT,Request,...,{('answer'&)},150.0:()->answer (v: None),False,True,150.0,150,12:17:14
-SPPP-F-4,5,[5][args:5-151-256],Fact,practice,CORRECT,Request,...,{('answer'&)},21.0:()->answer (v: None),False,True,21.0,21,12:17:15
-SPPP-F-4,1,[1][args:5-3],Fact,practice,CORRECT,Request,...,{('answer'&'arg_1_concept_1'&'arg_2_concept_1')},Inverse(Pow(?.v&?.v)):(arg_1_concept_1&arg_2_concept_1)->answer (v: None),False,True,521,521,12:17:15
-SPPP-F-4,2,[2][args:588-6-112-8],Fact,practice,CORRECT,Request,...,{('answer'&)},7.0:()->answer (v: None),False,True,7.0,7,12:17:16
-SPPP-F-4,3,[3][args:99-11-3],Fact,practice,CORRECT,Request,...,{('answer'&'arg_3_concept_3')},?.v:(arg_3_concept_3)->answer (v: None),False,True,3,3,12:17:16
-SPPP-F-4,4,[4][args:2-12],Fact,practice,CORRECT,Request,...,{('answer'&)},150.0:()->answer (v: None),False,True,150.0,150,12:17:17
-SPPP-F-4,5,[5][args:5-151-256],Fact,practice,CORRECT,Request,...,{('answer'&)},21.0:()->answer (v: None),False,True,21.0,21,12:17:17
-SPPP-F-4,1,[1][args:5-3],Fact,practice,CORRECT,Request,...,{('answer'&'arg_1_concept_1'&'arg_2_concept_1')},Inverse(Pow(?.v&?.v)):(arg_1_concept_1&arg_2_concept_1)->answer (v: None),False,True,521,521,12:17:18
-SPPP-F-4,2,[2][args:588-6-112-8],Fact,practice,CORRECT,Request,...,{('answer'&)},7.0:()->answer (v: None),False,True,7.0,7,12:17:18
-SPPP-F-4,3,[3][args:99-11-3],Fact,practice,CORRECT,Request,...,{('answer'&'arg_3_concept_3')},?.v:(arg_3_concept_3)->answer (v: None),False,True,3,3,12:17:19
-SPPP-F-4,4,[4][args:2-12],Fact,practice,CORRECT,Request,...,{('answer'&)},150.0:()->answer (v: None),False,True,150.0,150,12:17:19
-SPPP-F-4,5,[5][args:5-151-256],Fact,practice,CORRECT,Request,...,{('answer'&)},21.0:()->answer (v: None),False,True,21.0,21,12:17:20
-SPPP-F-4,1,[1][args:5-3],Fact,practice,CORRECT,Request,...,{('answer'&'arg_1_concept_1'&'arg_2_concept_1')},Inverse(Pow(?.v&?.v)):(arg_1_concept_1&arg_2_concept_1)->answer (v: None),False,True,521,521,12:17:20
-SPPP-F-4,2,[2][args:588-6-112-8],Fact,practice,CORRECT,Request,...,{('answer'&)},7.0:()->answer (v: None),False,True,7.0,7,12:17:21
-SPPP-F-4,3,[3][args:99-11-3],Fact,practice,CORRECT,Request,...,{('answer'&'arg_3_concept_3')},?.v:(arg_3_concept_3)->answer (v: None),False,True,3,3,12:17:21
-SPPP-F-4,4,[4][args:2-12],Fact,practice,CORRECT,Request,...,{('answer'&)},150.0:()->answer (v: None),False,True,150.0,150,12:17:22
-SPPP-F-4,5,[5][args:5-151-256],Fact,practice,CORRECT,Request,...,{('answer'&)},21.0:()->answer (v: None),False,True,21.0,21,12:17:22
-SPPP-F-4,1,[1][args:5-3],Fact,practice,CORRECT,Request,...,{('answer'&'arg_1_concept_1'&'arg_2_concept_1')},Inverse(Pow(?.v&?.v)):(arg_1_concept_1&arg_2_concept_1)->answer (v: None),False,True,521,521,12:17:23
-SPPP-F-4,2,[2][args:588-6-112-8],Fact,practice,CORRECT,Request,...,{('answer'&)},7.0:()->answer (v: None),False,True,7.0,7,12:17:24
-SPPP-F-4,3,[3][args:99-11-3],Fact,practice,CORRECT,Request,...,{('answer'&'arg_3_concept_3')},?.v:(arg_3_concept_3)->answer (v: None),False,True,3,3,12:17:24
-SPPP-F-4,4,[4][args:2-12],Fact,practice,CORRECT,Request,...,{('answer'&)},150.0:()->answer (v: None),False,True,150.0,150,12:17:25
-SPPP-F-4,5,[5][args:5-151-256],Fact,practice,CORRECT,Request,...,{('answer'&)},21.0:()->answer (v: None),False,True,21.0,21,12:17:25
-SPPP-F-4,3,[3][args:99-11-3],Fact,posttest,CORRECT,Request,...,{('answer'&'arg_3_concept_3')},?.v:(arg_3_concept_3)->answer (v: None),False,True,3,3,12:17:26
-SPPP-F-4,2,[2][args:588-6-112-8],Fact,posttest,CORRECT,Request,...,{('answer'&)},7.0:()->answer (v: None),False,True,7.0,7,12:17:26
-SPPP-F-4,2,[2][args:588-6-112-8],Fact,posttest,CORRECT,Request,...,{('answer'&)},7.0:()->answer (v: None),False,True,7.0,7,12:17:26
-SPPP-F-4,4,[4][args:2-12],Fact,posttest,CORRECT,Request,...,{('answer'&)},150.0:()->answer (v: None),False,True,150.0,150,12:17:26
-SPPP-F-4,1,[1][args:10-1],Fact,posttest,CORRECT,Request,...,{('answer'&'arg_1_concept_1'&'arg_2_concept_1')},Inverse(Pow(?.v&?.v)):(arg_1_concept_1&arg_2_concept_1)->answer (v: None),False,False,01,1,12:17:26
-SPPP-F-4,1,[1][args:11-2],Fact,posttest,CORRECT,Request,...,{('answer'&'arg_1_concept_1'&'arg_2_concept_1')},Inverse(Pow(?.v&?.v)):(arg_1_concept_1&arg_2_concept_1)->answer (v: None),False,False,121,121,12:17:26
-SPPP-F-4,1,[1][args:5-3],Fact,posttest,CORRECT,Request,...,{('answer'&'arg_1_concept_1'&'arg_2_concept_1')},Inverse(Pow(?.v&?.v)):(arg_1_concept_1&arg_2_concept_1)->answer (v: None),False,True,521,521,12:17:26
-SPPP-F-4,5,[5][args:18-93-291],Fact,posttest,INCORRECT,Request,...,{('answer'&)},21.0:()->answer (v: None),False,False,21.0,11,12:17:27
-SPPP-F-4,1,[1][args:5-3],Fact,posttest,CORRECT,Request,...,{('answer'&'arg_1_concept_1'&'arg_2_concept_1')},Inverse(Pow(?.v&?.v)):(arg_1_concept_1&arg_2_concept_1)->answer (v: None),False,True,521,521,12:17:27
-SPPP-F-4,2,[2][args:588-6-112-8],Fact,posttest,CORRECT,Request,...,{('answer'&)},7.0:()->answer (v: None),False,True,7.0,7,12:17:27
-SPPP-F-4,2,[2][args:360-6-135-9],Fact,posttest,INCORRECT,Request,...,{('answer'&)},7.0:()->answer (v: None),False,False,7.0,4,12:17:27
-SPPP-F-4,5,[5][args:13-37-154],Fact,posttest,INCORRECT,Request,...,{('answer'&)},21.0:()->answer (v: None),False,False,21.0,9,12:17:27
-SPPP-F-4,1,[1][args:5-3],Fact,posttest,CORRECT,Request,...,{('answer'&'arg_1_concept_1'&'arg_2_concept_1')},Inverse(Pow(?.v&?.v)):(arg_1_concept_1&arg_2_concept_1)->answer (v: None),False,True,521,521,12:17:27
-SPPP-F-4,4,[4][args:2-8],Fact,posttest,INCORRECT,Request,...,[3&3],HINT,False,False,None,68,12:17:27
-SPPP-F-4,1,[1][args:2-4],Fact,posttest,CORRECT,Request,...,{('answer'&'arg_1_concept_1'&'arg_2_concept_1')},Inverse(Pow(?.v&?.v)):(arg_1_concept_1&arg_2_concept_1)->answer (v: None),False,False,61,61,12:17:27
-SPPP-F-4,5,[5][args:5-151-256],Fact,posttest,CORRECT,Request,...,{('answer'&)},21.0:()->answer (v: None),False,True,21.0,21,12:17:27
-SPPP-F-4,4,[4][args:4-12],Fact,posttest,INCORRECT,Request,...,{('answer'&)},150.0:()->answer (v: None),False,False,150.0,20739,12:17:27
-SPPP-F-4,3,[3][args:99-11-3],Fact,posttest,CORRECT,Request,...,{('answer'&'arg_3_concept_3')},?.v:(arg_3_concept_3)->answer (v: None),False,True,3,3,12:17:27
-SPPP-F-4,3,[3][args:693-7-3],Fact,posttest,INCORRECT,Request,...,{('answer'&'arg_3_concept_3')},?.v:(arg_3_concept_3)->answer (v: None),False,False,3,33,12:17:27
-SPPP-F-4,4,[4][args:1-8],Fact,posttest,INCORRECT,Request,...,[3&3],HINT,False,False,None,16,12:17:27
-SPPP-F-4,5,[5][args:23-423-584],Fact,posttest,INCORRECT,Request,...,{('answer'&)},21.0:()->answer (v: None),False,False,21.0,7,12:17:28
-SPPP-F-4,2,[2][args:45-3-120-24],Fact,posttest,INCORRECT,Request,...,{('answer'&)},7.0:()->answer (v: None),False,False,7.0,3,12:17:28
-SPPP-F-4,5,[5][args:5-151-256],Fact,posttest,CORRECT,Request,...,{('answer'&)},21.0:()->answer (v: None),False,True,21.0,21,12:17:28
-SPPP-F-4,4,[4][args:2-12],Fact,posttest,CORRECT,Request,...,{('answer'&)},150.0:()->answer (v: None),False,True,150.0,150,12:17:28
-SPPP-F-4,5,[5][args:5-151-256],Fact,posttest,CORRECT,Request,...,{('answer'&)},21.0:()->answer (v: None),False,True,21.0,21,12:17:28
-SPPP-F-4,3,[3][args:99-11-3],Fact,posttest,CORRECT,Request,...,{('answer'&'arg_3_concept_3')},?.v:(arg_3_concept_3)->answer (v: None),False,True,3,3,12:17:28
-SPPP-F-4,3,[3][args:225-5-5],Fact,posttest,INCORRECT,Request,...,{('answer'&'arg_3_concept_3')},?.v:(arg_3_concept_3)->answer (v: None),False,False,5,9,12:17:28
-SPPP-F-4,4,[4][args:2-12],Fact,posttest,CORRECT,Request,...,{('answer'&)},150.0:()->answer (v: None),False,True,150.0,150,12:17:28
-SPPP-F-4,2,[2][args:216-4-87-29],Fact,posttest,INCORRECT,Request,...,{('answer'&)},7.0:()->answer (v: None),False,False,7.0,18,12:17:28
-SPPP-F-4,3,[3][args:312-3-4],Fact,posttest,INCORRECT,Request,...,{('answer'&'arg_3_concept_3')},?.v:(arg_3_concept_3)->answer (v: None),False,False,4,26,12:17:28
+SPSP-F-1,1,[1][args:23-1],Fact,study,NA,Train,None,{('answer'&'arg_1'&'arg_2')},Inverse(Multiply(?.v&?.v)):(arg_1&arg_2)->answer,False,True,None,32,12:30:47
+SPSP-F-1,2,[2][args:150-5-90-9],Fact,study,NA,Train,None,{('answer'&)},3.0:()->answer,False,True,None,3,12:30:48
+SPSP-F-1,3,[3][args:280-7-8],Fact,study,NA,Train,None,{('answer'&)},5.0:()->answer,False,True,None,5,12:30:48
+SPSP-F-1,4,[4][args:1-13],Fact,study,NA,Train,None,{('answer'&'arg_2'&'arg_2')},Add(?.v&?.v):(arg_2&arg_2)->answer,False,True,None,26,12:30:49
+SPSP-F-1,5,[5][args:5-151-256],Fact,study,NA,Train,None,{('answer'&)},21.0:()->answer,False,True,None,21,12:30:49
+SPSP-F-1,1,[1][args:23-1],Fact,practice,CORRECT,Request,...,{('answer'&'arg_1'&'arg_2')},Inverse(Multiply(?.v&?.v)):(arg_1&arg_2)->answer (v: None),False,True,32,32,12:30:49
+SPSP-F-1,2,[2][args:150-5-90-9],Fact,practice,CORRECT,Request,...,{('answer'&)},3.0:()->answer (v: None),False,True,3.0,3,12:30:50
+SPSP-F-1,3,[3][args:280-7-8],Fact,practice,CORRECT,Request,...,{('answer'&)},5.0:()->answer (v: None),False,True,5.0,5,12:30:50
+SPSP-F-1,4,[4][args:1-13],Fact,practice,CORRECT,Request,...,{('answer'&'arg_2'&'arg_2')},Add(?.v&?.v):(arg_2&arg_2)->answer (v: None),False,True,26,26,12:30:51
+SPSP-F-1,5,[5][args:5-151-256],Fact,practice,CORRECT,Request,...,{('answer'&)},21.0:()->answer (v: None),False,True,21.0,21,12:30:52
+SPSP-F-1,1,[1][args:23-1],Fact,study,NA,Train,None,{('answer'&'arg_1'&'arg_2')},Inverse(Multiply(?.v&?.v)):(arg_1&arg_2)->answer,False,True,None,32,12:30:53
+SPSP-F-1,2,[2][args:150-5-90-9],Fact,study,NA,Train,None,{('answer'&)},3.0:()->answer,False,True,None,3,12:30:53
+SPSP-F-1,3,[3][args:280-7-8],Fact,study,NA,Train,None,{('answer'&)},5.0:()->answer,False,True,None,5,12:30:54
+SPSP-F-1,4,[4][args:1-13],Fact,study,NA,Train,None,{('answer'&'arg_2'&'arg_2')},Add(?.v&?.v):(arg_2&arg_2)->answer,False,True,None,26,12:30:54
+SPSP-F-1,5,[5][args:5-151-256],Fact,study,NA,Train,None,{('answer'&)},21.0:()->answer,False,True,None,21,12:30:55
+SPSP-F-1,1,[1][args:23-1],Fact,practice,CORRECT,Request,...,{('answer'&'arg_1'&'arg_2')},Inverse(Multiply(?.v&?.v)):(arg_1&arg_2)->answer (v: None),False,True,32,32,12:30:55
+SPSP-F-1,2,[2][args:150-5-90-9],Fact,practice,CORRECT,Request,...,{('answer'&)},3.0:()->answer (v: None),False,True,3.0,3,12:30:55
+SPSP-F-1,3,[3][args:280-7-8],Fact,practice,CORRECT,Request,...,{('answer'&)},5.0:()->answer (v: None),False,True,5.0,5,12:30:56
+SPSP-F-1,4,[4][args:1-13],Fact,practice,CORRECT,Request,...,{('answer'&'arg_2'&'arg_2')},Add(?.v&?.v):(arg_2&arg_2)->answer (v: None),False,True,26,26,12:30:57
+SPSP-F-1,5,[5][args:5-151-256],Fact,practice,CORRECT,Request,...,{('answer'&)},21.0:()->answer (v: None),False,True,21.0,21,12:30:57
+SPSP-F-1,1,[1][args:23-1],Fact,study,NA,Train,None,{('answer'&'arg_1'&'arg_2')},Inverse(Multiply(?.v&?.v)):(arg_1&arg_2)->answer,False,True,None,32,12:30:58
+SPSP-F-1,2,[2][args:150-5-90-9],Fact,study,NA,Train,None,{('answer'&)},3.0:()->answer,False,True,None,3,12:30:59
+SPSP-F-1,3,[3][args:280-7-8],Fact,study,NA,Train,None,{('answer'&)},5.0:()->answer,False,True,None,5,12:30:59
+SPSP-F-1,4,[4][args:1-13],Fact,study,NA,Train,None,{('answer'&'arg_2'&'arg_2')},Add(?.v&?.v):(arg_2&arg_2)->answer,False,True,None,26,12:31:00
+SPSP-F-1,5,[5][args:5-151-256],Fact,study,NA,Train,None,{('answer'&)},21.0:()->answer,False,True,None,21,12:31:01
+SPSP-F-1,1,[1][args:23-1],Fact,practice,CORRECT,Request,...,{('answer'&'arg_1'&'arg_2')},Inverse(Multiply(?.v&?.v)):(arg_1&arg_2)->answer (v: None),False,True,32,32,12:31:01
+SPSP-F-1,2,[2][args:150-5-90-9],Fact,practice,CORRECT,Request,...,{('answer'&)},3.0:()->answer (v: None),False,True,3.0,3,12:31:01
+SPSP-F-1,3,[3][args:280-7-8],Fact,practice,CORRECT,Request,...,{('answer'&)},5.0:()->answer (v: None),False,True,5.0,5,12:31:02
+SPSP-F-1,4,[4][args:1-13],Fact,practice,CORRECT,Request,...,{('answer'&'arg_2'&'arg_2')},Add(?.v&?.v):(arg_2&arg_2)->answer (v: None),False,True,26,26,12:31:03
+SPSP-F-1,5,[5][args:5-151-256],Fact,practice,CORRECT,Request,...,{('answer'&)},21.0:()->answer (v: None),False,True,21.0,21,12:31:03
+SPSP-F-1,1,[1][args:23-1],Fact,study,NA,Train,None,{('answer'&'arg_1'&'arg_2')},Inverse(Multiply(?.v&?.v)):(arg_1&arg_2)->answer,False,True,None,32,12:31:05
+SPSP-F-1,2,[2][args:150-5-90-9],Fact,study,NA,Train,None,{('answer'&)},3.0:()->answer,False,True,None,3,12:31:05
+SPSP-F-1,3,[3][args:280-7-8],Fact,study,NA,Train,None,{('answer'&)},5.0:()->answer,False,True,None,5,12:31:06
+SPSP-F-1,4,[4][args:1-13],Fact,study,NA,Train,None,{('answer'&'arg_2'&'arg_2')},Add(?.v&?.v):(arg_2&arg_2)->answer,False,True,None,26,12:31:07
+SPSP-F-1,5,[5][args:5-151-256],Fact,study,NA,Train,None,{('answer'&)},21.0:()->answer,False,True,None,21,12:31:07
+SPSP-F-1,1,[1][args:23-1],Fact,practice,CORRECT,Request,...,{('answer'&'arg_1'&'arg_2')},Inverse(Multiply(?.v&?.v)):(arg_1&arg_2)->answer (v: None),False,True,32,32,12:31:07
+SPSP-F-1,2,[2][args:150-5-90-9],Fact,practice,CORRECT,Request,...,{('answer'&)},3.0:()->answer (v: None),False,True,3.0,3,12:31:08
+SPSP-F-1,3,[3][args:280-7-8],Fact,practice,CORRECT,Request,...,{('answer'&)},5.0:()->answer (v: None),False,True,5.0,5,12:31:09
+SPSP-F-1,4,[4][args:1-13],Fact,practice,CORRECT,Request,...,{('answer'&'arg_2'&'arg_2')},Add(?.v&?.v):(arg_2&arg_2)->answer (v: None),False,True,26,26,12:31:10
+SPSP-F-1,5,[5][args:5-151-256],Fact,practice,CORRECT,Request,...,{('answer'&)},21.0:()->answer (v: None),False,True,21.0,21,12:31:11
+SPSP-F-1,1,[1][args:23-1],Fact,study,NA,Train,None,{('answer'&'arg_1'&'arg_2')},Inverse(Multiply(?.v&?.v)):(arg_1&arg_2)->answer,False,True,None,32,12:31:12
+SPSP-F-1,2,[2][args:150-5-90-9],Fact,study,NA,Train,None,{('answer'&)},3.0:()->answer,False,True,None,3,12:31:13
+SPSP-F-1,3,[3][args:280-7-8],Fact,study,NA,Train,None,{('answer'&)},5.0:()->answer,False,True,None,5,12:31:14
+SPSP-F-1,4,[4][args:1-13],Fact,study,NA,Train,None,{('answer'&'arg_2'&'arg_2')},Add(?.v&?.v):(arg_2&arg_2)->answer,False,True,None,26,12:31:15
+SPSP-F-1,5,[5][args:5-151-256],Fact,study,NA,Train,None,{('answer'&)},21.0:()->answer,False,True,None,21,12:31:16
+SPSP-F-1,1,[1][args:23-1],Fact,practice,CORRECT,Request,...,{('answer'&'arg_1'&'arg_2')},Inverse(Multiply(?.v&?.v)):(arg_1&arg_2)->answer (v: None),False,True,32,32,12:31:16
+SPSP-F-1,2,[2][args:150-5-90-9],Fact,practice,CORRECT,Request,...,{('answer'&)},3.0:()->answer (v: None),False,True,3.0,3,12:31:17
+SPSP-F-1,3,[3][args:280-7-8],Fact,practice,CORRECT,Request,...,{('answer'&)},5.0:()->answer (v: None),False,True,5.0,5,12:31:18
+SPSP-F-1,4,[4][args:1-13],Fact,practice,CORRECT,Request,...,{('answer'&'arg_2'&'arg_2')},Add(?.v&?.v):(arg_2&arg_2)->answer (v: None),False,True,26,26,12:31:19
+SPSP-F-1,5,[5][args:5-151-256],Fact,practice,CORRECT,Request,...,{('answer'&)},21.0:()->answer (v: None),False,True,21.0,21,12:31:20
+SPSP-F-1,5,[5][args:5-151-256],Fact,posttest,CORRECT,Request,...,{('answer'&)},21.0:()->answer (v: None),False,True,21.0,21,12:31:21
+SPSP-F-1,3,[3][args:280-7-8],Fact,posttest,CORRECT,Request,...,{('answer'&)},5.0:()->answer (v: None),False,True,5.0,5,12:31:21
+SPSP-F-1,5,[5][args:23-423-584],Fact,posttest,INCORRECT,Request,...,{('answer'&'arg_1'&'arg_2')},Inverse(Multiply(?.v&?.v)):(arg_1&arg_2)->answer (v: None),False,False,9279,7,12:31:22
+SPSP-F-1,2,[2][args:360-6-135-9],Fact,posttest,INCORRECT,Request,...,{('answer'&)},3.0:()->answer (v: None),False,False,3.0,4,12:31:22
+SPSP-F-1,3,[3][args:312-3-4],Fact,posttest,INCORRECT,Request,...,[14&14],HINT,False,False,None,26,12:31:22
+SPSP-F-1,5,[5][args:18-93-291],Fact,posttest,INCORRECT,Request,...,{('answer'&)},21.0:()->answer (v: None),False,False,21.0,11,12:31:22
+SPSP-F-1,1,[1][args:23-1],Fact,posttest,CORRECT,Request,...,{('answer'&'arg_1'&'arg_2')},Inverse(Multiply(?.v&?.v)):(arg_1&arg_2)->answer (v: None),False,True,32,32,12:31:22
+SPSP-F-1,4,[4][args:1-13],Fact,posttest,CORRECT,Request,...,{('answer'&'arg_2'&'arg_2')},Add(?.v&?.v):(arg_2&arg_2)->answer (v: None),False,True,26,26,12:31:22
+SPSP-F-1,3,[3][args:280-7-8],Fact,posttest,CORRECT,Request,...,{('answer'&)},5.0:()->answer (v: None),False,True,5.0,5,12:31:22
+SPSP-F-1,4,[4][args:1-13],Fact,posttest,CORRECT,Request,...,{('answer'&'arg_2'&'arg_2')},Add(?.v&?.v):(arg_2&arg_2)->answer (v: None),False,True,26,26,12:31:22
+SPSP-F-1,5,[5][args:5-151-256],Fact,posttest,CORRECT,Request,...,{('answer'&)},21.0:()->answer (v: None),False,True,21.0,21,12:31:22
+SPSP-F-1,4,[4][args:1-13],Fact,posttest,CORRECT,Request,...,{('answer'&'arg_2'&'arg_2')},Add(?.v&?.v):(arg_2&arg_2)->answer (v: None),False,True,26,26,12:31:22
+SPSP-F-1,1,[1][args:15-2],Fact,posttest,INCORRECT,Request,...,[14&14],HINT,False,False,None,522,12:31:22
+SPSP-F-1,1,[1][args:23-1],Fact,posttest,CORRECT,Request,...,{('answer'&'arg_1'&'arg_2')},Inverse(Multiply(?.v&?.v)):(arg_1&arg_2)->answer (v: None),False,True,32,32,12:31:22
+SPSP-F-1,2,[2][args:150-5-90-9],Fact,posttest,CORRECT,Request,...,{('answer'&)},3.0:()->answer (v: None),False,True,3.0,3,12:31:22
+SPSP-F-1,4,[4][args:2-8],Fact,posttest,INCORRECT,Request,...,{('answer'&'arg_2'&'arg_2')},Add(?.v&?.v):(arg_2&arg_2)->answer (v: None),False,False,16,68,12:31:23
+SPSP-F-1,3,[3][args:280-7-8],Fact,posttest,CORRECT,Request,...,{('answer'&)},5.0:()->answer (v: None),False,True,5.0,5,12:31:23
+SPSP-F-1,2,[2][args:150-5-90-9],Fact,posttest,CORRECT,Request,...,{('answer'&)},3.0:()->answer (v: None),False,True,3.0,3,12:31:23
+SPSP-F-1,1,[1][args:10-1],Fact,posttest,INCORRECT,Request,...,[14&14],HINT,False,False,None,1,12:31:23
+SPSP-F-1,5,[5][args:23-423-584],Fact,posttest,INCORRECT,Request,...,{('answer'&'arg_1'&'arg_2')},Inverse(Multiply(?.v&?.v)):(arg_1&arg_2)->answer (v: None),False,False,9279,7,12:31:23
+SPSP-F-1,3,[3][args:448-7-8],Fact,posttest,INCORRECT,Request,...,[14&14],HINT,False,False,None,8,12:31:23
+SPSP-F-1,1,[1][args:4-4],Fact,posttest,INCORRECT,Request,...,[14&14],HINT,False,False,None,652,12:31:23
+SPSP-F-1,2,[2][args:288-12-18-9],Fact,posttest,INCORRECT,Request,...,{('answer'&)},3.0:()->answer (v: None),False,False,3.0,12,12:31:23
+SPSP-F-1,4,[4][args:3-15],Fact,posttest,INCORRECT,Request,...,{('answer'&'arg_2'&'arg_2')},Add(?.v&?.v):(arg_2&arg_2)->answer (v: None),False,False,30,3380,12:31:23
+SPSP-F-1,3,[3][args:840-2-10],Fact,posttest,INCORRECT,Request,...,[14&14],HINT,False,False,None,42,12:31:24
+SPSP-F-1,2,[2][args:150-5-90-9],Fact,posttest,CORRECT,Request,...,{('answer'&)},3.0:()->answer (v: None),False,True,3.0,3,12:31:24
+SPSP-F-1,1,[1][args:23-1],Fact,posttest,CORRECT,Request,...,{('answer'&'arg_1'&'arg_2')},Inverse(Multiply(?.v&?.v)):(arg_1&arg_2)->answer (v: None),False,True,32,32,12:31:24
+SPSP-F-1,5,[5][args:5-151-256],Fact,posttest,CORRECT,Request,...,{('answer'&)},21.0:()->answer (v: None),False,True,21.0,21,12:31:24
+SPSP-F-1,2,[2][args:216-4-87-29],Fact,posttest,INCORRECT,Request,...,{('answer'&)},3.0:()->answer (v: None),False,False,3.0,18,12:31:24
+SPSP-F-1,4,[4][args:1-8],Fact,posttest,CORRECT,Request,...,{('answer'&'arg_2'&'arg_2')},Add(?.v&?.v):(arg_2&arg_2)->answer (v: None),False,False,16,16,12:31:24
+SPPP-F-4,1,[1][args:8-2],Fact,study,NA,Train,None,{('answer'&'arg_1'&'arg_1')},Inverse(Multiply(?.v&?.v)):(arg_1&arg_1)->answer,False,True,None,46,12:31:24
+SPPP-F-4,2,[2][args:252-6-84-12],Fact,study,NA,Train,None,{('answer'&'arg_2')},?.v:(arg_2)->answer,False,True,None,6,12:31:24
+SPPP-F-4,3,[3][args:99-11-3],Fact,study,NA,Train,None,{('answer'&'arg_2')&('answer'&'arg_3')},?.v:(arg_3)->answer,False,True,None,3,12:31:25
+SPPP-F-4,4,[4][args:2-12],Fact,study,NA,Train,None,{('answer'&)},150.0:()->answer,False,True,None,150,12:31:25
+SPPP-F-4,5,[5][args:7-356-475],Fact,study,NA,Train,None,{('answer'&)},17.0:()->answer,False,True,None,17,12:31:25
+SPPP-F-4,1,[1][args:8-2],Fact,practice,CORRECT,Request,...,{('answer'&'arg_1'&'arg_1')},Inverse(Multiply(?.v&?.v)):(arg_1&arg_1)->answer (v: None),False,True,46,46,12:31:25
+SPPP-F-4,2,[2][args:252-6-84-12],Fact,practice,CORRECT,Request,...,{('answer'&'arg_2')&('answer'&'arg_3')},?.v:(arg_2)->answer (v: None),False,True,6,6,12:31:26
+SPPP-F-4,3,[3][args:99-11-3],Fact,practice,CORRECT,Request,...,{('answer'&'arg_2')&('answer'&'arg_3')},?.v:(arg_3)->answer (v: None),False,True,3,3,12:31:26
+SPPP-F-4,4,[4][args:2-12],Fact,practice,CORRECT,Request,...,{('answer'&)},150.0:()->answer (v: None),False,True,150.0,150,12:31:27
+SPPP-F-4,5,[5][args:7-356-475],Fact,practice,CORRECT,Request,...,{('answer'&)},17.0:()->answer (v: None),False,True,17.0,17,12:31:27
+SPPP-F-4,1,[1][args:8-2],Fact,practice,CORRECT,Request,...,{('answer'&'arg_1'&'arg_1')},Inverse(Multiply(?.v&?.v)):(arg_1&arg_1)->answer (v: None),False,True,46,46,12:31:28
+SPPP-F-4,2,[2][args:252-6-84-12],Fact,practice,CORRECT,Request,...,{('answer'&'arg_2')&('answer'&'arg_3')},?.v:(arg_2)->answer (v: None),False,True,6,6,12:31:28
+SPPP-F-4,3,[3][args:99-11-3],Fact,practice,INCORRECT,Request,...,{('answer'&'arg_2')&('answer'&'arg_3')},?.v:(arg_2)->answer (v: None),False,True,11,3,12:31:28
+SPPP-F-4,4,[4][args:2-12],Fact,practice,CORRECT,Request,...,{('answer'&)},150.0:()->answer (v: None),False,True,150.0,150,12:31:29
+SPPP-F-4,5,[5][args:7-356-475],Fact,practice,CORRECT,Request,...,{('answer'&)},17.0:()->answer (v: None),False,True,17.0,17,12:31:29
+SPPP-F-4,1,[1][args:8-2],Fact,practice,CORRECT,Request,...,{('answer'&'arg_1'&'arg_2')},Inverse(Pow(?.v&?.v)):(arg_1&arg_2)->answer (v: None),False,True,46,46,12:31:30
+SPPP-F-4,2,[2][args:252-6-84-12],Fact,practice,CORRECT,Request,...,{('answer'&'arg_2')&('answer'&'arg_3')},?.v:(arg_2)->answer (v: None),False,True,6,6,12:31:30
+SPPP-F-4,3,[3][args:99-11-3],Fact,practice,CORRECT,Request,...,{('answer'&'arg_2')&('answer'&'arg_3')},?.v:(arg_3)->answer (v: None),False,True,3,3,12:31:31
+SPPP-F-4,4,[4][args:2-12],Fact,practice,CORRECT,Request,...,{('answer'&)},150.0:()->answer (v: None),False,True,150.0,150,12:31:31
+SPPP-F-4,5,[5][args:7-356-475],Fact,practice,CORRECT,Request,...,{('answer'&)},17.0:()->answer (v: None),False,True,17.0,17,12:31:32
+SPPP-F-4,1,[1][args:8-2],Fact,practice,CORRECT,Request,...,{('answer'&'arg_1'&'arg_2')},Inverse(Pow(?.v&?.v)):(arg_1&arg_2)->answer (v: None),False,True,46,46,12:31:32
+SPPP-F-4,2,[2][args:252-6-84-12],Fact,practice,CORRECT,Request,...,{('answer'&'arg_2')&('answer'&'arg_3')},?.v:(arg_2)->answer (v: None),False,True,6,6,12:31:33
+SPPP-F-4,3,[3][args:99-11-3],Fact,practice,CORRECT,Request,...,{('answer'&'arg_2')&('answer'&'arg_3')},?.v:(arg_3)->answer (v: None),False,True,3,3,12:31:33
+SPPP-F-4,4,[4][args:2-12],Fact,practice,CORRECT,Request,...,{('answer'&)},150.0:()->answer (v: None),False,True,150.0,150,12:31:33
+SPPP-F-4,5,[5][args:7-356-475],Fact,practice,CORRECT,Request,...,{('answer'&)},17.0:()->answer (v: None),False,True,17.0,17,12:31:34
+SPPP-F-4,1,[1][args:8-2],Fact,practice,CORRECT,Request,...,{('answer'&'arg_1'&'arg_2')},Inverse(Pow(?.v&?.v)):(arg_1&arg_2)->answer (v: None),False,True,46,46,12:31:34
+SPPP-F-4,2,[2][args:252-6-84-12],Fact,practice,CORRECT,Request,...,{('answer'&'arg_2')&('answer'&'arg_3')},?.v:(arg_2)->answer (v: None),False,True,6,6,12:31:35
+SPPP-F-4,3,[3][args:99-11-3],Fact,practice,CORRECT,Request,...,{('answer'&'arg_2')&('answer'&'arg_3')},?.v:(arg_3)->answer (v: None),False,True,3,3,12:31:35
+SPPP-F-4,4,[4][args:2-12],Fact,practice,CORRECT,Request,...,{('answer'&)},150.0:()->answer (v: None),False,True,150.0,150,12:31:35
+SPPP-F-4,5,[5][args:7-356-475],Fact,practice,CORRECT,Request,...,{('answer'&)},17.0:()->answer (v: None),False,True,17.0,17,12:31:36
+SPPP-F-4,1,[1][args:8-2],Fact,practice,CORRECT,Request,...,{('answer'&'arg_1'&'arg_2')},Inverse(Pow(?.v&?.v)):(arg_1&arg_2)->answer (v: None),False,True,46,46,12:31:36
+SPPP-F-4,2,[2][args:252-6-84-12],Fact,practice,CORRECT,Request,...,{('answer'&'arg_2')&('answer'&'arg_3')},?.v:(arg_2)->answer (v: None),False,True,6,6,12:31:37
+SPPP-F-4,3,[3][args:99-11-3],Fact,practice,CORRECT,Request,...,{('answer'&'arg_2')&('answer'&'arg_3')},?.v:(arg_3)->answer (v: None),False,True,3,3,12:31:37
+SPPP-F-4,4,[4][args:2-12],Fact,practice,CORRECT,Request,...,{('answer'&)},150.0:()->answer (v: None),False,True,150.0,150,12:31:37
+SPPP-F-4,5,[5][args:7-356-475],Fact,practice,CORRECT,Request,...,{('answer'&)},17.0:()->answer (v: None),False,True,17.0,17,12:31:38
+SPPP-F-4,1,[1][args:8-2],Fact,practice,CORRECT,Request,...,{('answer'&'arg_1'&'arg_2')},Inverse(Pow(?.v&?.v)):(arg_1&arg_2)->answer (v: None),False,True,46,46,12:31:38
+SPPP-F-4,2,[2][args:252-6-84-12],Fact,practice,CORRECT,Request,...,{('answer'&'arg_2')&('answer'&'arg_3')},?.v:(arg_2)->answer (v: None),False,True,6,6,12:31:39
+SPPP-F-4,3,[3][args:99-11-3],Fact,practice,CORRECT,Request,...,{('answer'&'arg_2')&('answer'&'arg_3')},?.v:(arg_3)->answer (v: None),False,True,3,3,12:31:39
+SPPP-F-4,4,[4][args:2-12],Fact,practice,CORRECT,Request,...,{('answer'&)},150.0:()->answer (v: None),False,True,150.0,150,12:31:39
+SPPP-F-4,5,[5][args:7-356-475],Fact,practice,CORRECT,Request,...,{('answer'&)},17.0:()->answer (v: None),False,True,17.0,17,12:31:40
+SPPP-F-4,1,[1][args:8-2],Fact,practice,CORRECT,Request,...,{('answer'&'arg_1'&'arg_2')},Inverse(Pow(?.v&?.v)):(arg_1&arg_2)->answer (v: None),False,True,46,46,12:31:41
+SPPP-F-4,2,[2][args:252-6-84-12],Fact,practice,CORRECT,Request,...,{('answer'&'arg_2')&('answer'&'arg_3')},?.v:(arg_2)->answer (v: None),False,True,6,6,12:31:41
+SPPP-F-4,3,[3][args:99-11-3],Fact,practice,CORRECT,Request,...,{('answer'&'arg_2')&('answer'&'arg_3')},?.v:(arg_3)->answer (v: None),False,True,3,3,12:31:41
+SPPP-F-4,4,[4][args:2-12],Fact,practice,CORRECT,Request,...,{('answer'&)},150.0:()->answer (v: None),False,True,150.0,150,12:31:42
+SPPP-F-4,5,[5][args:7-356-475],Fact,practice,CORRECT,Request,...,{('answer'&)},17.0:()->answer (v: None),False,True,17.0,17,12:31:42
+SPPP-F-4,1,[1][args:8-2],Fact,practice,CORRECT,Request,...,{('answer'&'arg_1'&'arg_2')},Inverse(Pow(?.v&?.v)):(arg_1&arg_2)->answer (v: None),False,True,46,46,12:31:43
+SPPP-F-4,2,[2][args:252-6-84-12],Fact,practice,CORRECT,Request,...,{('answer'&'arg_2')&('answer'&'arg_3')},?.v:(arg_2)->answer (v: None),False,True,6,6,12:31:43
+SPPP-F-4,3,[3][args:99-11-3],Fact,practice,CORRECT,Request,...,{('answer'&'arg_2')&('answer'&'arg_3')},?.v:(arg_3)->answer (v: None),False,True,3,3,12:31:44
+SPPP-F-4,4,[4][args:2-12],Fact,practice,CORRECT,Request,...,{('answer'&)},150.0:()->answer (v: None),False,True,150.0,150,12:31:44
+SPPP-F-4,5,[5][args:7-356-475],Fact,practice,CORRECT,Request,...,{('answer'&)},17.0:()->answer (v: None),False,True,17.0,17,12:31:45
+SPPP-F-4,1,[1][args:4-4],Fact,posttest,INCORRECT,Request,...,[5&5],HINT,False,False,None,652,12:31:45
+SPPP-F-4,2,[2][args:252-6-84-12],Fact,posttest,CORRECT,Request,...,{('answer'&'arg_2')&('answer'&'arg_3')},?.v:(arg_2)->answer (v: None),False,True,6,6,12:31:45
+SPPP-F-4,2,[2][args:110-5-121-11],Fact,posttest,INCORRECT,Request,...,{('answer'&'arg_2')&('answer'&'arg_3')},?.v:(arg_2)->answer (v: None),False,False,5,2,12:31:46
+SPPP-F-4,2,[2][args:45-3-120-24],Fact,posttest,CORRECT,Request,...,{('answer'&'arg_2')&('answer'&'arg_3')},?.v:(arg_2)->answer (v: None),False,False,3,3,12:31:46
+SPPP-F-4,5,[5][args:7-356-475],Fact,posttest,CORRECT,Request,...,{('answer'&)},17.0:()->answer (v: None),False,True,17.0,17,12:31:46
+SPPP-F-4,4,[4][args:2-12],Fact,posttest,CORRECT,Request,...,{('answer'&)},150.0:()->answer (v: None),False,True,150.0,150,12:31:46
+SPPP-F-4,3,[3][args:448-7-8],Fact,posttest,INCORRECT,Request,...,[6&6],HINT,False,False,None,8,12:31:46
+SPPP-F-4,1,[1][args:8-2],Fact,posttest,CORRECT,Request,...,{('answer'&'arg_1'&'arg_2')},Inverse(Pow(?.v&?.v)):(arg_1&arg_2)->answer (v: None),False,True,46,46,12:31:46
+SPPP-F-4,4,[4][args:1-8],Fact,posttest,INCORRECT,Request,...,{('answer'&)},150.0:()->answer (v: None),False,False,150.0,16,12:31:46
+SPPP-F-4,4,[4][args:2-12],Fact,posttest,CORRECT,Request,...,{('answer'&)},150.0:()->answer (v: None),False,True,150.0,150,12:31:46
+SPPP-F-4,1,[1][args:8-2],Fact,posttest,CORRECT,Request,...,{('answer'&'arg_1'&'arg_2')},Inverse(Pow(?.v&?.v)):(arg_1&arg_2)->answer (v: None),False,True,46,46,12:31:46
+SPPP-F-4,4,[4][args:2-4],Fact,posttest,INCORRECT,Request,...,{('answer'&)},150.0:()->answer (v: None),False,False,150.0,18,12:31:46
+SPPP-F-4,2,[2][args:288-12-18-9],Fact,posttest,CORRECT,Request,...,{('answer'&'arg_2')&('answer'&'arg_3')},?.v:(arg_2)->answer (v: None),False,False,12,12,12:31:46
+SPPP-F-4,3,[3][args:99-11-3],Fact,posttest,CORRECT,Request,...,{('answer'&'arg_2')&('answer'&'arg_3')},?.v:(arg_3)->answer (v: None),False,True,3,3,12:31:46
+SPPP-F-4,3,[3][args:225-5-5],Fact,posttest,INCORRECT,Request,...,[6&6],HINT,False,False,None,9,12:31:46
+SPPP-F-4,3,[3][args:99-11-3],Fact,posttest,CORRECT,Request,...,{('answer'&'arg_2')&('answer'&'arg_3')},?.v:(arg_3)->answer (v: None),False,True,3,3,12:31:46
+SPPP-F-4,1,[1][args:8-2],Fact,posttest,CORRECT,Request,...,{('answer'&'arg_1'&'arg_2')},Inverse(Pow(?.v&?.v)):(arg_1&arg_2)->answer (v: None),False,True,46,46,12:31:46
+SPPP-F-4,3,[3][args:99-11-3],Fact,posttest,CORRECT,Request,...,{('answer'&'arg_2')&('answer'&'arg_3')},?.v:(arg_3)->answer (v: None),False,True,3,3,12:31:47
+SPPP-F-4,5,[5][args:23-423-584],Fact,posttest,INCORRECT,Request,...,[6&6],HINT,False,False,None,7,12:31:47
+SPPP-F-4,5,[5][args:13-37-154],Fact,posttest,INCORRECT,Request,...,[6&6],HINT,False,False,None,9,12:31:47
+SPPP-F-4,5,[5][args:7-356-475],Fact,posttest,CORRECT,Request,...,{('answer'&)},17.0:()->answer (v: None),False,True,17.0,17,12:31:47
+SPPP-F-4,2,[2][args:252-6-84-12],Fact,posttest,CORRECT,Request,...,{('answer'&'arg_2')&('answer'&'arg_3')},?.v:(arg_2)->answer (v: None),False,True,6,6,12:31:47
+SPPP-F-4,3,[3][args:693-7-3],Fact,posttest,INCORRECT,Request,...,[6&6],HINT,False,False,None,33,12:31:47
+SPPP-F-4,5,[5][args:5-79-199],Fact,posttest,INCORRECT,Request,...,[6&6],HINT,False,False,None,24,12:31:47
+SPPP-F-4,1,[1][args:10-1],Fact,posttest,INCORRECT,Request,...,[5&5],HINT,False,False,None,1,12:31:47
+SPPP-F-4,4,[4][args:2-12],Fact,posttest,CORRECT,Request,...,{('answer'&)},150.0:()->answer (v: None),False,True,150.0,150,12:31:47
+SPPP-F-4,2,[2][args:252-6-84-12],Fact,posttest,CORRECT,Request,...,{('answer'&'arg_2')&('answer'&'arg_3')},?.v:(arg_2)->answer (v: None),False,True,6,6,12:31:47
+SPPP-F-4,4,[4][args:2-8],Fact,posttest,INCORRECT,Request,...,{('answer'&)},150.0:()->answer (v: None),False,False,150.0,68,12:31:47
+SPPP-F-4,5,[5][args:7-356-475],Fact,posttest,CORRECT,Request,...,{('answer'&)},17.0:()->answer (v: None),False,True,17.0,17,12:31:47
+SPPP-F-4,1,[1][args:2-4],Fact,posttest,INCORRECT,Request,...,[5&5],HINT,False,False,None,61,12:31:48
