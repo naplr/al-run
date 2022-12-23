@@ -11,7 +11,6 @@ from memory.shared.const import *
 
 
 def create_agent(name, function_set, alpha, tau, c, s, beta, b_practice, b_study):
-    print(PLANNER)
     if AGENT_TYPE == 'memory':
         agent = MemoryAgent(
             agent_name=name,

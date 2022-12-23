@@ -1,18 +1,3 @@
-### ALGEBRA ###
-
-STUDY_PROBLEM_NUM = 10
-# CONCEPTS = [2, 3, 4]
-CONCEPTS = [1, 2, 3, 4, 5]
-CONCEPT_NUM = len(CONCEPTS)
-SELECTED_PROBLEMS = list(map(str, CONCEPTS))
-
-DEBUG = True
-# AGENT_TYPE = 'memory'
-AGENT_TYPE = 'modular'
-PLANNER = 'numba'
-
-### GEOMETRY ###
-
 FIX = 2
 PIKS1 = [["fact", "circle", FIX],
         ["fact", "triangle", FIX],
@@ -49,3 +34,23 @@ PIKS = PIKS4
 
 SHAPES = ["circle", "triangle", "rectangle", "trapezoid"]
 
+INTERACTION_TYPE_PRETRAIN = "pretrain"
+INTERACTION_TYPE_PRETEST = "pre"
+INTERACTION_TYPE_POSTTEST = "post"
+INTERACTION_TYPE_STUDY = "study"
+
+SKILL = 'skill'
+FACT = 'fact'
+
+KTYPE_SKILL = 'S_TYPE'
+KTYPE_FACT = 'F_TYPE'
+COND_SPPP = 'SPPP_TYPE'
+COND_SPSP = 'SPSP_TYPE'
+
+PTYPE_DEMO = 'demo'
+PTYPE_PRACTICE = 'practice'
+
+TT_PRETRAIN = "pretrain"
+TT_PRETEST = "pre"
+TT_POSTTEST = "post"
+TT_STUDY = "study"
