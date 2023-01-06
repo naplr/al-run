@@ -4,16 +4,15 @@ from apprentice.agents.ModularAgent import ModularAgent
 from apprentice.working_memory import fo_planner_operators
 from apprentice.working_memory.representation import Sai
 from random import randint
-# from memory.shared.config import *
+from memory.shared.config import *
 
-AGENT_TYPE = 'modular'
 def create_agent(name, alpha, tau, c, s, beta, b_practice, b_study):
     if AGENT_TYPE == 'memory':
         agent = MemoryAgent(
             agent_name=name,
             feature_set=["equals"],
             function_set=["add", "subtract", "multiply", "divide", "circ_rule", "trap_rule", "tria_rule"],
-            when_learner="decisiontree",
+            when_learner="decisiontree2",
             where_learner="mostspecific",
             alpha=alpha,
             tau=tau,

@@ -1,5 +1,5 @@
 from re import I
-import sys, json, pickle, copy, itertools, time, multiprocessing
+import sys, json, pickle, copy, itertools, time, multiprocessing, os
 from random import randint, choice, shuffle
 
 from utils import parse_brd, generate_sai, generate_state_and_answer, create_agent
@@ -94,7 +94,9 @@ def _run_pretrain_once(state, answer, agent, name):
     problem_info = {'problem_name': name}
     if DEBUG: print(f"[PRE TRAIN]: {name}")
 
-    res, info = agent.request(state, problem_info=problem_info)
+    res, info = agent.request(state, problem_info=problem_info, add_skill_info=True)
+    print("pretrain mapping")
+    print(res.get("mapping", "No mapping"))
     info['problem_name'] = name
     if len(res) == 0 or res["inputs"]["value"] == None:
         log(LOG_HINT, agent.agent_name, None, TT_PRETRAIN, info)
@@ -172,7 +174,7 @@ def run_problem_test(state, answer, agent, ttype):
             log(LOG_HINT, agent.agent_name, ktype, ttype, info)
             break
         attempts += 1
-        res, info = agent.request(state, problem_info=problem_info)
+        res, info = agent.request(state, problem_info=problem_info, add_skill_info=True)
         info['problem_name'] = problem_name
         if len(res) == 0:
             log(LOG_HINT, agent.agent_name, ktype, ttype, info)
@@ -216,7 +218,7 @@ def pre_test(agent):
 ### RUN AGENT ###
 
 def run_agent(parameters):
-    data, alpha, tau, c, s, beta, b_practice, b_study, fact_c, skill_c, idx, total = parameters
+    data, alpha, tau, c, s, beta, b_practice, b_study, fact_c, skill_c, idx, total, iteration = parameters
     global logs
     agent_name = data["agent_name"]
 
@@ -259,7 +261,11 @@ def run_agent(parameters):
     logs[agent_name]['type'] = atype
     logs[agent_name]['cond'] =cond
 
-    pickle.dump(logs, open(f"logs/{atype}-{cond}-{idx}-res.pkl", "wb"))
+
+    dirname = f"{AGENT_TYPE}-logs"
+    if not os.path.exists(dirname):
+        os.makedirs(dirname)
+    pickle.dump(logs, open(f"{dirname}/{atype}-{cond}-{idx}-{iteration}-res.pkl", "wb"))
     # pickle.dump(logs, open(f"logs/{agent_name}-res.pkl", "wb"))
     # agent_logs[agent_name] = agent.get_log()
 
@@ -350,7 +356,7 @@ def main():
             total = len(json_data["training_set1"])
             for idx, a in enumerate(json_data["training_set1"]):
                 start = time.time()
-                run_agent([a, alpha, tau, c, s, beta, b_practice, b_study, fact_c, skill_c, idx, total])
+                run_agent([a, alpha, tau, c, s, beta, b_practice, b_study, fact_c, skill_c, idx, total, i])
                 print("\nTime: {:.2f} s".format(
                     time.time() - start
                 ))
@@ -368,17 +374,18 @@ def main_multi():
     alpha, tau, c, s = 0.177, -0.7, 0.277, 1 # 0.0786
     beta, b_practice, b_study = 5, 1, 0.01
 
-    fact_c, skill_c = 2, 2
+    fact_c, skill_c = 1, 2
 
     pool = multiprocessing.Pool()
     agents = []
-    with open(json_fp, 'r') as jf:
-        json_data = json.load(jf)
-        total = len(json_data["training_set1"])
-        for idx, a in enumerate(json_data["training_set1"]):
-            # if not check_if_f_sppp(a):
-            #     continue
-            agents.append([a, alpha, tau, c, s, beta, b_practice, b_study, fact_c, skill_c, idx, total])
+    for i in range(1):
+        with open(json_fp, 'r') as jf:
+            json_data = json.load(jf)
+            total = len(json_data["training_set1"])
+            for idx, a in enumerate(json_data["training_set1"]):
+                # if not check_if_f_sppp(a):
+                #     continue
+                agents.append([a, alpha, tau, c, s, beta, b_practice, b_study, fact_c, skill_c, idx, total, i])
 
     start = time.time()
     pool.map(run_agent, agents)
@@ -391,5 +398,5 @@ def check_if_f_sppp(a):
 
 
 if __name__ == "__main__":
-    main()
-    # main_multi()
+    # main()
+    main_multi()
