@@ -2,7 +2,7 @@ from re import I
 import sys, json, pickle, copy, itertools, time, multiprocessing, os
 from random import randint, choice, shuffle
 
-from utils import parse_brd, generate_sai, generate_state_and_answer, create_agent
+from utils import parse_brd, generate_sai, generate_state_and_answer, create_agent, get_formula
 from memory.shared.config import *
 from memory.shared.const import *
 
@@ -139,11 +139,20 @@ def pre_train(agent, fact_c, skill_c):
 
 def run_problem_study(state, answer, examples_only, agent, ttype, problem_name):
     ktype = state['knowledge_type']['value']
+    stype = state['shape_type']['value']
     problem_info = {'problem_name': problem_name}
     if examples_only:
-        sai = generate_sai(answer)
-        agent.train(state, sai=sai, reward=1, problem_info=problem_info)
         log(LOG_DEMO, agent.agent_name, ktype, ttype, {'problem_name': problem_name})
+        if ktype == 'fact':
+            sai = generate_sai(answer, 'answer-1')
+            agent.train(state, sai=sai, reward=1, problem_info=problem_info)
+        elif ktype == 'skill':
+            formula = get_formula(stype)
+            sai = generate_sai(formula, 'answer-1')
+            state['answer-1']['contentEditable'] = False
+            agent.train(state, sai=sai, reward=1, problem_info=problem_info)
+            sai = generate_sai(answer, 'answer-2')
+            agent.train(state, sai=sai, reward=1, problem_info=problem_info)
     else:
         run_problem_test(state, answer, agent, ttype)
 

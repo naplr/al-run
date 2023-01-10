@@ -35,8 +35,8 @@ def create_agent(name, alpha, tau, c, s, beta, b_practice, b_study):
     return agent
 
 
-def generate_sai(val):
-    return Sai(selection='answer', action='UpdateTextField', inputs={'value': str(val)})
+def generate_sai(val, sel='answer_1'):
+    return Sai(selection=sel, action='UpdateTextField', inputs={'value': str(val)})
 
 
 def random_num_for_state():
@@ -81,6 +81,19 @@ def random_num():
     IIDDXX += 1
     return (IIDDXX % 15) + 1
     # return randint(1, 15)
+
+def get_formula(shape_type):
+    ans = ""
+    if shape_type == "circle":
+        ans = "A=pi*r^2"
+    elif shape_type == "triangle":
+        ans = "A=1/2*b*h"
+    elif shape_type == "rectangle":
+        ans = "A=l*w"
+    elif shape_type == "trapezoid":
+        ans = "A=1/2*(a+b)*h"
+
+    return ans
 
 def generate_state_and_answer(knowledge_type, shape_type):
     if knowledge_type == "fact":
@@ -198,7 +211,19 @@ def _get_state(
             'to_right': 'shape_type',
             'to_left': 'knowledge_type'
         },
-        'answer': {
+        'answer-1': {
+            'dom_class': 'CTATTextInput',
+            'offsetParent': 'background-initial',
+            'id': 'answer',
+            'type': 'TextField',
+            'value': '',
+            'contentEditable': True,
+            'below': '',
+            'above': 'r',
+            'to_right': 'done',
+            'to_left': ''
+        },
+        'answer-2': {
             'dom_class': 'CTATTextInput',
             'offsetParent': 'background-initial',
             'id': 'answer',
