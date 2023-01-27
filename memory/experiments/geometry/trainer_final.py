@@ -228,8 +228,8 @@ def run_agent(parameters):
 
     agent = create_agent(agent_name, alpha, tau, c, s, beta, b_practice, b_study)
 
-    pre_train(agent, fact_c, skill_c)
-    pre_test(agent)
+    # pre_train(agent, fact_c, skill_c)
+    # pre_test(agent)
 
     if AGENT_TYPE == 'memory':
         logs[agent_name]['pre_t'] = agent.t
@@ -250,6 +250,10 @@ def run_agent(parameters):
 
             ttype = TT_POSTTEST if "prepost" in qf else TT_STUDY
 
+            # Skip post test.
+            # if ttype == TT_POSTTEST:
+            #     continue
+
             if AGENT_TYPE == 'memory' and ttype == TT_POSTTEST and first_post:
                 logs[agent_name]['post_t'] = agent.t
                 agent.update_activation_for_post_test(2)
@@ -266,6 +270,7 @@ def run_agent(parameters):
     if not os.path.exists(dirname):
         os.makedirs(dirname)
     pickle.dump(logs, open(f"{dirname}/{atype}-{cond}-{idx}-{iteration}-res.pkl", "wb"))
+    logs = {}
     # pickle.dump(logs, open(f"logs/{agent_name}-res.pkl", "wb"))
     # agent_logs[agent_name] = agent.get_log()
 
@@ -346,10 +351,11 @@ def main():
     json_fp = sys.argv[1]
     colorama.init(autoreset=True)
 
-    alpha, tau, c, s = 0.177, -0.7, 0.277, 1 # 0.0786
+    alpha, tau, c, s = 0.177, -0.7, 0.277, 1.5 # 0.0786
     beta, b_practice, b_study = 5, 1, 0.01
 
-    fact_c, skill_c = 2, 2
+    fact_c, skill_c = 1, 2
+
     for i in range(1):
         with open(json_fp, 'r') as jf:
             json_data = json.load(jf)
@@ -371,14 +377,14 @@ def main_multi():
     json_fp = sys.argv[1]
     colorama.init(autoreset=True)
 
-    alpha, tau, c, s = 0.177, -0.7, 0.277, 1 # 0.0786
+    alpha, tau, c, s = 0.177, -0.7, 0.277, 1.5 # 0.0786
     beta, b_practice, b_study = 5, 1, 0.01
 
     fact_c, skill_c = 1, 2
 
     pool = multiprocessing.Pool()
     agents = []
-    for i in range(1):
+    for i in range(5):
         with open(json_fp, 'r') as jf:
             json_data = json.load(jf)
             total = len(json_data["training_set1"])
@@ -398,5 +404,5 @@ def check_if_f_sppp(a):
 
 
 if __name__ == "__main__":
-    # main()
-    main_multi()
+    main()
+    # main_multi()

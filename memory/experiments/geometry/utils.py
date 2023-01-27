@@ -29,7 +29,7 @@ def create_agent(name, alpha, tau, c, s, beta, b_practice, b_study):
             agent_name=name,
             feature_set=["equals"],
             function_set=["add", "subtract", "multiply", "divide", "circ_rule", "trap_rule", "tria_rule"],
-            when_learner="decisiontree2",
+            when_learner="decisiontree",
             where_learner="mostspecific",
         )
     return agent
