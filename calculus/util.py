@@ -19,14 +19,9 @@ def create_agent():
     # )
     agent = ModularAgent(
         agent_name="Calculus-Agent",
-        feature_set=['equals'],
-        # function_set=["add", "subtract", "multiply", "divide", "pow"],
+        feature_set=[],
         function_set=["DX", "SPLIT"],
         where="antiunify",
-        # where_args={"use_neg": True}
-        # where_learner="mostspecific",
-        # where_learner="specifictogeneral",
-        # where_learner="versionspace",
     )
     return agent
 
