@@ -1,0 +1,21 @@
+Problem,Step,RHS_ID,Where,How,AL_SAI,Correct_SAI,Result,Time
+#1[n=[62&51]],1,None,None,None,None,Sai(selection='e1'&action='SPLIT'&inputs={'value': '[SPLIT]'}),HINT,16:47:12:25
+#1[n=[62&51]],2,None,None,None,None,Sai(selection='e9'&action='DX'&inputs={'value': '[DX]'}),HINT,16:47:12:34
+#1[n=[62&51]],3,None,None,None,None,Sai(selection='e10'&action='DX'&inputs={'value': '[DX]'}),HINT,16:47:12:39
+#1[n=[62&51]],4,None,None,None,None,Sai(selection='DONE'&action='DONE'&inputs={'value': '[DONE]'}),HINT,16:47:12:46
+#2[n=[85&56]],1,None,None,None,None,Sai(selection='e1'&action='SPLIT'&inputs={'value': '[SPLIT]'}),HINT,16:47:12:51
+#2[n=[85&56]],2,None,None,None,None,Sai(selection='e9'&action='DX'&inputs={'value': '[DX]'}),HINT,16:47:12:55
+#2[n=[85&56]],3,None,None,None,None,Sai(selection='e10'&action='DX'&inputs={'value': '[DX]'}),HINT,16:47:12:60
+#2[n=[85&56]],4,None,None,None,None,Sai(selection='DONE'&action='DONE'&inputs={'value': '[DONE]'}),HINT,16:47:12:63
+#3[n=[30&76]],1,None,None,None,None,Sai(selection='e1'&action='SPLIT'&inputs={'value': '[SPLIT]'}),HINT,16:47:12:66
+#3[n=[30&76]],2,None,None,None,None,Sai(selection='e9'&action='DX'&inputs={'value': '[DX]'}),HINT,16:47:12:69
+#3[n=[30&76]],3,None,None,None,None,Sai(selection='e10'&action='DX'&inputs={'value': '[DX]'}),HINT,16:47:12:73
+#3[n=[30&76]],4,None,None,None,None,Sai(selection='DONE'&action='DONE'&inputs={'value': '[DONE]'}),HINT,16:47:12:76
+#4[n=[12&27]],1,None,None,None,None,Sai(selection='e1'&action='SPLIT'&inputs={'value': '[SPLIT]'}),HINT,16:47:12:79
+#4[n=[12&27]],2,None,None,None,None,Sai(selection='e9'&action='DX'&inputs={'value': '[DX]'}),HINT,16:47:12:82
+#4[n=[12&27]],3,None,None,None,None,Sai(selection='e10'&action='DX'&inputs={'value': '[DX]'}),HINT,16:47:12:85
+#4[n=[12&27]],4,None,None,None,None,Sai(selection='DONE'&action='DONE'&inputs={'value': '[DONE]'}),HINT,16:47:12:88
+#5[n=[51&77]],1,None,None,None,None,Sai(selection='e1'&action='SPLIT'&inputs={'value': '[SPLIT]'}),HINT,16:47:12:90
+#5[n=[51&77]],2,None,None,None,None,Sai(selection='e9'&action='DX'&inputs={'value': '[DX]'}),HINT,16:47:12:93
+#5[n=[51&77]],3,None,None,None,None,Sai(selection='e10'&action='DX'&inputs={'value': '[DX]'}),HINT,16:47:12:96
+#5[n=[51&77]],4,None,None,None,None,Sai(selection='DONE'&action='DONE'&inputs={'value': '[DONE]'}),HINT,16:47:12:99
