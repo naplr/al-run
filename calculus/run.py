@@ -53,7 +53,7 @@ def _run_problem(agent, fsm):
 
     while not fsm.done:
         state = fsm.get_state()
-        res, info = agent.request(state)
+        res = agent.act(state)
 
         # h = fsm.hint()
         # h_sai, h_foa = h['sai'], h['foa']
@@ -61,6 +61,8 @@ def _run_problem(agent, fsm):
         correct_sai = util.generate_sai_from_sai(h_sai)
         if len(res) == 0:
             # copied = deepcopy(correct_sai)
+            print(correct_sai)
+            print(correct_sai['action'])
             exp  = agent.train(state, correct_sai, 1)
 
             # log_tx(fsm.step, rhs_id, where, exp, None, correct_sai, None)

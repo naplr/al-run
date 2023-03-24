@@ -1,8 +1,8 @@
 # from apprentice.agents.ModularAgent import ModularAgent
-from apprentice.agents.ModularAgent import ModularAgent
+# from apprentice.agents.ModularAgent import ModularAgent
 from apprentice.agents.cre_agents.cre_agent import CREAgent, SAI
 # from apprentice.working_memory.representation import Sai
-from apprentice.working_memory import fo_planner_operators
+# from apprentice.working_memory import fo_planner_operators
 
 def create_agent():
     # agent = ModularAgent(
@@ -17,16 +17,27 @@ def create_agent():
     #     # where_learner="specifictogeneral",
     #     # where_learner="versionspace",
     # )
-    agent = ModularAgent(
+    agent = CREAgent(
         agent_name="Calculus-Agent",
         feature_set=[],
-        function_set=["DX", "SPLIT"],
-        where="antiunify",
+        function_set=["DX", "SPLIT", "COEFF"],
+        # where="antiunify",
+        where="mostspecific",
     )
     return agent
 
 def generate_sai(sel, action, val):
-   return SAI(selection=sel, action=action, inputs={'value': str(val)})
+    return {
+        "selection": sel,
+        "action": action, 
+        "inputs": {'value': str(val)}
+    }
+#    return SAI(sel, action, {'value': str(val)})
 
 def generate_sai_from_sai(sai):
-    return SAI(selection=sai['selection'], action=sai['action'], inputs={'value': str(sai['input'])})
+    return {
+        "selection": sai['selection'],
+        "action": sai['action'], 
+        "inputs": {'value': str(sai['input'])}
+    }
+    # return SAI(sai['selection'], sai['action'], {'value': str(sai['input'])})

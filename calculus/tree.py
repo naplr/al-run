@@ -1,4 +1,9 @@
 
+'''
+- Some required functions: get_state(), get_nodes(), parse_from_string(), apply() [action at node]
+'''
+
+
 class Problems:
     def __init__(self, problem_string, actions):
         self.problem_string = problem_string
@@ -26,6 +31,20 @@ class BaseAction:
     def apply(cls, node):
         raise NotImplemented
 
+class Node:
+    # TODO: Should we have types? Like number, variable, op
+    def __init__(self, val, parent):
+        self.val = val
+        self.parent = parent
+        self.children = []
+
+    def is_leaf(self):
+        return not self.children or len(self.children) <= 0
+
+    # TODO: Add order.
+    def add_child(self, child):
+        child.parent = self
+        self.children.append(child)
 
 
 COMMUTE_OPS = ['multiply', 'add']

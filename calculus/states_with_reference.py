@@ -1,4 +1,4 @@
-def st(name, value, parent):
+def s(name, value, parent):
     return {
         # 'dom_class': 'CTATTextInput',
         # 'type': 'TextField',
@@ -51,21 +51,22 @@ def a(action, sel, input=None):
 #     return states
 
 def generate_states(ns):
-    states = { 'e1': st('e1', '[INT]', None) }
+    states = { 'e1': s('e1', '[INT]', None) }
     if len(ns) == 1:
+        e2 = s('e2', '[POW]', states['e1'])
         return {
             **states,
-            'e2': st('e2', '[POW]', 'e1'),
-            'e3': st('e3', 'x', 'e2'),
-            'e4': st('e4', str(ns[0]), 'e2'),
+            'e2': e2,
+            'e3': s('e3', 'x', e2),
+            'e4': s('e4', str(ns[0]), e2),
         }
 
-    states['e2'] = st('e2', '[ADD]', 'e1')
+    states['e2'] = s('e2', '[ADD]', states['e1'])
     for idx, n in enumerate(ns):
         tidx = idx*3+3
-        states[f'e{tidx}'] = st(f'e{tidx}', '[POW]', 'e2')
-        states[f'e{tidx+1}'] = st(f'e{tidx+1}', 'x', f'e{tidx}')
-        states[f'e{tidx+2}'] = st(f'e{tidx+2}', str(n), f'e{tidx}')
+        states[f'e{tidx}'] = s(f'e{tidx}', '[POW]', states['e2'])
+        states[f'e{tidx+1}'] = s(f'e{tidx+1}', 'x', states[f'e{tidx}'])
+        states[f'e{tidx+2}'] = s(f'e{tidx+2}', str(n), states[f'e{tidx}'])
 
     return states
 
@@ -92,8 +93,6 @@ class States:
     def __init__(self, ns):
         self.ns = ns
         self.states = generate_states(ns)
-        # for s in self.states.values():
-        #     print(s)
         self.lastidx = len(self.states)
         self.step = 0
         self.done = False
@@ -154,12 +153,14 @@ class States:
 
             del selected
             child['parent'] = None
-            terms = [s for s in self.states.values() if s['parent'] and s['parent'] == child['id']]
+            for s in self.states.values():
+                print(s)
+            terms = [s for s in self.states.values() if s['parent'] and s['parent']['id'] == child['id']]
             for t in terms:
                 nodeid = f'e{self.inc_idx()}'
-                new_node = st(nodeid, '[INT]', child['id'])
+                new_node = s(nodeid, '[INT]', child)
                 self.states[nodeid] = new_node
-                t['parent'] = new_node['id']
+                t['parent'] = new_node
             return True
 
         if action == DX:
@@ -168,15 +169,16 @@ class States:
                 return False
 
             nodeid = f'e{self.inc_idx()}'
-            divnode = st(nodeid, '[DIV]', selected['parent']) 
+            sparent = self.states[selected['parent']]
+            divnode = s(nodeid, '[DIV]', sparent) 
             self.states[nodeid] = divnode
-            expnode = [s for s in self.states.values() if (s['parent'] == child['id'] and s['value'] != 'x')][0]
+            expnode = [s for s in self.states.values() if (s['parent']['id'] == child['id'] and s['value'] != 'x')][0]
             expnode['value'] = int(expnode['value']) + 1
 
             nodeid = f'e{self.inc_idx()}'
-            dennode = st(nodeid, expnode['value'], divnode['id'])
+            dennode = s(nodeid, expnode['value'], divnode)
             self.states[nodeid] = dennode
-            child['parent'] = divnode['id']
+            child['parent'] = divnode
             del selected
             return True
         
