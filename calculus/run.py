@@ -11,7 +11,6 @@ results = []
 current_problem = None
 
 def _clean(s):
-    print(s)
     if s == None:
         return s
     s = s.replace(', ','&')
@@ -57,12 +56,12 @@ def _run_problem(agent, fsm):
 
         # h = fsm.hint()
         # h_sai, h_foa = h['sai'], h['foa']
-        h_sai = fsm.get_correct_action()
-        correct_sai = util.generate_sai_from_sai(h_sai)
         if len(res) == 0:
             # copied = deepcopy(correct_sai)
+            print('[DEMO]')
+            h_sai = fsm.get_correct_action()
+            correct_sai = util.generate_sai_from_sai(h_sai)
             print(correct_sai)
-            print(correct_sai['action'])
             exp  = agent.train(state, correct_sai, 1)
 
             # log_tx(fsm.step, rhs_id, where, exp, None, correct_sai, None)
@@ -71,10 +70,12 @@ def _run_problem(agent, fsm):
         else:
             sel, act, val = res['selection'], res['action'], res["inputs"]["value"]
             sai = util.generate_sai(sel, act, val)
+            local_sai = util.generate_local_sai(sel, act, val)
+            print('[ACT]')
 
-            correct = fsm.apply(sai)
+            correct = fsm.apply(local_sai)
             # log_tx(fsm.step, res['rhs_id'], info['where'], info['skill'], sai, correct_sai, correct)
-            log_tx(fsm.step, res['rhs_id'], None, None, sai, correct_sai, correct)
+            # log_tx(fsm.step, res['rhs_id'], None, None, sai, correct_sai, correct)
             if correct:
                 print(Back.GREEN + Fore.BLACK + f"[CORRECT] STEP: {fsm.step}, {sel}-{act}-{val}")
             else:

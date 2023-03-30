@@ -23,8 +23,16 @@ def create_agent():
         function_set=["DX", "SPLIT", "COEFF"],
         # where="antiunify",
         where="mostspecific",
+
     )
     return agent
+
+def generate_local_sai(sel, action, val):
+    return {
+        "selection": sel,
+        "action": action,
+        "input": str(val)
+    }
 
 def generate_sai(sel, action, val):
     return {

@@ -97,6 +97,20 @@ class States:
         self.lastidx = len(self.states)
         self.step = 0
         self.done = False
+        self.show()
+
+    def show(self):
+        for s in self.states.values():
+            print(f"{s['id']}: parent={s['parent']}, val={s['value']}")
+
+        # roots = [s for s in self.states.values() if s['parent'] == None]
+        # print(len(roots))
+        # root = roots[0]
+        # print(_show(root))
+
+    # def _show(node):
+    #     for c in node.children
+    #     return children_repr
 
     def get_state(self):
         return self.states
@@ -131,9 +145,13 @@ class States:
         correct = self._apply(sai)
         if correct:
             self.step += 1
+            self.show()
+        else:
+            print('[WRONG]')
 
     def _apply(self, sai):
-        selection, action, input = sai['selection'], sai['action'], sai['input']
+        print(sai)
+        selection, action, inp = sai['selection'], sai['action'], sai['input']
         if action == 'DONE':
             addnodes = [s for s in self.states.values() if (s['value'] == '[ADD]' and s['parent'] is not None and self.states[s['parent']]['value'] == '[INT]')]
             pownodes = [s for s in self.states.values() if (s['value'] == '[POW]' and s['parent'] is not None and self.states[s['parent']]['value'] == '[INT]')]
@@ -145,10 +163,13 @@ class States:
                 return False
 
         selected = self.states[selection]
-        child = [s for s in self.states.values() if s['parent'] == selection][0]
+        print([s['parent'] for s in self.states.values()])
+        print(selection)
+        childs = [s for s in self.states.values() if s['parent'] == selection]
+        child = childs[0] if len(childs) > 0 else None
 
         if action == SPLIT:
-            if selected['value'] != '[INT]' or child['value'] != '[ADD]':
+            if selected['value'] != '[INT]' or child == None or child['value'] != '[ADD]':
                 print(f"[ERROR] Action: {action}, Wrong Condition")
                 return False
 
@@ -185,4 +206,5 @@ class States:
 
 
 if __name__ == "__main__":
-    pass
+    env = States([2, 3])
+    env.print()

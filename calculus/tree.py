@@ -33,9 +33,11 @@ class BaseAction:
 
 class Node:
     # TODO: Should we have types? Like number, variable, op
-    def __init__(self, val, parent):
+    def __init__(self, val, parent=None):
         self.val = val
         self.parent = parent
+        if parent is not None:
+            parent.add_child(self)
         self.children = []
 
     def is_leaf(self):
@@ -45,6 +47,19 @@ class Node:
     def add_child(self, child):
         child.parent = self
         self.children.append(child)
+
+    def show(self):
+        s = self._show(self)
+        print(s)
+        return s
+        
+    @staticmethod
+    def _show(node):
+        children_repr = [Node._show(c) for c in node.children]
+        s = f"{node.val}"
+        if len(children_repr) > 0:
+            s += f" ({', '.join(children_repr)})"
+        return s
 
 
 COMMUTE_OPS = ['multiply', 'add']
