@@ -1,14 +1,5 @@
-def st(name, value, parent):
-    return {
-        # 'dom_class': 'CTATTextInput',
-        # 'type': 'TextField',
-        'id': name,
-        'value': str(value) if value else 'NONE',
-        # 'contentEditable': True,
-        'parent': parent,
-        'type': 'Node'
-        # 'children': children
-    }
+from calculus.tree import Node
+
 
 DEL = 'DELETE'
 MOD = 'MODIFY'
@@ -49,25 +40,25 @@ def a(action, sel, input=None):
 #         states[f'e{tidx+2}'] = s(f'e{tidx+2}', str(n), f'e{tidx}')
 
 #     return states
+# INT, POW, ADD, DIV = '[INT]', '[POW]', '[ADD]', '[DIV]'
+INT, POW, ADD, DIV = '∫', '^', '+', '/'
+def generate_tree(ns):
+    root = Node(INT)
+    if len(ns) > 1:
+        node = Node(ADD)
+        root.add_child(node)
+    else:
+        node = root
 
-def generate_states(ns):
-    states = { 'e1': st('e1', '[INT]', None) }
-    if len(ns) == 1:
-        return {
-            **states,
-            'e2': st('e2', '[POW]', 'e1'),
-            'e3': st('e3', 'x', 'e2'),
-            'e4': st('e4', str(ns[0]), 'e2'),
-        }
+    for n in ns:
+        p = Node(POW)
+        node.add_child(p)
+        x = Node('x')
+        e = Node(str(n))
+        p.add_child(x)
+        p.add_child(e)
 
-    states['e2'] = st('e2', '[ADD]', 'e1')
-    for idx, n in enumerate(ns):
-        tidx = idx*3+3
-        states[f'e{tidx}'] = st(f'e{tidx}', '[POW]', 'e2')
-        states[f'e{tidx+1}'] = st(f'e{tidx+1}', 'x', f'e{tidx}')
-        states[f'e{tidx+2}'] = st(f'e{tidx+2}', str(n), f'e{tidx}')
-
-    return states
+    return root
 
 # def generate_correct_actions(self, ns):
 #     # Check for SPLIT
@@ -91,55 +82,63 @@ def generate_states(ns):
 class States:
     def __init__(self, ns):
         self.ns = ns
-        self.states = generate_states(ns)
-        # for s in self.states.values():
-        #     print(s)
-        self.lastidx = len(self.states)
+        self.root = generate_tree(ns)
         self.step = 0
         self.done = False
-        self.show()
 
     def show(self):
-        for s in self.states.values():
-            print(f"{s['id']}: parent={s['parent']}, val={s['value']}")
+        return self.root.show()
 
-        # roots = [s for s in self.states.values() if s['parent'] == None]
-        # print(len(roots))
-        # root = roots[0]
-        # print(_show(root))
+    def get_state_map(self):
+        return self._get_state_map(self.root)
 
-    # def _show(node):
-    #     for c in node.children
-    #     return children_repr
+    @staticmethod
+    def _get_state_map(node):
+        acc = {node.id: node}
+        for c in node.children:
+            acc.update(States._get_state_map(c))
+        return acc 
 
     def get_state(self):
-        return self.states
+        states = self._get_state(self.root)
+        states = {s['id']: s for s in states}
+        return states
+    
+    @staticmethod
+    def _get_state(node):
+        states = [
+            {
+                'id': node.id,
+                'value': str(node.val) if node.val else 'NONE',
+                'parent': node.parent.id if node.parent else None,
+                'children': [c.id for c in node.children],
+                'type': 'Node'
+            }
+        ]
+
+        for c in node.children:
+            states.extend(States._get_state(c))
+        return states
 
     def inc_idx(self):
         self.lastidx += 1
         return self.lastidx
 
     def get_correct_action(self):
-        # Check for SPLIT
-        targets = [s for s in self.states.values() if (s['value'] == '[ADD]' and s['parent'] is not None and self.states[s['parent']]['value'] == '[INT]')]
-        if len(targets) == 1:
-            sai = a(SPLIT, targets[0]['parent'])
-            self.apply(sai)
-            return sai
-        elif len(targets) > 1:
-            print("[ERROR] Something wrong! There are more than one add node inside [INT]")
-
-        # Check for DX
-        targets = [s for s in self.states.values() if (s['value'] == '[POW]' and s['parent'] is not None and self.states[s['parent']]['value'] == '[INT]')]
-        if len(targets) == 0:
-            sai = a('DONE', 'DONE')
-            self.apply(sai)
-            return sai
-
-        target = targets[0]
-        sai = a(DX, target['parent'])
-        self.apply(sai)
-        return sai
+        if self.root.val == INT:
+            if len(self.root.children) > 1:
+                print(f"[ERROR] Something wrong! There are more than one child node for {INT}")
+            elif self.root.children[0].val == ADD:
+                return a(SPLIT, self.root.id)
+            elif self.root.children[0].val == POW:
+                return a(DX, self.root.id)
+        elif self.root.val == ADD:
+            for c in self.root.children:
+                if c.val == INT and len(c.children) == 1 and c.children[0].val == POW:
+                    return a(DX, c.id)
+            return a('DONE', 'DONE')
+        elif self.root.val == DIV:
+            return a('DONE', 'DONE')
 
     def apply(self, sai):
         correct = self._apply(sai)
@@ -150,55 +149,47 @@ class States:
             print('[WRONG]')
 
     def _apply(self, sai):
-        print(sai)
+        states = self.get_state_map()
         selection, action, inp = sai['selection'], sai['action'], sai['input']
         if action == 'DONE':
-            addnodes = [s for s in self.states.values() if (s['value'] == '[ADD]' and s['parent'] is not None and self.states[s['parent']]['value'] == '[INT]')]
-            pownodes = [s for s in self.states.values() if (s['value'] == '[POW]' and s['parent'] is not None and self.states[s['parent']]['value'] == '[INT]')]
+            addnodes = [s.id for s in states.values() if (s.val == ADD and s.parent is not None and s.parent.val == INT)]
+            pownodes = [s.id for s in states.values() if (s.val == POW and s.parent is not None and s.parent.val == INT)]
             if len(addnodes) == 0 and len(pownodes) == 0:
                 self.done = True
                 return True
             else:
                 print(f"[ERROR] Action: {action}, Not done yet.")
+                self.show()
                 return False
 
-        selected = self.states[selection]
-        print([s['parent'] for s in self.states.values()])
-        print(selection)
-        childs = [s for s in self.states.values() if s['parent'] == selection]
-        child = childs[0] if len(childs) > 0 else None
-
+        selected = states[selection]
         if action == SPLIT:
-            if selected['value'] != '[INT]' or child == None or child['value'] != '[ADD]':
+            if selected.val != INT or len(selected.children) != 1 or selected.children[0].val != ADD:
                 print(f"[ERROR] Action: {action}, Wrong Condition")
                 return False
 
-            del selected
-            child['parent'] = None
-            terms = [s for s in self.states.values() if s['parent'] and s['parent'] == child['id']]
-            for t in terms:
-                nodeid = f'e{self.inc_idx()}'
-                new_node = st(nodeid, '[INT]', child['id'])
-                self.states[nodeid] = new_node
-                t['parent'] = new_node['id']
+            add = selected.children[0]
+            for c in add.children:
+                c.insert(Node(INT))
+            add.parent = None
+            self.root = add
             return True
 
         if action == DX:
-            if selected['value'] != '[INT]' or child['value'] != '[POW]':
+            if selected.val != INT or len(selected.children) != 1 or selected.children[0].val != POW:
                 print(f"[ERROR] Action: {action}, Wrong Condition")
                 return False
 
-            nodeid = f'e{self.inc_idx()}'
-            divnode = st(nodeid, '[DIV]', selected['parent']) 
-            self.states[nodeid] = divnode
-            expnode = [s for s in self.states.values() if (s['parent'] == child['id'] and s['value'] != 'x')][0]
-            expnode['value'] = int(expnode['value']) + 1
+            power = selected.children[0]
+            exp = power.children[1]
+            exp.val = str(int(exp.val) + 1)
+            div = Node(DIV)
+            power.insert(div)
+            div.add_child(Node(exp.val))
 
-            nodeid = f'e{self.inc_idx()}'
-            dennode = st(nodeid, expnode['value'], divnode['id'])
-            self.states[nodeid] = dennode
-            child['parent'] = divnode['id']
-            del selected
+            new_root = selected.delete()
+            if new_root is not None:
+                self.root = new_root
             return True
         
         print(f"[ERROR] Unrecognized action: {action}")
@@ -207,4 +198,4 @@ class States:
 
 if __name__ == "__main__":
     env = States([2, 3])
-    env.print()
+    env.get_state()
