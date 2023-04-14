@@ -1,4 +1,5 @@
-from calculus.tree import Node
+from tree import Node
+import copy
 
 
 DEL = 'DELETE'
@@ -82,6 +83,7 @@ def generate_tree(ns):
 class States:
     def __init__(self, ns):
         self.ns = ns
+        Node.node_count = 0
         self.root = generate_tree(ns)
         self.step = 0
         self.done = False
@@ -102,7 +104,11 @@ class States:
     def get_state(self):
         states = self._get_state(self.root)
         states = {s['id']: s for s in states}
-        return states
+        states['DONE'] = {
+            'id': 'DONE',
+            'type': 'Button'
+        }
+        return copy.deepcopy(states)
     
     @staticmethod
     def _get_state(node):
@@ -144,9 +150,7 @@ class States:
         correct = self._apply(sai)
         if correct:
             self.step += 1
-            self.show()
-        else:
-            print('[WRONG]')
+        return correct
 
     def _apply(self, sai):
         states = self.get_state_map()
@@ -159,7 +163,6 @@ class States:
                 return True
             else:
                 print(f"[ERROR] Action: {action}, Not done yet.")
-                self.show()
                 return False
 
         selected = states[selection]

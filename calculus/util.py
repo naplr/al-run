@@ -4,6 +4,20 @@ from apprentice.agents.cre_agents.cre_agent import CREAgent, SAI
 # from apprentice.working_memory.representation import Sai
 # from apprentice.working_memory import fo_planner_operators
 
+import colorama
+from colorama import Fore, Back, Style
+
+def print_log(color, text):
+    if color == "blue":
+        print(Back.BLUE + Fore.YELLOW + text + Style.RESET_ALL)
+    elif color == "green":
+        print(Back.GREEN + Fore.BLACK + text + Style.RESET_ALL)
+    elif color =="red":
+        print(Back.RED + Fore.BLACK + text + Style.RESET_ALL)
+    else:
+        raise ValueError("Wrong color option to print_log!")
+
+
 def create_agent():
     # agent = ModularAgent(
     #     agent_name="Calculus-Agent",
@@ -23,6 +37,7 @@ def create_agent():
         function_set=["DX", "SPLIT", "COEFF"],
         # where="antiunify",
         where="mostspecific",
+        fact_types='tree'
 
     )
     return agent

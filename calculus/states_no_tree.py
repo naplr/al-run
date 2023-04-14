@@ -146,8 +146,6 @@ class States:
         if correct:
             self.step += 1
             self.show()
-        else:
-            print('[WRONG]')
 
     def _apply(self, sai):
         print(sai)

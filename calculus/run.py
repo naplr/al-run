@@ -51,6 +51,7 @@ def _run_problem(agent, fsm):
     results.append([0, 0, 0])
 
     while not fsm.done:
+        fsm.show()
         state = fsm.get_state()
         res = agent.act(state)
 
@@ -58,30 +59,29 @@ def _run_problem(agent, fsm):
         # h_sai, h_foa = h['sai'], h['foa']
         if len(res) == 0:
             # copied = deepcopy(correct_sai)
-            print('[DEMO]')
             h_sai = fsm.get_correct_action()
+            fsm.apply(h_sai)
             correct_sai = util.generate_sai_from_sai(h_sai)
-            print(correct_sai)
             exp  = agent.train(state, correct_sai, 1)
 
             # log_tx(fsm.step, rhs_id, where, exp, None, correct_sai, None)
             log_tx(fsm.step, None, None, None, None, correct_sai, None)
-            print(Back.BLUE + Fore.YELLOW + f"[HINT] STEP: {fsm.step}, {h_sai['selection']}-{h_sai['action']}-{h_sai['input']}")
+            util.print_log("blue", f"[HINT] STEP: {fsm.step}, {h_sai['selection']}-{h_sai['action']}-{h_sai['input']}")
         else:
             sel, act, val = res['selection'], res['action'], res["inputs"]["value"]
             sai = util.generate_sai(sel, act, val)
             local_sai = util.generate_local_sai(sel, act, val)
-            print('[ACT]')
 
             correct = fsm.apply(local_sai)
             # log_tx(fsm.step, res['rhs_id'], info['where'], info['skill'], sai, correct_sai, correct)
-            # log_tx(fsm.step, res['rhs_id'], None, None, sai, correct_sai, correct)
+            log_tx(fsm.step, None, None, None, sai, "correct_sai", correct)
             if correct:
-                print(Back.GREEN + Fore.BLACK + f"[CORRECT] STEP: {fsm.step}, {sel}-{act}-{val}")
+                util.print_log("green", f"[CORRECT] STEP: {fsm.step}, {sel}-{act}-{val}")
             else:
-                print(Back.RED + Fore.BLACK + f"[WRONG] STEP: {fsm.step}, {sel}-{act}-{val}")
+                util.print_log("red", f"[WRONG] STEP: {fsm.step}, {sel}-{act}-{val}")
 
-            agent.train(state, sai=sai, reward=(1 if correct else -1), rhs_id=res['rhs_id'])
+            # agent.train(state, sai=sai, reward=(1 if correct else -1), rhs_id=res['rhs_id'])
+            agent.train(state, sai=sai, reward=(1 if correct else -1))
 
 
 def run_problem(agent, ns):
@@ -106,6 +106,29 @@ def main():
     for idx, r in enumerate(results):
         print(f'[#{idx}] Correct: {r[CORRECT]}, Wrong: {r[WRONG]}, HINT: {r[HINT]}')
 
+def main2():
+    global current_problem, results
+    agent = util.create_agent()
+
+    problems = random.sample(range(2, 100), N)
+    for idx in range(N):
+        ns = random.sample(range(2, 100), 2)
+        current_problem = f'#{idx+1}[n={ns}]'
+        run_problem(agent, ns)
+        print('=' * 20)
+
+    for idx in range(N):
+        ns = random.sample(range(2, 100), 3)
+        current_problem = f'#{idx+1}[n={ns}]'
+        run_problem(agent, ns)
+        print('=' * 20)
+
+    write_txlogs()
+    # agent.show_skills()
+    for idx, r in enumerate(results):
+        print(f'[#{idx}] Correct: {r[CORRECT]}, Wrong: {r[WRONG]}, HINT: {r[HINT]}')
+
 if __name__ == '__main__':
-    main()
+    # main()
+    main2()
     # debug()

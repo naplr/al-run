@@ -1,4 +1,4 @@
-from calculus.states import States, INT, ADD, POW, DX, SPLIT
+from states import States, INT, ADD, POW, DX, SPLIT
 
 def test_basic_single():
     env = States([2, 3])
