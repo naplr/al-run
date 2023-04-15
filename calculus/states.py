@@ -83,7 +83,7 @@ def generate_tree(ns):
 class States:
     def __init__(self, ns):
         self.ns = ns
-        Node.node_count = 0
+        # Node.node_count = 0
         self.root = generate_tree(ns)
         self.step = 0
         self.done = False

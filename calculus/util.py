@@ -35,8 +35,8 @@ def create_agent():
         agent_name="Calculus-Agent",
         feature_set=[],
         function_set=["DX", "SPLIT", "COEFF"],
-        # where="antiunify",
-        where="mostspecific",
+        where="antiunify",
+        # where="mostspecific",
         fact_types='tree'
 
     )

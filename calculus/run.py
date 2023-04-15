@@ -89,7 +89,7 @@ def run_problem(agent, ns):
     states = States(ns)
     _run_problem(agent, states)
 
-N = 5
+N = 2
 def main():
     global current_problem, results
     agent = util.create_agent()
@@ -129,6 +129,6 @@ def main2():
         print(f'[#{idx}] Correct: {r[CORRECT]}, Wrong: {r[WRONG]}, HINT: {r[HINT]}')
 
 if __name__ == '__main__':
-    # main()
-    main2()
+    main()
+    # main2()
     # debug()
