@@ -1,0 +1,33 @@
+Agent,Concept,Problem,Knowledge,Type,Result,Action,When-Part,Where-Part,How-Part,Intermediate,Seen,AL Ans,Correct Ans,Time
+SPSP-F-1,3,[3][args:256-4-4],Fact,study,NA,Train,None,{('answer'&)},16.0:()->answer,False,True,None,16,12:27:26
+SPSP-F-1,3,[3][args:256-4-4],Fact,practice,INCORRECT,Request,...,{('answer'&)},16.0:()->answer (v: 0.749),False,True,16.0,16,12:27:26
+SPSP-F-1,3,[3][args:256-4-4],Fact,study,NA,Train,None,{('answer'&)},16.0:()->answer,False,True,None,16,12:27:26
+SPSP-F-1,3,[3][args:256-4-4],Fact,practice,INCORRECT,Request,...,{('answer'&)},16.0:()->answer (v: 0.994),False,True,16.0,16,12:27:26
+SPSP-F-1,3,[3][args:256-4-4],Fact,study,NA,Train,None,{('answer'&)},16.0:()->answer,False,True,None,16,12:27:26
+SPSP-F-1,3,[3][args:256-4-4],Fact,practice,INCORRECT,Request,...,{('answer'&)},16.0:()->answer (v: 0.991),False,True,16.0,16,12:27:27
+SPSP-F-1,3,[3][args:256-4-4],Fact,study,NA,Train,None,{('answer'&)},16.0:()->answer,False,True,None,16,12:27:27
+SPSP-F-1,3,[3][args:256-4-4],Fact,practice,INCORRECT,Request,...,{('answer'&)},16.0:()->answer (v: 0.989),False,True,16.0,16,12:27:27
+SPSP-F-1,3,[3][args:256-4-4],Fact,study,NA,Train,None,{('answer'&)},16.0:()->answer,False,True,None,16,12:27:27
+SPSP-F-1,3,[3][args:256-4-4],Fact,practice,INCORRECT,Request,...,{('answer'&)},16.0:()->answer (v: 0.987),False,True,16.0,16,12:27:27
+SPSP-F-1,3,[3][args:256-4-4],Fact,posttest,INCORRECT,Request,...,{('answer'&)},16.0:()->answer (v: 0.976),False,True,16.0,16,12:27:28
+SPSP-F-1,3,[3][args:256-4-4],Fact,posttest,INCORRECT,Request,...,{('answer'&)},16.0:()->answer (v: 0.997),False,True,16.0,16,12:27:28
+SPSP-F-1,3,[3][args:448-7-8],Fact,posttest,INCORRECT,Request,...,{('answer'&)},16.0:()->answer (v: 0.997),False,False,16.0,8,12:27:28
+SPSP-F-1,3,[3][args:256-4-4],Fact,posttest,INCORRECT,Request,...,{('answer'&)},16.0:()->answer (v: 0.997),False,True,16.0,16,12:27:28
+SPSP-F-1,3,[3][args:693-7-3],Fact,posttest,INCORRECT,Request,...,{('answer'&)},16.0:()->answer (v: 0.997),False,False,16.0,33,12:27:28
+SPSP-F-1,3,[3][args:225-5-5],Fact,posttest,INCORRECT,Request,...,{('answer'&)},16.0:()->answer (v: 0.997),False,False,16.0,9,12:27:28
+SPPP-S-3,3,[3][args:99-11-3],Skill,practice,INCORRECT,Request,...,[0&0],HINT,False,True,None,3,12:27:28
+SPPP-S-3,3,[3][args:312-13-4],Skill,practice,INCORRECT,Request,...,[0&0],HINT,False,False,None,6,12:27:28
+SPPP-S-3,3,[3][args:280-7-8],Skill,practice,INCORRECT,Request,...,[0&0],HINT,False,False,None,5,12:27:28
+SPPP-S-3,3,[3][args:256-4-4],Skill,practice,INCORRECT,Request,...,[0&0],HINT,False,False,None,16,12:27:28
+SPPP-S-3,3,[3][args:648-12-6],Skill,practice,INCORRECT,Request,...,[0&0],HINT,False,False,None,9,12:27:28
+SPPP-S-3,3,[3][args:1170-9-10],Skill,practice,INCORRECT,Request,...,[0&0],HINT,False,False,None,13,12:27:28
+SPPP-S-3,3,[3][args:162-6-3],Skill,practice,INCORRECT,Request,...,[0&0],HINT,False,False,None,9,12:27:28
+SPPP-S-3,3,[3][args:308-4-7],Skill,practice,INCORRECT,Request,...,[0&0],HINT,False,False,None,11,12:27:28
+SPPP-S-3,3,[3][args:98-2-7],Skill,practice,INCORRECT,Request,...,[0&0],HINT,False,False,None,7,12:27:28
+SPPP-S-3,3,[3][args:495-9-5],Skill,practice,INCORRECT,Request,...,[0&0],HINT,False,False,None,11,12:27:28
+SPPP-S-3,3,[3][args:99-11-3],Skill,posttest,INCORRECT,Request,...,[0&0],HINT,False,True,None,3,12:27:28
+SPPP-S-3,3,[3][args:840-2-10],Skill,posttest,INCORRECT,Request,...,[0&0],HINT,False,False,None,42,12:27:28
+SPPP-S-3,3,[3][args:99-11-3],Skill,posttest,INCORRECT,Request,...,[0&0],HINT,False,True,None,3,12:27:28
+SPPP-S-3,3,[3][args:312-3-4],Skill,posttest,INCORRECT,Request,...,[0&0],HINT,False,False,None,26,12:27:28
+SPPP-S-3,3,[3][args:448-7-8],Skill,posttest,INCORRECT,Request,...,[0&0],HINT,False,False,None,8,12:27:28
+SPPP-S-3,3,[3][args:99-11-3],Skill,posttest,INCORRECT,Request,...,[0&0],HINT,False,True,None,3,12:27:28
