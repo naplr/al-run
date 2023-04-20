@@ -89,7 +89,7 @@ def run_problem(agent, ns):
     states = States(ns)
     _run_problem(agent, states)
 
-N = 2
+N = 5
 def main():
     global current_problem, results
     agent = util.create_agent()
