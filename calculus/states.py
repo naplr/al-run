@@ -16,7 +16,7 @@ def a(action, sel, input=None):
         input = f"[{action}]"
     return {
         'selection': sel,
-        'action': action,
+        'action_type': action,
         'input': input
     }
 
@@ -106,7 +106,7 @@ class States:
         states = {s['id']: s for s in states}
         states['DONE'] = {
             'id': 'DONE',
-            'type': 'Button'
+            'type': 'TreeButton'
         }
         return copy.deepcopy(states)
     
@@ -154,7 +154,7 @@ class States:
 
     def _apply(self, sai):
         states = self.get_state_map()
-        selection, action, inp = sai['selection'], sai['action'], sai['input']
+        selection, action, inp = sai['selection'], sai['action_type'], sai['input']
         if action == 'DONE':
             addnodes = [s.id for s in states.values() if (s.val == ADD and s.parent is not None and s.parent.val == INT)]
             pownodes = [s.id for s in states.values() if (s.val == POW and s.parent is not None and s.parent.val == INT)]

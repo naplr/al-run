@@ -17,6 +17,80 @@ def print_log(color, text):
     else:
         raise ValueError("Wrong color option to print_log!")
 
+# -----------------------------------------------
+# : Enviornment Configuration        
+
+from apprentice.agents.cre_agents.funcs import register_all_funcs
+from apprentice.agents.cre_agents.environment import ( Button, Component,
+    register_fact_set, register_all_facts, define_action_type, register_all_action_types, register_action_type_set
+    )
+from cre import define_fact, CREFunc
+from numba.types import string
+
+with register_all_action_types as Tree_action_type_set:
+    @define_action_type("SPLIT", {
+        'value' : {'type' : string, "semantic" : False}
+        })
+    def SPLIT(wm, selection, inputs):
+        pass
+
+    @define_action_type("DX", {
+        'value' : {'type' : string, "semantic" : False}
+        })
+    def DX(wm, selection, inputs):
+        pass
+
+    @define_action_type("COEFF", {
+        'value' : {'type' : string, "semantic" : False}
+        })
+    def COEFF(wm, selection, inputs):
+        pass
+
+    @define_action_type("DONE", {
+        'value' : {'type' : string, "semantic" : False}
+        })
+    def DONE(wm, selection, inputs):
+        pass
+
+
+Tree_action_type_set = {x.name: x for x in Tree_action_type_set}
+register_action_type_set(name='tree')(Tree_action_type_set)
+
+with register_all_facts as Tree_fact_types:
+    Node = define_fact("Node", {
+        "id": str,
+        "parent": "Node",
+        # "children": "List[Node]",
+        "value" : {"type" : str, "visible" : True, "semantic": True}
+
+    })
+
+    TreeButton = define_fact("TreeButton", {
+        "inherit_from": Node, 
+    })
+
+register_fact_set(name='tree')(Tree_fact_types)
+
+
+@CREFunc(signature=string(),
+    shorthand = '[DX]')
+def DX():
+    return "[DX]"
+
+@CREFunc(signature=string(),
+    shorthand = '[SPLIT]')
+def SPLIT():
+    return "[SPLIT]"
+    
+@CREFunc(signature=string(),
+    shorthand = '[COEFF]')
+def COEFF():
+    return "[COEFF]"
+
+register_all_funcs()
+
+
+# -- END ENVIRONMENT CONFIG --
 
 def create_agent():
     # agent = ModularAgent(
@@ -36,23 +110,27 @@ def create_agent():
         feature_set=[],
         function_set=["DX", "SPLIT", "COEFF"],
         where="antiunify",
+        when="decisiontree",
+        # when_args={"encode_relative" : True},
         # where="mostspecific",
-        fact_types='tree'
+        fact_types='tree',
+        action_types='tree',
+        
 
     )
     return agent
 
-def generate_local_sai(sel, action, val):
+def generate_local_sai(sel, action_type, val):
     return {
         "selection": sel,
-        "action": action,
+        "action_type": action_type,
         "input": str(val)
     }
 
-def generate_sai(sel, action, val):
+def generate_sai(sel, action_type, val):
     return {
         "selection": sel,
-        "action": action, 
+        "action_type": action_type, 
         "inputs": {'value': str(val)}
     }
 #    return SAI(sel, action, {'value': str(val)})
@@ -60,7 +138,7 @@ def generate_sai(sel, action, val):
 def generate_sai_from_sai(sai):
     return {
         "selection": sai['selection'],
-        "action": sai['action'], 
+        "action_type": sai['action_type'], 
         "inputs": {'value': str(sai['input'])}
     }
     # return SAI(sai['selection'], sai['action'], {'value': str(sai['input'])})

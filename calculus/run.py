@@ -53,11 +53,11 @@ def _run_problem(agent, fsm):
     while not fsm.done:
         fsm.show()
         state = fsm.get_state()
-        res = agent.act(state)
+        res = agent.act(state, json_friendly=True)
 
         # h = fsm.hint()
         # h_sai, h_foa = h['sai'], h['foa']
-        if len(res) == 0:
+        if not res:
             # copied = deepcopy(correct_sai)
             h_sai = fsm.get_correct_action()
             fsm.apply(h_sai)
@@ -66,9 +66,9 @@ def _run_problem(agent, fsm):
 
             # log_tx(fsm.step, rhs_id, where, exp, None, correct_sai, None)
             log_tx(fsm.step, None, None, None, None, correct_sai, None)
-            util.print_log("blue", f"[HINT] STEP: {fsm.step}, {h_sai['selection']}-{h_sai['action']}-{h_sai['input']}")
+            util.print_log("blue", f"[HINT] STEP: {fsm.step}, {h_sai['selection']}-{h_sai['action_type']}-{h_sai['input']}")
         else:
-            sel, act, val = res['selection'], res['action'], res["inputs"]["value"]
+            sel, act, val = res['selection'], res['action_type'], res["inputs"]["value"]
             sai = util.generate_sai(sel, act, val)
             local_sai = util.generate_local_sai(sel, act, val)
 
