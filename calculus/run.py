@@ -106,6 +106,25 @@ def main():
     for idx, r in enumerate(results):
         print(f'[#{idx}] Correct: {r[CORRECT]}, Wrong: {r[WRONG]}, HINT: {r[HINT]}')
 
+def random_terms():
+    global current_problem, results
+    agent = util.create_agent()
+
+    problems = random.sample(range(2, 100), N)
+    problem_count = []
+    for idx in range(50):
+        n = random.randint(1, 7)
+        ns = random.sample(range(2, 100), n)
+        current_problem = f'#{idx+1}[n={ns}][{len(ns)}]'
+        problem_count.append(len(ns))
+        run_problem(agent, ns)
+        print('=' * 20)
+
+    write_txlogs()
+    # agent.show_skills()
+    for idx, r in enumerate(results):
+        print(f'[#{idx}] ({problem_count[idx]}) Correct: {r[CORRECT]}, Wrong: {r[WRONG]}, HINT: {r[HINT]}')
+
 def main2():
     global current_problem, results
     agent = util.create_agent()
@@ -123,12 +142,35 @@ def main2():
         run_problem(agent, ns)
         print('=' * 20)
 
+    for idx in range(N):
+        ns = random.sample(range(2, 100), 2)
+        current_problem = f'#{idx+1}[n={ns}]'
+        run_problem(agent, ns)
+        print('=' * 20)
+
+    for idx in range(N):
+        ns = random.sample(range(2, 100), 4)
+        current_problem = f'#{idx+1}[n={ns}]'
+        run_problem(agent, ns)
+        print('=' * 20)
+
+    problem_count = []
+    for idx in range(20):
+        n = random.randint(2, 7)
+        ns = random.sample(range(2, 100), n)
+        current_problem = f'#{idx+1}[n={ns}][{len(ns)}]'
+        problem_count.append(len(ns))
+        run_problem(agent, ns)
+        print('=' * 20)
+
+
     write_txlogs()
     # agent.show_skills()
     for idx, r in enumerate(results):
         print(f'[#{idx}] Correct: {r[CORRECT]}, Wrong: {r[WRONG]}, HINT: {r[HINT]}')
 
 if __name__ == '__main__':
-    main()
+    # main()
     # main2()
+    random_terms()
     # debug()
