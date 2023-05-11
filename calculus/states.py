@@ -106,7 +106,8 @@ class States:
         states = {s['id']: s for s in states}
         states['DONE'] = {
             'id': 'DONE',
-            'type': 'TreeButton'
+            'type': 'TreeButton',
+            'parent': self.root.id
         }
         return copy.deepcopy(states)
     
@@ -135,16 +136,16 @@ class States:
             if len(self.root.children) > 1:
                 print(f"[ERROR] Something wrong! There are more than one child node for {INT}")
             elif self.root.children[0].val == ADD:
-                return a(SPLIT, self.root.id)
+                return a(SPLIT, self.root.id), [self.root.children[0].id,]
             elif self.root.children[0].val == POW:
-                return a(DX, self.root.id)
+                return a(DX, self.root.id), [self.root.children[0].id,]
         elif self.root.val == ADD:
             for c in self.root.children:
                 if c.val == INT and len(c.children) == 1 and c.children[0].val == POW:
-                    return a(DX, c.id)
-            return a('DONE', 'DONE')
+                    return a(DX, c.id), [c.children[0].id,]
+            return a('DONE', 'DONE'), None
         elif self.root.val == DIV:
-            return a('DONE', 'DONE')
+            return a('DONE', 'DONE'), None
 
     def apply(self, sai):
         correct = self._apply(sai)

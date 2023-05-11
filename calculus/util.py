@@ -6,6 +6,7 @@ from apprentice.agents.cre_agents.cre_agent import CREAgent, SAI
 
 import colorama
 from colorama import Fore, Back, Style
+from states import INT, ADD, POW
 
 def print_log(color, text):
     if color == "blue":
@@ -25,7 +26,7 @@ from apprentice.agents.cre_agents.environment import ( Button, Component,
     register_fact_set, register_all_facts, define_action_type, register_all_action_types, register_action_type_set
     )
 from cre import define_fact, CREFunc
-from numba.types import string
+from numba.types import string, boolean
 
 with register_all_action_types as Tree_action_type_set:
     @define_action_type("SPLIT", {
@@ -60,7 +61,7 @@ with register_all_facts as Tree_fact_types:
     Node = define_fact("Node", {
         "id": str,
         "parent": "Node",
-        # "children": "List[Node]",
+        "children": "List(Node)",
         "value" : {"type" : str, "visible" : True, "semantic": True}
 
     })
@@ -71,16 +72,29 @@ with register_all_facts as Tree_fact_types:
 
 register_fact_set(name='tree')(Tree_fact_types)
 
+@CREFunc(signature=boolean(string, string),
+    shorthand = '[IntAndPow]')
+def IntAndPow(a, b):
+    return a == POW and b == INT
 
-@CREFunc(signature=string(),
+@CREFunc(signature=boolean(string, string),
+    shorthand = '[IntAndAdd]')
+def IntAndAdd(a, b):
+    return a == ADD and b == INT
+
+@CREFunc(signature=string(string),
     shorthand = '[DX]')
-def DX():
-    return "[DX]"
+def DX(a):
+    if a == POW:
+        return "[DX]"
+    return "[ERROR]"
 
-@CREFunc(signature=string(),
+@CREFunc(signature=string(string),
     shorthand = '[SPLIT]')
-def SPLIT():
-    return "[SPLIT]"
+def SPLIT(a):
+    if a == ADD:
+        return "[SPLIT]"
+    return "[ERROR]"
     
 @CREFunc(signature=string(),
     shorthand = '[COEFF]')
@@ -107,11 +121,12 @@ def create_agent():
     # )
     agent = CREAgent(
         agent_name="Calculus-Agent",
-        feature_set=[],
+        feature_set=["IntAndPow", "IntAndAdd"],
+        # feature_set=[],
         function_set=["DX", "SPLIT", "COEFF"],
         where="antiunify",
         when="decisiontree",
-        # when_args={"encode_relative" : True},
+        when_args={"encode_relative" : True},
         # where="mostspecific",
         fact_types='tree',
         action_types='tree',
