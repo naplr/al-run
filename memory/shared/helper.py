@@ -2,9 +2,10 @@ import pickle
 from itertools import chain
 from random import choice, sample, shuffle
 
-from apprentice.agents.MemoryAgent import MemoryAgent
+# from apprentice.agents.MemoryAgent import MemoryAgent
 from apprentice.agents.ModularAgent import ModularAgent
 from apprentice.working_memory.representation import Sai
+from apprentice.agents.cre_agents.cre_agent import CREAgent, SAI
 
 from memory.shared.config import *
 from memory.shared.const import *
@@ -12,26 +13,39 @@ from memory.shared.const import *
 
 def create_agent(name, function_set, alpha, tau, c, s, beta, b_practice, b_study):
     if AGENT_TYPE == 'memory':
-        agent = MemoryAgent(
+        # agent = MemoryAgent(
+        #     agent_name=name,
+        #     function_set=function_set,
+        #     # feature_set=["equals"],
+        #     feature_set=[],
+        #     when_learner="decisiontree",
+        #     # when_learner="alwaystrue",
+        #     where_learner="mostspecific",
+        #     planner=PLANNER,
+        #     # search_depth=2,
+        #     search_depth=5,
+        #     alpha=alpha,
+        #     tau=tau,
+        #     c=c,
+        #     s=s,
+        #     beta=beta,
+        #     b_practice=b_practice,
+        #     b_study=b_study,
+        #     print_log=DEBUG,
+        #     use_memory=False
+        # )
+        pass
+    elif AGENT_TYPE == 'cre':
+        agent = CREAgent(
             agent_name=name,
-            function_set=function_set,
-            # feature_set=["equals"],
-            feature_set=[],
-            when_learner="decisiontree",
-            # when_learner="alwaystrue",
-            where_learner="mostspecific",
-            planner=PLANNER,
-            # search_depth=2,
-            search_depth=5,
-            alpha=alpha,
-            tau=tau,
-            c=c,
-            s=s,
-            beta=beta,
-            b_practice=b_practice,
-            b_study=b_study,
-            print_log=DEBUG,
-            use_memory=False
+            feature_set=["Equals"],
+            function_set=["Add", "Subtract", "Multiply", "Divide"],
+            when="decisiontree",
+            # when_args={"encode_relative" : True},
+            # where="antiunify",
+            where="mostspecific",
+            how="set_chaining",
+            search_depth=2,
         )
     else:
         agent = ModularAgent(
@@ -45,8 +59,10 @@ def create_agent(name, function_set, alpha, tau, c, s, beta, b_practice, b_study
 
 
 def read_problems():
-    study = pickle.load(open('../../data/alg-study.pkl', 'rb'))
-    post = pickle.load(open('../../data/alg-post.pkl', 'rb'))
+    # study = pickle.load(open('../../data/alg-study.pkl', 'rb'))
+    # post = pickle.load(open('../../data/alg-post.pkl', 'rb'))
+    study = pickle.load(open('memory/data/alg-study.pkl', 'rb'))
+    post = pickle.load(open('memory/data/alg-post.pkl', 'rb'))
     return study, post
 
 

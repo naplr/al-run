@@ -7,8 +7,9 @@ CONCEPT_NUM = len(CONCEPTS)
 SELECTED_PROBLEMS = list(map(str, CONCEPTS))
 
 DEBUG = True
-AGENT_TYPE = 'memory'
+# AGENT_TYPE = 'memory'
 # AGENT_TYPE = 'modular'
+AGENT_TYPE = 'cre'
 PLANNER = 'numba'
 
 ### GEOMETRY ###

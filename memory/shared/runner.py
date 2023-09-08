@@ -168,42 +168,51 @@ def _run_problem_fact(agent, concept, state, answer, ptype, ttype, name, seen):
     problem_info = {'problem_name': name}
     if ptype == PTYPE_DEMO:
         sai = helper.generate_sai(answer)
-        when, where, exp = agent.train(state, sai=sai, reward=1, problem_info=problem_info, ret_train_expl=True)
-        log_transaction(None, 'Train', when, where, exp, False, None, answer, seen)
+
+        # when, where, exp = agent.train(state, sai=sai, reward=1, problem_info=problem_info, ret_train_expl=True)
+        # log_transaction(None, 'Train', when, where, exp, False, None, answer, seen)
+
+        agent.train(state, sai=sai, reward=1, problem_info=problem_info)
+
         log(LOG_DEMO, agent.agent_name, correct_answer=answer)
     elif ptype == PTYPE_PRACTICE:
         res, info = agent.request(state, problem_info=problem_info)
-
         info['problem_name'] = name
-        if len(res) == 0:
+
+        if not res:
             # Can't answer
             log(LOG_HINT, agent.agent_name, KTYPE_FACT, ttype, info, correct_answer=answer, seen=seen)
-            log_transaction(False, 'Request', info['when'], info['where'], 'HINT', False, None, answer, seen)
+            # log_transaction(False, 'Request', info['when'], info['where'], 'HINT', False, None, answer, seen)
             if ttype == TT_STUDY:
                 sai = helper.generate_sai(answer)
-                when, where, exp = agent.train(state, sai=sai, reward=1, problem_info=problem_info, ret_train_expl=True)
-                log_transaction(None, 'Train', when, where, exp, False, None, answer, seen)
+                # when, where, exp = agent.train(state, sai=sai, reward=1, problem_info=problem_info, ret_train_expl=True)
+                # log_transaction(None, 'Train', when, where, exp, False, None, answer, seen)
+
+                agent.train(state, sai=sai, reward=1, problem_info=problem_info)
         else:
             val = res["inputs"]["value"]
-            selection = res['selection']
+            selection = res['selection'].id
             # correct = str(val) == str(answer) and selection == 'answer'
             try:
                 correct = (val != None) and (str(int(val)) == str(answer)) and selection == 'answer'
             except:
                 correct = False
-            log_transaction(correct, 'Request', info['when'], info['where'], info['skill'], False, val, answer, seen)
+            # log_transaction(correct, 'Request', info['when'], info['where'], info['skill'], False, val, answer, seen)
             if ttype == TT_STUDY:
-                rhs_id = res["rhs_id"]
+                # rhs_id = res["rhs_id"]
                 sai = helper.generate_sai(val)
                 rew = 1 if correct else -1
-                exp = agent.train(state, sai=sai, reward=rew, rhs_id=rhs_id, problem_info=problem_info, ret_train_expl=True)
+                # exp = agent.train(state, sai=sai, reward=rew, rhs_id=rhs_id, problem_info=problem_info, ret_train_expl=True)
+
+                agent.train(state, sai=sai, reward=rew, problem_info=problem_info)
             if correct:
                 log(LOG_CORRECT, agent.agent_name, KTYPE_FACT, ttype, info, val, answer, seen)
             else:
                 log(LOG_WRONG, agent.agent_name, KTYPE_FACT, ttype, info, val, answer, seen)
                 if ttype == TT_STUDY:
                     sai = helper.generate_sai(answer)
-                    exp = agent.train(state, sai=sai, reward=1, problem_info=problem_info, ret_train_expl=True)
+                    # exp = agent.train(state, sai=sai, reward=1, problem_info=problem_info, ret_train_expl=True)
+                    agent.train(state, sai=sai, reward=1, problem_info=problem_info)
 
 
     # log_transaction(result, action, skill, isInt, al_answer="", correct_answer=""):
@@ -216,12 +225,17 @@ def _run_problem_skill(agent, concept, state, answer, steps, ptype, ttype, name,
             sai = helper.generate_sai(value, selection)
             print(f'[[TRAIN INT]]: {value}, {selection}')
             # print(sai)
-            when, where, exp = agent.train(state, sai=sai, reward=1, problem_info=problem_info, ret_train_expl=True, foci_of_attention=foas)
-            print(f'[[Explanation]]: {exp}')
-            log_transaction(None, 'Train', when, where, exp, idx+1 == len(steps), None, s, seen)
+
+            # when, where, exp = agent.train(state, sai=sai, reward=1, problem_info=problem_info, ret_train_expl=True, foci_of_attention=foas)
+            # print(f'[[Explanation]]: {exp}')
+            # log_transaction(None, 'Train', when, where, exp, idx+1 == len(steps), None, s, seen)
+
+            agent.train(state, sai=sai, reward=1, problem_info=problem_info, foci_of_attention=foas)
+
             state[selection]['value'] = str(value)
             state[selection]['contentEditable'] = False
             state[selection]['is_empty'] = False
+
         # sai = helper.generate_sai(answer)
         # when, where, exp = agent.train(state, sai=sai, reward=1, problem_info=problem_info, ret_train_expl=True, foci_of_attention=None)
         # log_transaction(None, 'Train', when, where, exp, False, None, answer, seen)
@@ -231,9 +245,9 @@ def _run_problem_skill(agent, concept, state, answer, steps, ptype, ttype, name,
         while True:
             res, info = agent.request(state, problem_info=problem_info)
             info['problem_name'] = name
-            if len(res) == 0:
+            if not res:
                 log(LOG_HINT, agent.agent_name, KTYPE_SKILL, ttype, info, correct_answer=answer, seen=seen)
-                log_transaction(False, 'Request', info['when'], info['where'], 'HINT', False, None, answer, seen)
+                # log_transaction(False, 'Request', info['when'], info['where'], 'HINT', False, None, answer, seen)
 
                 # if ttype == TT_STUDY:
                 #     # TODO: Also need to provide step by step here?
@@ -242,23 +256,25 @@ def _run_problem_skill(agent, concept, state, answer, steps, ptype, ttype, name,
                 return
 
             val = res["inputs"]["value"]
-            selection = res['selection']
-            rhs_id = res["rhs_id"]
+            selection = res['selection'].id
+            skill_id = info['skill_id']
+            # rhs_id = res["rhs_id"]
             if selection == 'answer':
                 try:
                     correct = (val != None) and (str(int(val)) == str(answer))
                 except:
                     correct = False
 
-                log_transaction(correct, 'Request', info['when'], info['where'], info['skill'], False, val, answer, seen)
+                # log_transaction(correct, 'Request', info['when'], info['where'], info['skill'], False, val, answer, seen)
                 if ttype == TT_STUDY:
-                    rhs_id = res["rhs_id"]
+                    skill_id = info['skill_id']
+                    # rhs_id = res["rhs_id"]
                     sai = helper.generate_sai(val)
                     rew = 1 if correct else -1
-                    agent.train(state, sai=sai, reward=rew, rhs_id=rhs_id, problem_info=problem_info)
+                    agent.train(state, sai=sai, reward=rew, skill_uid=skill_id, problem_info=problem_info)
 
-                    for (st, sai, rhs_id) in prev_actions:
-                        agent.train(st, sai=sai, reward=rew, rhs_id=rhs_id, problem_info=problem_info)
+                    for (st, sai, uid) in prev_actions:
+                        agent.train(st, sai=sai, reward=rew, skill_uid=uid, problem_info=problem_info)
 
                 if correct:
                     log(LOG_CORRECT, agent.agent_name, KTYPE_SKILL, ttype, info, val, answer, seen)
@@ -269,13 +285,15 @@ def _run_problem_skill(agent, concept, state, answer, steps, ptype, ttype, name,
                     #     agent.train(state, sai=sai, reward=1, problem_info=problem_info)
             else:
                 print(f'INTERMEDIATE SEL: {selection}')
-                log_transaction(None, 'Request', info['when'], info['where'], info['skill'], True, val, None, seen)
+                # log_transaction(None, 'Request', info['when'], info['where'], info['skill'], True, val, None, seen)
 
                 cur_state = copy.deepcopy(state)
                 sai = helper.generate_sai(val, selection)
 
-                prev_actions.append((cur_state, sai, rhs_id))
+                prev_actions.append((cur_state, sai, skill_id))
 
+                print('+++++')
+                print(selection)
                 state[selection]['value'] = str(val)
                 state[selection]['contentEditable'] = False
                 state[selection]['is_empty'] = False
@@ -350,7 +368,8 @@ def run_agent(parameters):
     ft = 0.625
     st = 0.2
     wait_time = ft if knowledge_type == KTYPE_FACT else st
-    agent.update_activation_for_post_test(wait_time*2)
+
+    # agent.update_activation_for_post_test(wait_time*2)
 
     # run post
     for p in post:
@@ -387,9 +406,9 @@ def run(function_set, state_func):
     pool = multiprocessing.Pool()
     agents = []
     for i in range(num_set):
-        agents.append([f'SPPP-F-{i+1}', function_set, alpha, tau, c, s, beta, b_practice, b_study, COND_SPPP, KTYPE_FACT, study_problems, post_problems, state_func])
-        agents.append([f'SPSP-F-{i+1}', function_set, alpha, tau, c, s, beta, b_practice, b_study, COND_SPSP, KTYPE_FACT, study_problems, post_problems, state_func])
-        agents.append([f'SPPP-S-{i+1}', function_set, alpha, tau, c, s, beta, b_practice, b_study, COND_SPPP, KTYPE_SKILL, study_problems, post_problems, state_func])
+        # agents.append([f'SPPP-F-{i+1}', function_set, alpha, tau, c, s, beta, b_practice, b_study, COND_SPPP, KTYPE_FACT, study_problems, post_problems, state_func])
+        # agents.append([f'SPSP-F-{i+1}', function_set, alpha, tau, c, s, beta, b_practice, b_study, COND_SPSP, KTYPE_FACT, study_problems, post_problems, state_func])
+        # agents.append([f'SPPP-S-{i+1}', function_set, alpha, tau, c, s, beta, b_practice, b_study, COND_SPPP, KTYPE_SKILL, study_problems, post_problems, state_func])
         agents.append([f'SPSP-S-{i+1}', function_set, alpha, tau, c, s, beta, b_practice, b_study, COND_SPSP, KTYPE_SKILL, study_problems, post_problems, state_func])
 
     pool.map(run_agent, agents)
