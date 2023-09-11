@@ -82,11 +82,14 @@ def log_result(log_type, agent_name, ktype, ttype, info, seen):
 
 
 def log(log_type, agent_name, ktype=None, ttype=TT_STUDY, info=None, al_answer="", correct_answer="", seen=False):
+    global transaction_logs
     # log_result(log_type, agent_name, ktype, ttype, info, str(correct_answer) in seen_answers)
-    print(seen)
     log_result(log_type, agent_name, ktype, ttype, info, seen)
 
     if not DEBUG: return
+
+    # tx = ','.join(map(lambda x: str(x), [agent_name, info['problem_name'].replace(',', '-'), ktype, ttype, seen, log_type, al_answer, correct_answer]))
+    # transaction_logs.append(f"{tx}\n")
 
     if log_type == LOG_HINT:
         print(Back.BLUE + Fore.YELLOW + "HINT")
@@ -100,7 +103,45 @@ def log(log_type, agent_name, ktype=None, ttype=TT_STUDY, info=None, al_answer="
         print(Back.RED + Fore.WHITE + "SOMETHING WRONG !!!!")
 
 
-def log_transaction(result, action, when_part, where_part, how_part, isInt, al_answer, correct_answer, seen):
+# def log_transaction(result, action, when_part, where_part, how_part, isInt, al_answer, correct_answer, seen):
+#     global current_agent, current_concept, current_problem, current_ktype, current_ttype, current_ptype, transaction_logs
+#     now = datetime.now()
+#     time = now.strftime("%H:%M:%S")
+
+#     # print(f"result: {str(result)}")
+#     if result == None:
+#         r = "NA"
+#     elif result == True:
+#         r = "CORRECT"
+#     elif result == False:
+#         r = "INCORRECT"
+#     else:
+#         r = "???"
+
+#     if current_ttype == TT_POSTTEST:
+#         ttype = 'posttest'
+#     elif current_ttype == TT_STUDY and current_ptype == PTYPE_DEMO:
+#         ttype = 'study'
+#     elif current_ttype == TT_STUDY and current_ptype == PTYPE_PRACTICE:
+#         ttype = 'practice'
+#     else:
+#         ttype = '???'
+
+#     ktype = 'Fact' if current_ktype == KTYPE_FACT else 'Skill'
+#     how_part = how_part.replace(', ','&')
+#     how_part = how_part.replace(',','&')
+#     where_part = str(where_part)
+#     where_part = where_part.replace(', ','&')
+#     where_part = where_part.replace(',','&')
+#     when_part = str(when_part)
+#     when_part = when_part.replace(', ','&')
+#     when_part = when_part.replace(',','&')
+#     when_part = when_part.replace('\n', 'CHAR(13)')
+
+#     l = f'{current_agent},{current_concept},{current_problem},{ktype},{ttype},{r},{action},{when_part},{where_part},{how_part},{isInt},{seen},{al_answer},{correct_answer},{time}\n'
+#     transaction_logs.append(l)
+
+def log_tx(result, action, isInt, al_answer, correct_answer, seen):
     global current_agent, current_concept, current_problem, current_ktype, current_ttype, current_ptype, transaction_logs
     now = datetime.now()
     time = now.strftime("%H:%M:%S")
@@ -125,17 +166,8 @@ def log_transaction(result, action, when_part, where_part, how_part, isInt, al_a
         ttype = '???'
 
     ktype = 'Fact' if current_ktype == KTYPE_FACT else 'Skill'
-    how_part = how_part.replace(', ','&')
-    how_part = how_part.replace(',','&')
-    where_part = str(where_part)
-    where_part = where_part.replace(', ','&')
-    where_part = where_part.replace(',','&')
-    when_part = str(when_part)
-    when_part = when_part.replace(', ','&')
-    when_part = when_part.replace(',','&')
-    when_part = when_part.replace('\n', 'CHAR(13)')
 
-    l = f'{current_agent},{current_concept},{current_problem},{ktype},{ttype},{r},{action},{when_part},{where_part},{how_part},{isInt},{seen},{al_answer},{correct_answer},{time}\n'
+    l = f'{current_agent},{current_concept},{current_problem},{ktype},{ttype},{r},{action},{isInt},{seen},{al_answer},{correct_answer},{time}\n'
     transaction_logs.append(l)
 
 
@@ -174,7 +206,7 @@ def _run_problem_fact(agent, concept, state, answer, ptype, ttype, name, seen):
 
         agent.train(state, sai=sai, reward=1, problem_info=problem_info)
 
-        log(LOG_DEMO, agent.agent_name, correct_answer=answer)
+        log(LOG_DEMO, agent.agent_name, correct_answer=answer, info=problem_info)
     elif ptype == PTYPE_PRACTICE:
         res, info = agent.request(state, problem_info=problem_info)
         info['problem_name'] = name
@@ -219,7 +251,8 @@ def _run_problem_fact(agent, concept, state, answer, ptype, ttype, name, seen):
 def _run_problem_skill(agent, concept, state, answer, steps, ptype, ttype, name, seen):
     problem_info = {'problem_name': name}
     if ptype == PTYPE_DEMO:
-        log(LOG_DEMO, agent.agent_name, correct_answer=answer)
+        log(LOG_DEMO, agent.agent_name, correct_answer=answer, info=problem_info)
+        log_tx(None, 'Example', None, None, None, seen)
         for idx, s in enumerate(steps):
             selection, value, foas = s
             sai = helper.generate_sai(value, selection)
@@ -231,6 +264,8 @@ def _run_problem_skill(agent, concept, state, answer, steps, ptype, ttype, name,
             # log_transaction(None, 'Train', when, where, exp, idx+1 == len(steps), None, s, seen)
 
             agent.train(state, sai=sai, reward=1, problem_info=problem_info, foci_of_attention=foas)
+
+            # log_tx(None, 'Train', idx+1 == len(steps), None, s, seen)
 
             state[selection]['value'] = str(value)
             state[selection]['contentEditable'] = False
@@ -247,7 +282,7 @@ def _run_problem_skill(agent, concept, state, answer, steps, ptype, ttype, name,
             info['problem_name'] = name
             if not res:
                 log(LOG_HINT, agent.agent_name, KTYPE_SKILL, ttype, info, correct_answer=answer, seen=seen)
-                # log_transaction(False, 'Request', info['when'], info['where'], 'HINT', False, None, answer, seen)
+                log_tx(False, 'Request', False, None, answer, seen)
 
                 # if ttype == TT_STUDY:
                 #     # TODO: Also need to provide step by step here?
@@ -265,7 +300,7 @@ def _run_problem_skill(agent, concept, state, answer, steps, ptype, ttype, name,
                 except:
                     correct = False
 
-                # log_transaction(correct, 'Request', info['when'], info['where'], info['skill'], False, val, answer, seen)
+                log_tx(correct, 'Request', False, val, answer, seen)
                 if ttype == TT_STUDY:
                     skill_id = info['skill_id']
                     # rhs_id = res["rhs_id"]
@@ -297,10 +332,10 @@ def _run_problem_skill(agent, concept, state, answer, steps, ptype, ttype, name,
                 state[selection]['value'] = str(val)
                 state[selection]['contentEditable'] = False
                 state[selection]['is_empty'] = False
+                log_tx(None, 'Request', True, val, answer, seen)
                 continue
 
                 # log(LOG_WRONG, agent.agent_name, KTYPE_SKILL, ttype, info, val, answer, seen)
-                # log_transaction(False, 'Request', info['when'], info['where'], info['skill'], None, val, answer, seen)
             return
 
 
@@ -356,6 +391,9 @@ def run_agent(parameters):
     print(f"RUNNING: {agent_name}")
     agent = helper.create_agent(agent_name, function_set, alpha, tau, c, s, beta, b_practice, b_study)
     study, post = helper.get_post_test_problems(study_problems, post_problems, knowledge_type)
+    print(len(study))
+    print(study)
+    print(post)
 
     # run study
     for idx, p in enumerate(study):
@@ -381,7 +419,9 @@ def run_agent(parameters):
     pickle.dump(logs, open(f'logs/{agent_name}-res.pkl', "wb"))
 
     global transaction_logs
-    tlogs = ['Agent,Concept,Problem,Knowledge,Type,Result,Action,When-Part,Where-Part,How-Part,Intermediate,Seen,AL Ans,Correct Ans,Time\n']
+    tlogs = ['Agent,Concept,Problem,Knowledge,Type,Result,Action,Intermediate,Seen,AL Ans,Correct Ans,Time\n']
+
+    # tlogs = ['agent_name, problem, ktype, ttype, seen, log_type, al_answer, correct_answer\n']
     tlogs.extend(transaction_logs)
     with open(f"logs/{agent_name}-txlogs.csv", 'w+') as f:
         f.writelines(tlogs)
@@ -394,7 +434,7 @@ def run(function_set, state_func):
     beta, b_practice, b_study = 5, 1, 0.01
 
     study_problems, post_problems = helper.read_problems()
-    num_set = 5
+    num_set = 1
 
     # run_agent([f'SPPP-F-0', function_set, alpha, tau, c, s, beta, b_practice, b_study, COND_SPPP, KTYPE_FACT, study_problems, post_problems, state_func])
     # run_agent([f'SPSP-F-0', function_set, alpha, tau, c, s, beta, b_practice, b_study, COND_SPSP, KTYPE_FACT, study_problems, post_problems, state_func])
