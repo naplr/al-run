@@ -1,0 +1,53 @@
+skill,activation,t,decay,b
+"('Multiply', ('value', '?arg0'), ('value', '?arg1')):(w,l)->answer",-inf,1,0.177,0.01
+"('Multiply', ('value', '?arg0'), ('value', '?arg1')):(w,l)->answer",0.3948298140119091,2,0.5881044507141373,1.0
+"('Multiply', ('value', '?arg0'), ('value', '?arg1')):(w,l)->answer",5.008806512936178,6,41.65108358121513,1.0
+"('Multiply', ('value', '?arg0'), ('value', '?arg1')):(w,l)->answer",5.3331613588037134,20,57.54138188156189,1.0
+"('Multiply', ('value', '?arg0'), ('value', '?arg1')):(w,l)->answer",5.167951233648972,29,48.805679053944104,1.0
+"('Multiply', ('value', '?arg0'), ('value', '?arg1')):(w,l)->answer",5.136637890811942,45,47.306546474033404,0.01
+"('Multiply', ('value', '?arg0'), ('value', '?arg1')):(w,l)->answer",2.905333668655379,47,5.238160960724098,1.0
+"('Multiply', ('value', '?arg0'), ('value', '?arg1')):(w,l)->answer",5.104616827952576,48,45.82131456060536,0.01
+"('Multiply', ('value', '?arg0'), ('value', '?arg1')):(w,l)->answer",3.071996759638966,49,6.156033822972215,1.0
+"('Multiply', ('value', '?arg0'), ('value', '?arg1')):(w,l)->answer",5.105093689923875,154,45.84308578894818,1.0
+"('Multiply', ('value', '?arg0'), ('value', '?arg1')):(w,l)->answer",5.054489074952411,156,43.58966861827258,1.0
+A=1/2*b*h:()->answer,-inf,4,0.177,0.01
+A=1/2*b*h:()->answer,0.3948298140119091,5,0.5881044507141373,1.0
+A=1/2*b*h:()->answer,5.008806512936178,7,41.65108358121513,1.0
+A=1/2*b*h:()->answer,5.426515642465333,27,63.15452203752163,1.0
+A=1/2*b*h:()->answer,5.151760509935557,30,48.0246850367202,1.0
+A=1/2*b*h:()->answer,5.1421589565368295,152,47.56747142681131,1.0
+A=1/2*b*h:()->answer,5.055481143249362,162,43.63275832092471,1.0
+A=l*w:()->answer,-inf,9,0.177,0.01
+A=l*w:()->answer,0.3948298140119091,10,0.5881044507141373,1.0
+A=l*w:()->answer,5.008806512936178,17,41.65108358121513,1.0
+A=l*w:()->answer,5.263244427321576,19,53.66763835259279,1.0
+A=l*w:()->answer,5.234839180781651,21,52.16960037561707,1.0
+A=l*w:()->answer,5.21371183732941,150,51.082657390165174,1.0
+A=l*w:()->answer,5.056960646608501,160,43.69709884560924,1.0
+"('Area Trapezoid', ('value', '?arg0'), ('value', '?arg1'), ('value', '?arg2')):(a,b,h)->answer",-inf,12,0.177,0.01
+"('Area Trapezoid', ('value', '?arg0'), ('value', '?arg1'), ('value', '?arg2')):(a,b,h)->answer",0.3948298140119091,13,0.5881044507141373,1.0
+"('Area Trapezoid', ('value', '?arg0'), ('value', '?arg1'), ('value', '?arg2')):(a,b,h)->answer",5.008806512936178,14,41.65108358121513,1.0
+"('Area Trapezoid', ('value', '?arg0'), ('value', '?arg1'), ('value', '?arg2')):(a,b,h)->answer",5.514886882509038,15,68.97324119919838,1.0
+"('Area Trapezoid', ('value', '?arg0'), ('value', '?arg1'), ('value', '?arg2')):(a,b,h)->answer",5.426515642465522,16,63.154522037533546,1.0
+"('Area Trapezoid', ('value', '?arg0'), ('value', '?arg1'), ('value', '?arg2')):(a,b,h)->answer",5.371586948181004,25,59.78853975538797,1.0
+"('Area Trapezoid', ('value', '?arg0'), ('value', '?arg1'), ('value', '?arg2')):(a,b,h)->answer",5.204995015305181,31,50.640850209432664,1.0
+"('Area Trapezoid', ('value', '?arg0'), ('value', '?arg1'), ('value', '?arg2')):(a,b,h)->answer",5.167951233648972,32,48.805679053944104,1.0
+"('Area Trapezoid', ('value', '?arg0'), ('value', '?arg1'), ('value', '?arg2')):(a,b,h)->answer",5.163452036604586,33,48.58738049723006,0.01
+"('Area Trapezoid', ('value', '?arg0'), ('value', '?arg1'), ('value', '?arg2')):(a,b,h)->answer",3.2998895530800674,34,7.686371548260796,1.0
+"('Area Trapezoid', ('value', '?arg0'), ('value', '?arg1'), ('value', '?arg2')):(a,b,h)->answer",5.15539078934581,35,48.19870117502708,0.01
+"('Area Trapezoid', ('value', '?arg0'), ('value', '?arg1'), ('value', '?arg2')):(a,b,h)->answer",3.2781560769478,36,7.524927525564715,1.0
+"('Area Trapezoid', ('value', '?arg0'), ('value', '?arg1'), ('value', '?arg2')):(a,b,h)->answer",5.148545374346182,37,47.87109527994201,0.01
+"('Area Trapezoid', ('value', '?arg0'), ('value', '?arg1'), ('value', '?arg2')):(a,b,h)->answer",3.237904764924036,38,7.235037173709826,1.0
+"('Area Trapezoid', ('value', '?arg0'), ('value', '?arg1'), ('value', '?arg2')):(a,b,h)->answer",5.142385431901767,39,47.57820541656849,0.01
+"('Area Trapezoid', ('value', '?arg0'), ('value', '?arg1'), ('value', '?arg2')):(a,b,h)->answer",3.205207223679225,40,7.007988900554251,1.0
+"('Area Trapezoid', ('value', '?arg0'), ('value', '?arg1'), ('value', '?arg2')):(a,b,h)->answer",5.136951001074733,155,47.32130552920036,1.0
+"('Area Trapezoid', ('value', '?arg0'), ('value', '?arg1'), ('value', '?arg2')):(a,b,h)->answer",5.056526508248055,157,43.67820920190612,1.0
+"('Area Trapezoid', ('value', '?arg0'), ('value', '?arg1'), ('value', '?arg2')):(a,b,h)->answer",5.056101668572099,161,43.65973208746865,1.0
+"('Area Trapezoid', ('value', '?arg0'), ('value', '?arg1'), ('value', '?arg2')):(a,b,h)->answer",5.0552786113513095,163,43.62395803491006,1.0
+"('Area Circle', ('value', '?arg0')):(r)->answer",-inf,41,0.177,0.01
+"('Area Circle', ('value', '?arg0')):(r)->answer",0.3948298140119091,42,0.5881044507141373,1.0
+"('Area Circle', ('value', '?arg0')):(r)->answer",5.008806512936178,43,41.65108358121513,0.01
+"('Area Circle', ('value', '?arg0')):(r)->answer",4.619397043353489,44,28.27390057849883,1.0
+"('Area Circle', ('value', '?arg0')):(r)->answer",5.4265156424653345,46,63.15452203752174,1.0
+"('Area Circle', ('value', '?arg0')):(r)->answer",5.3331613588037365,153,57.54138188156321,1.0
+"('Area Circle', ('value', '?arg0')):(r)->answer",5.064553368906101,164,44.02879250593905,1.0

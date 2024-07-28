@@ -6,6 +6,7 @@ from utils import parse_brd, generate_sai, generate_state_and_answer, create_age
 from memory.shared.config import *
 from memory.shared.const import *
 
+import pandas as pd
 import colorama
 from colorama import Fore, Back
 
@@ -198,7 +199,8 @@ def run_problem_test(state, answer, agent, ttype):
 def run_problem_from_json(brd, examples_only, agent, ttype):
     if DEBUG: print(brd)
 
-    brd_fp = "../../../../testing-memory-AL/old-experiment/{}".format(brd)
+    # brd_fp = "../../../../testing-memory-AL/old-experiment/{}".format(brd)
+    brd_fp = "../testing-memory-AL/old-experiment/{}".format(brd)
     state, answer = parse_brd(brd_fp)
     if ttype == TT_STUDY:
         run_problem_study(state, answer, examples_only, agent, ttype, f"study-{brd}")
@@ -210,7 +212,8 @@ TESTS = [f"prepost2_{i}.brd" for i in range(2, 18)]
 def pre_test(agent):
     shuffle(TESTS)
     for brd in TESTS:
-        brd_fp = f"../../../../testing-memory-AL/old-experiment/brds/{brd}"
+        # brd_fp = f"../../../../testing-memory-AL/old-experiment/brds/{brd}"
+        brd_fp = f"../testing-memory-AL/old-experiment/brds/{brd}"
         state, answer = parse_brd(brd_fp)
         run_problem_test(state, answer, agent, TT_PRETEST)
 
@@ -267,6 +270,17 @@ def run_agent(parameters):
         os.makedirs(dirname)
     pickle.dump(logs, open(f"{dirname}/{atype}-{cond}-{idx}-{iteration}-res.pkl", "wb"))
     logs = {}
+
+    rows = []
+    activations, exp_times, decays, bs = agent.get_activations()
+    for exp in activations:
+        for a, t, d, b in zip(activations[exp], exp_times[exp], decays[exp], bs[exp]):
+            rows.append([exp, a, t, d, b])
+
+    df = pd.DataFrame(rows, columns=['skill', 'activation', 't', 'decay', 'b'])
+    df.to_csv(f'{dirname}/{atype}-{cond}-{idx}-{iteration}-activation.csv', index=False)
+    
+ 
     # pickle.dump(logs, open(f"logs/{agent_name}-res.pkl", "wb"))
     # agent_logs[agent_name] = agent.get_log()
 
@@ -372,14 +386,14 @@ def main_multi():
     json_fp = sys.argv[1]
     colorama.init(autoreset=True)
 
-    alpha, tau, c, s = 0.177, -0.7, 0.277, 1.5 # 0.0786
+    alpha, tau, c, s = 0.177, -0.7, 0.277, 0.0786
     beta, b_practice, b_study = 5, 1, 0.01
 
     fact_c, skill_c = 1, 2
 
     pool = multiprocessing.Pool()
     agents = []
-    for i in range(5):
+    for i in range(1):
         with open(json_fp, 'r') as jf:
             json_data = json.load(jf)
             total = len(json_data["training_set1"])

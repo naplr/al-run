@@ -39,7 +39,7 @@ def create_agent(name, function_set, alpha, tau, c, s, beta, b_practice, b_study
         agent = CREAgent(
             agent_name=name,
             feature_set=["Equals"],
-            function_set=["Add", "Subtract", "Multiply", "Divide"],
+            function_set=["Add", "Subtract", "Multiply", "Divide", "Power", "Reverse"],
             when="decisiontree",
             # when_args={"encode_relative" : True},
             # where="antiunify",

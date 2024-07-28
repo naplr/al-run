@@ -1,16 +1,16 @@
 ### ALGEBRA ###
 
-STUDY_PROBLEM_NUM = 10
+STUDY_PROBLEM_NUM = 4
 # CONCEPTS = [2, 3, 4]
-# CONCEPTS = [1, 2, 3, 4, 5]
-CONCEPTS = [1]
+CONCEPTS = [1, 2, 3, 4, 5]
+# CONCEPTS = [2, 3] # 1 requires extra ability to reverse the string and power
 CONCEPT_NUM = len(CONCEPTS)
 SELECTED_PROBLEMS = list(map(str, CONCEPTS))
 
 DEBUG = True
-# AGENT_TYPE = 'memory'
+AGENT_TYPE = 'memory'
 # AGENT_TYPE = 'modular'
-AGENT_TYPE = 'cre'
+# AGENT_TYPE = 'cre'
 PLANNER = 'numba'
 
 ### GEOMETRY ###
